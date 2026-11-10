@@ -82,22 +82,22 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      padding: 0 clamp(20px, 4vw, 72px);
+      padding: 0 clamp(16px, 3.5vw, 56px);
       box-sizing: border-box;
       position: relative;
       z-index: 1;
     }
 
-    /* Stage Container (Expands across the screen: Mascot Left, Content Right) */
+    /* Stage Container (Proportional 2-column composition matching reference banner) */
     .cs-stage-container {
       width: 100%;
-      max-width: 1400px;
+      max-width: 1260px;
       margin: 0 auto;
       display: flex;
       flex-direction: row;
       align-items: flex-end;
       justify-content: space-between;
-      gap: clamp(24px, 4vw, 64px);
+      gap: clamp(16px, 3vw, 44px);
       height: 100%;
       max-height: calc(100vh - 72px);
     }
@@ -109,15 +109,14 @@
     .cs-mascot-unit {
       position: relative;
       flex: 0 0 auto;
-      height: min(600px, calc(100vh - 82px));
+      height: clamp(380px, 86vh, 620px);
       aspect-ratio: 3375 / 4772;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      margin-left: clamp(0px, 2vw, 36px);
     }
 
-    /* Ambient Mascot Aura */
+    /* Ambient Mascot Aura (Spotlight behind torso and head) */
     .cs-mascot-aura {
       position: absolute;
       top: 50%;
@@ -135,7 +134,7 @@
     /* Glowing Floor Stage Disc (Right on top of the footer line) */
     .cs-mascot-glow-disc {
       position: absolute;
-      bottom: -2px;
+      bottom: -4px;
       left: 50%;
       transform: translateX(-50%);
       width: 88%;
@@ -150,7 +149,7 @@
     /* Neon Cyan Floor Rim Ring */
     .cs-mascot-neon-rim {
       position: absolute;
-      bottom: 3px;
+      bottom: 2px;
       left: 50%;
       transform: translateX(-50%);
       width: 76%;
@@ -307,13 +306,12 @@
        RIGHT COLUMN: TYPOGRAPHY, COUNTDOWN & SOCIALS (CENTER-ALIGNED)
        ========================================================================== */
     .cs-content-unit {
-      flex: 0 1 600px;
+      flex: 0 1 580px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding-bottom: clamp(14px, 3vh, 36px);
-      margin-right: clamp(0px, 2vw, 36px);
+      padding-bottom: clamp(14px, 3.5vh, 36px);
     }
 
     /* Eyebrow: ─── MR. DENTALSHOW ─── */
@@ -660,7 +658,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-left: 0;
       }
 
       .cs-speech-bubble {
@@ -701,7 +698,6 @@
         text-align: center;
         max-width: 500px;
         padding-bottom: 0;
-        margin-right: 0;
       }
 
       .cs-meta-row {
