@@ -215,93 +215,77 @@
     }
 
     /* ==========================================================================
-       SPEECH BUBBLE (FLOATING TO THE RIGHT OF BEAVER'S HEAD ABOVE GESTURING HAND)
-       Starts at left: 54% (where beaver's right ear ends), completely unblocked face
+       SPEECH BUBBLE (EXACT 1:1 VECTOR OVAL BALLOON WITH INTEGRATED TAIL & SWOOSH)
+       Pixel-perfect match to target mockup (media_1794330278821_f4fff661.jpg)
        ========================================================================== */
     .cs-speech-bubble {
       position: absolute;
-      top: 1%;
-      left: 54%;
-      width: clamp(210px, 18vw, 250px);
-      background: #ffffff;
-      border: 3px solid #00d2d3;
-      border-radius: 28px;
-      padding: 11px 16px 13px 16px;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42), 0 0 20px rgba(0, 210, 211, 0.32);
+      top: -2%;
+      left: 52%;
+      width: clamp(230px, 20vw, 290px);
+      aspect-ratio: 421 / 271;
+      filter: drop-shadow(0 14px 34px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 16px rgba(0, 207, 222, 0.28));
       z-index: 5;
-      text-align: center;
       box-sizing: border-box;
-      animation: csBubbleFloat 4s ease-in-out infinite;
+      animation: csBubbleFloat 4.2s ease-in-out infinite;
     }
 
-    /* Accent marks on top right of bubble */
-    .cs-bubble-accents {
+    .cs-bubble-svg {
+      width: 100%;
+      height: 100%;
       position: absolute;
-      top: -12px;
-      right: 18px;
-      display: flex;
-      gap: 3px;
+      inset: 0;
+      overflow: visible;
       pointer-events: none;
+      z-index: 1;
     }
 
-    .cs-bubble-accents span {
-      display: inline-block;
-      width: 2.5px;
-      background: #00d2d3;
-      border-radius: 2px;
-    }
-
-    .cs-bubble-accents span:nth-child(1) {
-      height: 8px;
-      transform: rotate(18deg);
-    }
-
-    .cs-bubble-accents span:nth-child(2) {
-      height: 12px;
-      transform: rotate(24deg);
-    }
-
-    .cs-bubble-accents span:nth-child(3) {
-      height: 7px;
-      transform: rotate(30deg);
-    }
-
-    .cs-bubble-main-text {
+    .cs-bubble-body {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-size: 15px;
-      font-weight: 800;
-      color: #02284d;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
+      justify-content: center;
+      padding: 4% 7% 12% 7%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .cs-bubble-headline {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(13px, 1.2vw, 17px);
+      font-weight: 850;
+      color: #07213a;
+      line-height: 1.15;
+      letter-spacing: -0.018em;
+      text-align: center;
+    }
+
+    .cs-bubble-pill-wrap {
+      margin-top: clamp(4px, 0.45vw, 7px);
     }
 
     .cs-bubble-pill {
       display: inline-block;
-      background: #061d31;
+      background: #003770;
       color: #ffffff;
-      font-size: 16px;
-      font-weight: 900;
-      border-radius: 999px;
-      padding: 5px 22px;
-      margin-top: 6px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(14px, 1.35vw, 18.5px);
+      font-weight: 850;
+      border-radius: 9999px;
+      padding: clamp(5px, 0.45vw, 7px) clamp(18px, 1.8vw, 26px);
       letter-spacing: -0.01em;
-      box-shadow: 0 4px 12px rgba(2, 40, 77, 0.35);
+      box-shadow: 0 4px 10px rgba(0, 55, 112, 0.35);
+      line-height: 1.15;
     }
 
-    /* Tail pointing bottom-left to beaver mouth */
-    .cs-speech-tail {
-      position: absolute;
-      bottom: -12px;
-      left: 20px;
-      width: 18px;
-      height: 14px;
-      background: #ffffff;
-      border-bottom: 3px solid #00d2d3;
-      border-left: 3px solid #00d2d3;
-      transform: skew(-20deg) rotate(10deg);
-      border-bottom-left-radius: 5px;
+    .cs-bubble-swoosh-svg {
+      width: clamp(75px, 8vw, 110px);
+      height: clamp(6px, 0.6vw, 9px);
+      margin-top: clamp(3px, 0.35vw, 5px);
+      display: block;
     }
 
     /* ==========================================================================
@@ -664,18 +648,9 @@
 
       .cs-speech-bubble {
         position: static;
+        width: min(280px, 90vw);
         margin: 0 auto 12px auto;
         animation: none;
-      }
-
-      .cs-speech-tail {
-        bottom: -11px;
-        left: 50%;
-        transform: translateX(-50%) rotate(45deg);
-        border: none;
-        border-right: 3px solid #00d2d3;
-        border-bottom: 3px solid #00d2d3;
-        border-bottom-left-radius: 0;
       }
 
       .cs-mascot-img {
@@ -753,20 +728,44 @@
 
         <!-- LEFT COLUMN: MASCOT & SPEECH BUBBLE (Exact coordinate mapping) -->
         <div class="cs-mascot-unit">
-          <!-- Floating Speech Bubble (Positioned to the right of beaver head, NEVER covers face) -->
+          <!-- Floating Speech Bubble (Exact 1:1 Vector Oval Balloon with Integrated Tail & Swoosh) -->
           <div class="cs-speech-bubble" role="status" aria-label="Our brand new website is Coming Soon">
-            <!-- Accent marks on top right -->
-            <div class="cs-bubble-accents" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
+            <!-- Vector Speech Balloon with cyan outline, seamless tail & 3 white radiating ticks -->
+            <svg class="cs-bubble-svg" viewBox="0 0 421 271" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Speech Bubble Body with Integrated Tail -->
+              <path d="
+                M 195 18
+                C 305 18, 397 66, 397 126
+                C 397 186, 305 242, 200 242
+                C 160 242, 125 228, 104 222
+                C 85 228, 62 238, 40 242
+                C 40 236, 46 230, 56 222
+                C 58 214, 50 192, 44 184
+                C 30 165, 16 148, 16 125
+                C 16 66, 95 18, 195 18
+                Z
+              " fill="#ffffff" stroke="#00cfde" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+
+              <!-- 3 Radiating White Ticks on Top Right -->
+              <g stroke="#ffffff" stroke-width="4.2" stroke-linecap="round">
+                <line x1="351" y1="31" x2="355" y2="15" />
+                <line x1="368" y1="37" x2="380" y2="22" />
+                <line x1="382" y1="50" x2="397" y2="39" />
+              </g>
+            </svg>
+
+            <!-- Bubble Content: Typography, Navy Pill, and Cyan Curved Swoosh Underline -->
+            <div class="cs-bubble-body">
+              <div class="cs-bubble-headline">
+                “Our brand new<br>website is
+              </div>
+              <div class="cs-bubble-pill-wrap">
+                <div class="cs-bubble-pill">Coming Soon</div>
+              </div>
+              <svg class="cs-bubble-swoosh-svg" viewBox="0 0 145 10" fill="none" aria-hidden="true">
+                <path d="M 4 8 C 50 2, 95 2, 141 8" stroke="#00cfde" stroke-width="3.6" stroke-linecap="round" />
+              </svg>
             </div>
-            <div class="cs-bubble-main-text">
-              <span>“Our brand new</span>
-              <span>website is</span>
-            </div>
-            <div class="cs-bubble-pill">Coming Soon</div>
-            <div class="cs-speech-tail" aria-hidden="true"></div>
           </div>
 
           <!-- Ambient Lighting & Disc -->
