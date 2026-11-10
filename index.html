@@ -81,25 +81,22 @@
       min-height: 0;
       display: flex;
       align-items: flex-end;
-      justify-content: center;
-      padding: 0 clamp(16px, 3.5vw, 56px);
+      padding: 0 clamp(20px, 4vw, 64px);
       box-sizing: border-box;
       position: relative;
       z-index: 1;
     }
 
-    /* Stage Container (Proportional 2-column composition matching reference banner) */
+    /* Stage Container (Full-bleed: Mascot on LEFT, Content on RIGHT) */
     .cs-stage-container {
       width: 100%;
-      max-width: 1260px;
-      margin: 0 auto;
+      height: 100%;
+      max-height: calc(100vh - 72px);
       display: flex;
       flex-direction: row;
       align-items: flex-end;
       justify-content: space-between;
-      gap: clamp(16px, 3vw, 44px);
-      height: 100%;
-      max-height: calc(100vh - 72px);
+      gap: clamp(16px, 3vw, 48px);
     }
 
     /* ==========================================================================
@@ -109,7 +106,8 @@
     .cs-mascot-unit {
       position: relative;
       flex: 0 0 auto;
-      height: clamp(380px, 86vh, 620px);
+      height: 100%;
+      max-height: calc(100vh - 72px);
       aspect-ratio: 3375 / 4772;
       display: flex;
       align-items: flex-end;
@@ -170,6 +168,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+      object-position: bottom center;
       display: block;
       z-index: 2;
       filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.5));
@@ -220,7 +219,7 @@
       position: absolute;
       top: 1%;
       left: 54%;
-      width: clamp(220px, 18vw, 260px);
+      width: clamp(210px, 18vw, 260px);
       background: #ffffff;
       border: 3px solid #00d2d3;
       border-radius: 28px;
@@ -303,15 +302,18 @@
     }
 
     /* ==========================================================================
-       RIGHT COLUMN: TYPOGRAPHY, COUNTDOWN & SOCIALS (CENTER-ALIGNED)
+       RIGHT COLUMN: TYPOGRAPHY, COUNTDOWN & SOCIALS (ANCHORED RIGHT, VERTICALLY BALANCED)
        ========================================================================== */
     .cs-content-unit {
-      flex: 0 1 580px;
+      flex: 0 1 clamp(440px, 46vw, 600px);
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      padding-bottom: clamp(14px, 3.5vh, 36px);
+      padding: 16px 0 10px 0;
+      box-sizing: border-box;
     }
 
     /* Eyebrow: ─── MR. DENTALSHOW ─── */
@@ -350,7 +352,7 @@
     }
 
     .cs-heading-top {
-      font-size: clamp(26px, 2.6vw, 38px);
+      font-size: clamp(24px, 2.5vw, 36px);
       font-weight: 800;
       color: #ffffff;
       line-height: 1.15;
@@ -358,7 +360,7 @@
     }
 
     .cs-heading-accent {
-      font-size: clamp(36px, 3.8vw, 54px);
+      font-size: clamp(34px, 3.6vw, 50px);
       font-weight: 900;
       color: #38bdf8;
       line-height: 1.06;
@@ -377,7 +379,7 @@
     .cs-date-row {
       margin-top: 2px;
       color: #ffffff;
-      font-size: clamp(17px, 1.6vw, 21px);
+      font-size: clamp(16px, 1.5vw, 20px);
       font-weight: 700;
       letter-spacing: -0.01em;
     }
@@ -392,7 +394,7 @@
     .cs-venue-row {
       margin-top: 6px;
       color: #cbd5e1;
-      font-size: clamp(12.5px, 1.05vw, 14.5px);
+      font-size: clamp(12px, 1vw, 14px);
       font-weight: 500;
       line-height: 1.35;
       text-align: center;
@@ -408,12 +410,12 @@
     /* Countdown Card */
     .cs-countdown-card {
       width: 100%;
-      max-width: 480px;
+      max-width: 460px;
       background: rgba(2, 28, 55, 0.72);
       border: 1.5px solid rgba(0, 210, 211, 0.38);
       border-radius: 16px;
-      padding: clamp(12px, 1.8vh, 16px) clamp(16px, 2vw, 24px);
-      margin: clamp(14px, 2vh, 20px) auto;
+      padding: clamp(10px, 1.6vh, 14px) clamp(14px, 1.8vw, 20px);
+      margin: clamp(12px, 1.8vh, 18px) auto;
       box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -429,27 +431,27 @@
       font-weight: 800;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .cs-timer-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      gap: 8px;
     }
 
     .cs-timer-box {
       background: rgba(1, 18, 38, 0.92);
       border: 1px solid rgba(0, 210, 211, 0.3);
       border-radius: 10px;
-      padding: clamp(8px, 1.2vh, 12px) 4px;
+      padding: clamp(6px, 1vh, 10px) 4px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     .cs-timer-num {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: clamp(24px, 2.6vw, 32px);
+      font-size: clamp(22px, 2.4vw, 30px);
       font-weight: 900;
       color: #ffffff;
       line-height: 1;
@@ -470,7 +472,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -481,9 +483,9 @@
       background: rgba(2, 40, 75, 0.65);
       border: 1px solid rgba(255, 255, 255, 0.28);
       border-radius: 999px;
-      padding: 7px 16px;
+      padding: 6px 14px;
       color: #ffffff;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.25s ease;
@@ -491,8 +493,8 @@
     }
 
     .cs-social-pill svg {
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
       fill: currentColor;
       flex-shrink: 0;
     }
@@ -782,7 +784,7 @@
             alt="Dental Show 2027 Mascot Mr. Dentalshow - Official Ambassador" class="cs-mascot-img" />
         </div>
 
-        <!-- RIGHT COLUMN: HERO TYPOGRAPHY, COUNTDOWN & SOCIALS (CENTERED) -->
+        <!-- RIGHT COLUMN: HERO TYPOGRAPHY, COUNTDOWN & SOCIALS (ANCHORED RIGHT) -->
         <div class="cs-content-unit">
           <!-- Eyebrow: ─── MR. DENTALSHOW ─── -->
           <div class="cs-eyebrow-row">

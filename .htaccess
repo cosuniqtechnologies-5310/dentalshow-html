@@ -143,8 +143,8 @@ AddDefaultCharset UTF-8
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
 
-    # HTML Documents (keep relatively short so updates deploy quickly)
-    ExpiresByType text/html "access plus 1 hour"
+    # HTML Documents (no-cache so updates deploy instantly)
+    ExpiresByType text/html "access plus 0 seconds"
 
     # CSS & JavaScript
     ExpiresByType text/css "access plus 1 year"
@@ -185,6 +185,13 @@ AddDefaultCharset UTF-8
 # 8. SECURITY HEADERS
 # ----------------------------------------------------------------------
 <IfModule mod_headers.c>
+    # Prevent HTML caching during site launch
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+
     # Prevent MIME type sniffing
     Header set X-Content-Type-Options "nosniff"
 
