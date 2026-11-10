@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow crawling of internal or server files
+Disallow: /.htaccess
+Disallow: /README.md
+
+# Sitemap location
+Sitemap: https://dentalshow.in/sitemap.xml
+

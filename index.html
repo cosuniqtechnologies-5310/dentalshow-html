@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon | Dental Show 2027</title>
+  <meta name="description"
+    content="Save the date for Dental Show 2027 on 6th and 7th Feb 2027 at Chennai Trade Centre. Organised by Tamilnadu Dental Traders and Manufacturers Association (TNDTMA)." />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-icon.png" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #011526;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (max-height: 620px) {
+
+      html,
+      body {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+      }
+    }
+
+    /* Ambient Backgrounds */
+    .cs-bg-mesh {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(6, 157, 191, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 80% 60%, rgba(0, 168, 107, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 20% 70%, rgba(4, 119, 191, 0.3) 0%, transparent 45%),
+        linear-gradient(160deg, #011526 0%, #022340 50%, #011221 100%);
+    }
+
+    .cs-dot-mesh {
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+      background-size: 26px 26px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Main Fit-to-Screen Container */
+    .cs-layout {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      max-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(10px, 1.8vh, 20px) clamp(16px, 3vw, 32px);
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* Central Content Flow: Mascot -> Save Date -> Countdown -> Socials */
+    .cs-main-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 1.4vh, 16px);
+      margin: auto 0;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    /* Speech Bubble */
+    .cs-bubble-wrap {
+      position: relative;
+      background: #ffffff;
+      color: #011526;
+      padding: clamp(8px, 1.1vh, 12px) clamp(16px, 2.5vw, 24px);
+      border-radius: 18px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 0 2.5px rgba(59, 191, 143, 0.5);
+      z-index: 3;
+      margin-bottom: -4px;
+      animation: cs-float 3.5s ease-in-out infinite;
+    }
+
+    .cs-bubble-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #023868;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    .cs-pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: #00a86b;
+      border-radius: 50%;
+      animation: cs-pulse 2s infinite;
+    }
+
+    .cs-bubble-quote {
+      font-size: clamp(14px, 1.8vw, 19px);
+      font-weight: 800;
+      color: #011526;
+      line-height: 1.2;
+    }
+
+    .cs-bubble-tail {
+      position: absolute;
+      bottom: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-top: 10px solid #ffffff;
+    }
+
+    /* Big Mascot Stage */
+    .cs-mascot-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .cs-mascot-aura {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(200px, 35vw, 320px);
+      height: clamp(200px, 35vw, 320px);
+      background: radial-gradient(circle, rgba(6, 157, 191, 0.35) 0%, rgba(59, 191, 143, 0.15) 50%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(28px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cs-sparkle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 3;
+      animation: cs-spin 4s ease-in-out infinite;
+    }
+
+    .cs-sparkle-1 {
+      top: 0;
+      right: -15px;
+      animation-delay: 0s;
+    }
+
+    .cs-sparkle-2 {
+      top: 50%;
+      left: -20px;
+      animation-delay: 1.2s;
+    }
+
+    .cs-sparkle-3 {
+      bottom: 10%;
+      right: -10px;
+      animation-delay: 2.4s;
+    }
+
+    /* The Mascot Image (BIG) */
+    .cs-mascot-img {
+      position: relative;
+      z-index: 2;
+      height: clamp(160px, 28vh, 280px);
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.6));
+      animation: cs-bob 4s ease-in-out infinite;
+    }
+
+    .cs-mascot-shadow {
+      width: clamp(120px, 20vw, 170px);
+      height: 12px;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+      border-radius: 50%;
+      margin-top: -6px;
+      z-index: 1;
+    }
+
+    /* Save The Date Message (Directly below mascot) */
+    .cs-save-the-date {
+      font-size: clamp(16px, 2.3vw, 23px);
+      font-weight: 800;
+      color: #ffffff;
+      -webkit-text-fill-color: #ffffff;
+      line-height: 1.4;
+      max-width: 680px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      letter-spacing: -0.01em;
+    }
+
+    .cs-save-the-date strong {
+      color: #ffffff;
+      -webkit-text-fill-color: #ffffff;
+      background: none;
+      font-weight: 900;
+    }
+
+    .cs-save-the-date-venue {
+      font-size: clamp(12.5px, 1.45vw, 15px);
+      font-weight: 500;
+      color: #ffffff;
+      -webkit-text-fill-color: #ffffff;
+      opacity: 0.95;
+      margin-top: 5px;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Countdown Timer (30 Days) */
+    .cs-countdown-panel {
+      background: rgba(2, 37, 68, 0.75);
+      border: 1px solid rgba(6, 157, 191, 0.4);
+      border-radius: 16px;
+      margin-top: clamp(12px, 2.2vh, 24px);
+      margin-bottom: clamp(12px, 2.2vh, 24px);
+      padding: clamp(14px, 2.2vh, 22px) clamp(16px, 2.8vw, 28px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .cs-countdown-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #3bbf8f;
+      margin-bottom: clamp(10px, 1.5vh, 14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .cs-countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(8px, 1.2vw, 12px);
+    }
+
+    .cs-time-box {
+      min-width: clamp(56px, 6.5vw, 76px);
+      padding: clamp(8px, 1.4vh, 14px) clamp(6px, 1vw, 12px);
+      background: rgba(1, 21, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .cs-time-num {
+      font-size: clamp(20px, 2.6vw, 28px);
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1;
+      font-family: monospace;
+    }
+
+    .cs-time-lbl {
+      font-size: clamp(9px, 0.9vw, 10.5px);
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    /* Social Media Links */
+    .cs-social-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 1.4vw, 12px);
+      flex-wrap: wrap;
+    }
+
+    .cs-social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: clamp(6px, 0.9vh, 8px) clamp(12px, 1.5vw, 16px);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: clamp(11.5px, 1.2vw, 13px);
+      font-weight: 600;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .cs-social-btn svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .cs-social-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .cs-social-btn--fb:hover {
+      background: #1877f2;
+      border-color: #1877f2;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.4);
+    }
+
+    .cs-social-btn--ig:hover {
+      background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
+      border-color: #dc2743;
+      box-shadow: 0 4px 14px rgba(220, 39, 67, 0.4);
+    }
+
+    .cs-social-btn--li:hover {
+      background: #0a66c2;
+      border-color: #0a66c2;
+      box-shadow: 0 4px 14px rgba(10, 102, 194, 0.4);
+    }
+
+    .cs-social-btn--yt:hover {
+      background: #ff0000;
+      border-color: #ff0000;
+      box-shadow: 0 4px 14px rgba(255, 0, 0, 0.4);
+    }
+
+    /* 3. BOTTOM ROW: DENTAL SHOW LOGO (BIG) + TNDTMA LOGO */
+    .cs-bottom-branding {
+      width: calc(100% + 2 * clamp(16px, 3vw, 32px));
+      margin-left: calc(-1 * clamp(16px, 3vw, 32px));
+      margin-right: calc(-1 * clamp(16px, 3vw, 32px));
+      margin-bottom: calc(-1 * clamp(10px, 1.8vh, 20px));
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(16px, 3.5vw, 36px);
+      padding: clamp(10px, 1.5vh, 18px) clamp(16px, 3vw, 32px);
+      border-top: 1px solid #e2e8f0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+      flex-shrink: 0;
+      flex-wrap: wrap;
+      z-index: 10;
+    }
+
+    /* Big Dental Show 2027 Logo */
+    .cs-big-logo {
+      height: clamp(48px, 7vh, 76px);
+      width: auto;
+      max-width: clamp(220px, 30vw, 320px);
+      object-fit: contain;
+      filter: none;
+      transition: transform 0.25s ease;
+    }
+
+    .cs-big-logo:hover {
+      transform: scale(1.03);
+    }
+
+    .cs-brand-divider {
+      width: 1px;
+      height: clamp(34px, 4.5vh, 48px);
+      background: #cbd5e1;
+    }
+
+    /* TNDTMA Organiser Seal */
+    .cs-tndtma-seal {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+
+    
+    .cs-tndtma-logo-img {
+      width: clamp(44px, 5.8vh, 58px);
+      height: clamp(44px, 5.8vh, 58px);
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
+      transition: transform 0.25s ease;
+    }
+    .cs-tndtma-logo-img:hover {
+      transform: scale(1.05);
+    }
+    .cs-tndtma-badge {
+      width: clamp(38px, 4.8vh, 48px);
+      height: clamp(38px, 4.8vh, 48px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #023868 0%, #00a86b 100%);
+      border: 1.5px solid rgba(0, 168, 107, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(2, 56, 104, 0.2);
+      flex-shrink: 0;
+    }
+
+    .cs-tndtma-badge svg {
+      width: clamp(20px, 2.5vh, 26px);
+      height: clamp(20px, 2.5vh, 26px);
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cs-tndtma-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cs-tndtma-sub {
+      font-size: clamp(9.5px, 1vw, 11px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #008756;
+      line-height: 1.25;
+    }
+
+    .cs-tndtma-main {
+      font-size: clamp(14px, 1.6vw, 17px);
+      font-weight: 900;
+      color: #023e73;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+    }
+
+    .cs-tndtma-full {
+      font-size: clamp(10.5px, 1.15vw, 12px);
+      color: #475569;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    /* Keyframe Animations */
+    @keyframes cs-float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes cs-bob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    @keyframes cs-spin {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.15) rotate(180deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes cs-pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
+    }
+
+    /* Mobile Responsive Sizing */
+    @media (max-width: 680px) {
+      .cs-layout {
+        padding: 8px 12px;
+      }
+
+      .cs-bubble-wrap {
+        padding: 6px 12px;
+        border-radius: 12px;
+      }
+
+      .cs-bubble-quote {
+        font-size: 13.5px;
+      }
+
+      .cs-mascot-img {
+        height: clamp(130px, 24vh, 180px);
+      }
+
+      .cs-save-the-date {
+        font-size: 14.5px;
+        color: #ffffff;
+        -webkit-text-fill-color: #ffffff;
+      }
+
+      .cs-save-the-date strong {
+        color: #ffffff;
+        -webkit-text-fill-color: #ffffff;
+        background: none;
+      }
+
+      .cs-save-the-date-venue {
+        font-size: 12px;
+        color: #ffffff;
+        -webkit-text-fill-color: #ffffff;
+      }
+
+      .cs-countdown-panel {
+        padding: 12px 14px;
+        margin-top: 14px;
+        margin-bottom: 14px;
+      }
+
+      .cs-time-box {
+        min-width: 48px;
+        padding: 6px 4px;
+      }
+
+      .cs-time-num {
+        font-size: 18px;
+      }
+
+      .cs-social-row {
+        gap: 8px;
+      }
+
+      .cs-social-btn {
+        padding: 6px 10px;
+        font-size: 11.5px;
+      }
+
+      .cs-bottom-branding {
+        gap: 12px;
+        padding: 8px 12px;
+        margin-left: -12px;
+        margin-right: -12px;
+        margin-bottom: -8px;
+        width: calc(100% + 24px);
+        background: #ffffff;
+      }
+
+      .cs-big-logo {
+        height: 38px;
+        max-width: 170px;
+        filter: none;
+      }
+
+      .cs-brand-divider {
+        height: 28px;
+        background: #cbd5e1;
+      }
+
+      .cs-tndtma-seal {
+        gap: 8px;
+      }
+
+      .cs-tndtma-main {
+        color: #023e73;
+      }
+
+      .cs-tndtma-full {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Backdrops -->
+  <div class="cs-bg-mesh" aria-hidden="true"></div>
+  <div class="cs-dot-mesh" aria-hidden="true"></div>
+
+  <div class="cs-layout">
+    <!-- Main Center Flow -->
+    <div class="cs-main-flow">
+      <!-- 1. Mascot Speech Bubble -->
+      <div class="cs-bubble-wrap" role="note" aria-label="Official Mascot Message">
+        <div class="cs-bubble-badge">
+          <span class="cs-pulse-dot" aria-hidden="true"></span>
+          <span>Mr. Dentalshow</span>
+        </div>
+        <div class="cs-bubble-quote">
+          “Our brand new page is Coming Soon”
+        </div>
+        <div class="cs-bubble-tail" aria-hidden="true"></div>
+      </div>
+
+      <!-- 2. Big Mascot Stage -->
+      <div class="cs-mascot-container">
+        <div class="cs-mascot-aura" aria-hidden="true"></div>
+
+        <!-- Sparkles around Mascot -->
+        <svg class="cs-sparkle cs-sparkle-1" width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"
+          aria-hidden="true">
+          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"></path>
+        </svg>
+        <svg class="cs-sparkle cs-sparkle-2" width="18" height="18" viewBox="0 0 24 24" fill="#3bbf8f"
+          aria-hidden="true">
+          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"></path>
+        </svg>
+        <svg class="cs-sparkle cs-sparkle-3" width="20" height="20" viewBox="0 0 24 24" fill="#069dbf"
+          aria-hidden="true">
+          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"></path>
+        </svg>
+
+        <!-- Big Mascot Image -->
+        <img src="images/dental-show-mascot-new.png" alt="Dental Show Official Mascot Mr. Dentalshow"
+          class="cs-mascot-img" />
+
+        <div class="cs-mascot-shadow" aria-hidden="true"></div>
+      </div>
+
+      <!-- 3. Save The Date Message (Directly below mascot) -->
+      <div class="cs-save-the-date">
+        Save the date for <strong>Dental Show 2027</strong> on <strong>6th &amp; 7th Feb 2027</strong>
+        <div class="cs-save-the-date-venue">
+          Chennai Trade Centre (CTC), New Halls 2, 3 &amp; 3A • Nandambakkam, Chennai
+        </div>
+      </div>
+
+      <!-- 4. Countdown Timer (30 Days) -->
+      <div class="cs-countdown-panel" aria-label="30 Days Countdown">
+        <div class="cs-countdown-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Live Launch Countdown</span>
+        </div>
+        <div class="cs-countdown-grid">
+          <div class="cs-time-box">
+            <div class="cs-time-num" id="cs-days">30</div>
+            <div class="cs-time-lbl">Days</div>
+          </div>
+          <div class="cs-time-box">
+            <div class="cs-time-num" id="cs-hours">00</div>
+            <div class="cs-time-lbl">Hours</div>
+          </div>
+          <div class="cs-time-box">
+            <div class="cs-time-num" id="cs-minutes">00</div>
+            <div class="cs-time-lbl">Mins</div>
+          </div>
+          <div class="cs-time-box">
+            <div class="cs-time-num" id="cs-seconds">00</div>
+            <div class="cs-time-lbl">Secs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Social Media Links -->
+      <div class="cs-social-row">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/dentalshow.in" target="_blank" rel="noopener noreferrer"
+          class="cs-social-btn cs-social-btn--fb" aria-label="Follow Dental Show on Facebook"
+          title="Facebook: dentalshow.in">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+            </path>
+          </svg>
+          <span>Facebook</span>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/dentalshow.in/" target="_blank" rel="noopener noreferrer"
+          class="cs-social-btn cs-social-btn--ig" aria-label="Follow Dental Show on Instagram"
+          title="Instagram: @dentalshow.in">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+            </path>
+          </svg>
+          <span>Instagram</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/company/dentalshowindia" target="_blank" rel="noopener noreferrer"
+          class="cs-social-btn cs-social-btn--li" aria-label="Follow Dental Show on LinkedIn"
+          title="LinkedIn: dentalshowindia">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+            </path>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@dentalshow_in" target="_blank" rel="noopener noreferrer"
+          class="cs-social-btn cs-social-btn--yt" aria-label="Subscribe to Dental Show on YouTube"
+          title="YouTube: @dentalshow_in">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+            </path>
+          </svg>
+          <span>YouTube</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. BOTTOM ROW: DENTAL SHOW LOGO (BIG) + TNDTMA LOGO -->
+    <footer class="cs-bottom-branding" role="contentinfo">
+      <!-- Big Dental Show 2027 Logo -->
+      <div class="cs-big-logo-wrap" title="Dental Show 2027">
+        <img src="images/logos/dark-header-logo.png" alt="Dental Show 2027 Logo" class="cs-big-logo" />
+      </div>
+
+      <span class="cs-brand-divider" aria-hidden="true"></span>
+
+      <!-- TNDTMA Organiser Seal -->
+      <div class="cs-tndtma-seal" title="Organised by Tamilnadu Dental Traders and Manufacturers Association">
+        <img src="images/logos/tndtma-logo.png" alt="TNDTMA - Tamilnadu Dental Traders and Manufacturers Association" class="cs-tndtma-logo-img" />
+        <div class="cs-tndtma-text">
+          <span class="cs-tndtma-sub">Organised by</span>
+          <span class="cs-tndtma-main">TNDTMA</span>
+          <span class="cs-tndtma-full">Tamilnadu Dental Traders &amp; Manufacturers Association</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Persistent 30-Day Countdown Script -->
+  <script>
+    (function () {
+      var STORAGE_KEY = 'dentalshow_30d_target';
+      var now = Date.now();
+      var targetTime = localStorage.getItem(STORAGE_KEY);
+
+      // Start 30 days from first visit, or reuse existing target
+      if (!targetTime || isNaN(targetTime) || Number(targetTime) <= now) {
+        targetTime = now + (30 * 24 * 60 * 60 * 1000);
+        try {
+          localStorage.setItem(STORAGE_KEY, targetTime);
+        } catch (e) { }
+      } else {
+        targetTime = Number(targetTime);
+      }
+
+      var daysEl = document.getElementById("cs-days");
+      var hoursEl = document.getElementById("cs-hours");
+      var minsEl = document.getElementById("cs-minutes");
+      var secsEl = document.getElementById("cs-seconds");
+
+      function updateCountdown() {
+        var diff = targetTime - Date.now();
+
+        if (diff <= 0) {
+          if (daysEl) daysEl.textContent = "00";
+          if (hoursEl) hoursEl.textContent = "00";
+          if (minsEl) minsEl.textContent = "00";
+          if (secsEl) secsEl.textContent = "00";
+          return;
+        }
+
+        var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (daysEl) daysEl.textContent = d < 10 ? "0" + d : d;
+        if (hoursEl) hoursEl.textContent = h < 10 ? "0" + h : h;
+        if (minsEl) minsEl.textContent = m < 10 ? "0" + m : m;
+        if (secsEl) secsEl.textContent = s < 10 ? "0" + s : s;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+# ======================================================================
+# Dental Show 2027 - Production Apache Server Configuration (.htaccess)
+# ======================================================================
+
+# ----------------------------------------------------------------------
+# 1. DIRECTORY LISTING & SERVER SIGNATURE
+# ----------------------------------------------------------------------
+# Disable directory browsing (prevents users from seeing folder files)
+Options -Indexes
+
+# Hide Apache version and server identity
+ServerSignature Off
+
+# Default document priority
+DirectoryIndex index.html home.html index.php
+
+# ----------------------------------------------------------------------
+# 2. REWRITE ENGINE INITIALIZATION
+# ----------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # ------------------------------------------------------------------
+    # 2.1 FORCE HTTPS (SSL)
+    # ------------------------------------------------------------------
+    # Redirect all HTTP requests to HTTPS (handles reverse proxies & load balancers)
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # ------------------------------------------------------------------
+    # 2.2 CANONICAL HOSTNAME (Optional: www vs non-www)
+    # ------------------------------------------------------------------
+    # To enforce non-www (https://dentalshow.in instead of www.dentalshow.in),
+    # uncomment the two lines below:
+    # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    # RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+    # ------------------------------------------------------------------
+    # 2.3 CLEAN EXTENSIONLESS URLS (.html)
+    # ------------------------------------------------------------------
+    # 1. Redirect direct requests for index.html to site root /
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.html[\s?] [NC]
+    RewriteRule ^index\.html$ / [R=301,L]
+
+    # 2. Internally rewrite extensionless requests to matching .html file
+    # Example: /about -> /about.html, /events/dental-show-2027 -> /events/dental-show-2027.html
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.*)$ $1.html [NC,L]
+
+    # ------------------------------------------------------------------
+    # 2.4 BLOCK HIDDEN FILES AND DIRECTORIES
+    # ------------------------------------------------------------------
+    # Prevent direct access to .git, .env, .htaccess, etc.
+    RewriteCond %{SCRIPT_FILENAME} -d [OR]
+    RewriteCond %{SCRIPT_FILENAME} -f
+    RewriteRule "(^|/)\." - [F]
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 3. BLOCK SENSITIVE FILES & EXTENSIONS
+# ----------------------------------------------------------------------
+<FilesMatch "(^#.*#|\.(bak|conf|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op]|tpl|git|env)|~)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Specifically protect this .htaccess and any .htpasswd
+<Files ~ "^.*\.([Hh][Tt][AaPp].*)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</Files>
+
+# ----------------------------------------------------------------------
+# 4. CUSTOM ERROR PAGES
+# ----------------------------------------------------------------------
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 500 /500.html
+
+# ----------------------------------------------------------------------
+# 5. CHARACTER ENCODING & MIME TYPES
+# ----------------------------------------------------------------------
+AddDefaultCharset UTF-8
+
+<IfModule mod_mime.c>
+    # Charsets
+    AddCharset UTF-8 .html .css .js .xml .json .rss .atom
+
+    # Modern Web Assets & Fonts
+    AddType image/svg+xml .svg .svgz
+    AddType image/webp .webp
+    AddType font/woff .woff
+    AddType font/woff2 .woff2
+    AddType font/ttf .ttf
+    AddType font/otf .otf
+    AddType application/pdf .pdf
+    AddType application/json .json
+    AddType image/x-icon .ico
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 6. GZIP / DEFLATE COMPRESSION (PERFORMANCE)
+# ----------------------------------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/atom+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 7. BROWSER CACHING (LEVERAGE BROWSER CACHE)
+# ----------------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    # HTML Documents (keep relatively short so updates deploy quickly)
+    ExpiresByType text/html "access plus 1 hour"
+
+    # CSS and JavaScript
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+
+    # Images and Media
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # Web Fonts
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+
+    # Documents & Brochures
+    ExpiresByType application/pdf "access plus 1 month"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 8. SECURITY HEADERS
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+    # Prevent MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Clickjacking protection
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Cross-site scripting (XSS) filter
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Referrer policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Restrict unnecessary browser features
+    Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+
+    # HTTP Strict Transport Security (HSTS) - Enabled over HTTPS
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 9. CROSS-ORIGIN (CORS) FOR FONTS & STATIC ASSETS
+# ----------------------------------------------------------------------
+<FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+    </IfModule>
+</FilesMatch>
+
