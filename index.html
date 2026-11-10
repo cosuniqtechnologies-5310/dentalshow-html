@@ -94,13 +94,13 @@
     /* Stage Container (Centered card layout matching screenshot) */
     .cs-stage-container {
       width: 100%;
-      max-width: 1140px;
+      max-width: 1220px;
       margin: 0 auto;
       display: flex;
       flex-direction: row;
       align-items: center; /* Harmonious vertical centering of mascot & content */
       justify-content: center;
-      gap: clamp(24px, 4vw, 56px);
+      gap: clamp(24px, 3vw, 48px);
     }
 
     /* ==========================================================================
@@ -115,6 +115,7 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      margin-right: clamp(80px, 8vw, 130px); /* Clear reserved space for speech bubble overhang */
     }
 
     /* Ambient Mascot Aura (Spotlight behind torso and head) */
@@ -220,9 +221,9 @@
        ========================================================================== */
     .cs-speech-bubble {
       position: absolute;
-      top: -2%;
-      left: 52%;
-      width: clamp(230px, 20vw, 290px);
+      top: 0%;
+      left: 65%;
+      width: clamp(210px, 17vw, 255px);
       aspect-ratio: 421 / 271;
       filter: drop-shadow(0 14px 34px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 16px rgba(0, 207, 222, 0.28));
       z-index: 5;
@@ -644,6 +645,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-right: 0;
       }
 
       .cs-speech-bubble {
