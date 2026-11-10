@@ -48,7 +48,7 @@
       z-index: 0;
       background:
         radial-gradient(ellipse at 25% 45%, rgba(6, 157, 191, 0.48) 0%, transparent 60%),
-        radial-gradient(ellipse at 75% 45%, rgba(2, 62, 115, 0.65) 0%, transparent 60%),
+        radial-gradient(ellipse at 75% 40%, rgba(2, 62, 115, 0.65) 0%, transparent 60%),
         radial-gradient(circle at 45% 85%, rgba(0, 210, 211, 0.28) 0%, transparent 50%),
         linear-gradient(135deg, #011424 0%, #022543 50%, #01101e 100%);
     }
@@ -71,53 +71,59 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      overflow: hidden;
     }
 
-    /* Main Center Stage (fills all remaining height above footer) */
+    /* Main Center Stage (Anchored to the floor right above footer) */
     .cs-stage-wrap {
-      flex: 1;
+      flex: 1 1 auto;
       width: 100%;
       min-height: 0;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
-      padding: clamp(10px, 2vh, 24px) clamp(16px, 3vw, 40px);
+      padding: 0 clamp(16px, 3vw, 40px);
       box-sizing: border-box;
       position: relative;
       z-index: 1;
     }
 
-    /* Grid containing Left Mascot Box & Right Content Box */
-    .cs-stage-grid {
+    /* Stage Container (Mascot Left + Content Right) */
+    .cs-stage-container {
       width: 100%;
-      max-width: 1120px;
+      max-width: 1100px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 460px 1fr;
-      align-items: center;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: center;
       gap: clamp(24px, 4vw, 56px);
+      height: 100%;
+      max-height: calc(100vh - 72px);
     }
 
     /* ==========================================================================
-       LEFT COLUMN: MASCOT, STAGE LIGHTING & FLOATING SPEECH BUBBLE
+       LEFT COLUMN: MASCOT, GLOWING FLOOR DISC & SPEECH BUBBLE
+       Aspect-ratio locked to 3375 / 4772 so speech bubble coordinates NEVER shift
        ========================================================================== */
-    .cs-mascot-box {
+    .cs-mascot-unit {
       position: relative;
-      width: 460px;
-      height: clamp(340px, 56vh, 460px);
+      flex: 0 0 auto;
+      height: min(480px, calc(100vh - 96px));
+      aspect-ratio: 3375 / 4772;
       display: flex;
       align-items: flex-end;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     /* Ambient Mascot Aura */
     .cs-mascot-aura {
       position: absolute;
       top: 50%;
-      left: 170px;
+      left: 50%;
       transform: translate(-50%, -50%);
-      width: 320px;
-      height: 320px;
+      width: 100%;
+      height: 90%;
       background: radial-gradient(circle, rgba(0, 210, 211, 0.35) 0%, rgba(6, 157, 191, 0.18) 45%, transparent 70%);
       border-radius: 50%;
       filter: blur(28px);
@@ -125,14 +131,15 @@
       z-index: 1;
     }
 
-    /* Glowing Floor Stage Disc */
+    /* Glowing Floor Stage Disc (Right on top of the footer line) */
     .cs-mascot-glow-disc {
       position: absolute;
       bottom: -6px;
-      left: 30px;
-      width: 270px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
       height: 36px;
-      background: radial-gradient(ellipse at 50% 50%, #00e5ff 0%, rgba(6, 157, 191, 0.7) 40%, transparent 75%);
+      background: radial-gradient(ellipse at 50% 50%, #00e5ff 0%, rgba(6, 157, 191, 0.75) 40%, transparent 75%);
       border-radius: 50%;
       filter: blur(8px);
       z-index: 1;
@@ -142,9 +149,10 @@
     /* Neon Cyan Floor Rim Ring */
     .cs-mascot-neon-rim {
       position: absolute;
-      bottom: 4px;
-      left: 55px;
-      width: 220px;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 78%;
       height: 18px;
       border: 2px solid #00e5ff;
       border-radius: 50%;
@@ -158,13 +166,13 @@
     .cs-mascot-img {
       position: relative;
       z-index: 2;
-      height: 94%;
-      width: auto;
-      max-width: 330px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
+      object-position: bottom center;
+      display: block;
       filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.5));
       animation: csBob 4.2s ease-in-out infinite;
-      margin-left: 5px;
     }
 
     /* Twinkling Star Sparkles */
@@ -177,8 +185,8 @@
     }
 
     .cs-sparkle-1 {
-      top: 18%;
-      left: -4px;
+      top: 14%;
+      left: -8px;
       color: #ffffff;
       font-size: 24px;
       filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
@@ -187,7 +195,7 @@
 
     .cs-sparkle-2 {
       bottom: 22%;
-      left: -10px;
+      left: -14px;
       color: #00e5ff;
       font-size: 18px;
       filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.9));
@@ -195,8 +203,8 @@
     }
 
     .cs-sparkle-3 {
-      bottom: 34%;
-      left: 315px;
+      bottom: 38%;
+      right: -24px;
       color: #00e5ff;
       font-size: 19px;
       filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.9));
@@ -204,17 +212,18 @@
     }
 
     /* ==========================================================================
-       SPEECH BUBBLE (FLOATING TO THE RIGHT OF BEAVER'S HEAD)
+       SPEECH BUBBLE (FLOATING TO THE RIGHT OF BEAVER'S HEAD ABOVE GESTURING HAND)
+       Starts at left: 54% (where beaver's right ear ends), completely unblocked face
        ========================================================================== */
     .cs-speech-bubble {
       position: absolute;
-      top: 5%;
-      left: 200px;
-      width: 246px;
+      top: 2%;
+      left: 54%;
+      width: clamp(210px, 20vw, 246px);
       background: #ffffff;
       border: 3px solid #00d2d3;
       border-radius: 28px;
-      padding: 12px 16px 14px 16px;
+      padding: 11px 16px 13px 16px;
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42), 0 0 20px rgba(0, 210, 211, 0.32);
       z-index: 5;
       text-align: center;
@@ -282,7 +291,7 @@
     .cs-speech-tail {
       position: absolute;
       bottom: -12px;
-      left: 22px;
+      left: 20px;
       width: 18px;
       height: 14px;
       background: #ffffff;
@@ -293,20 +302,22 @@
     }
 
     /* ==========================================================================
-       RIGHT COLUMN: TYPOGRAPHY, COUNTDOWN & SOCIALS
+       RIGHT COLUMN: TYPOGRAPHY, COUNTDOWN & SOCIALS (CENTER-ALIGNED)
        ========================================================================== */
-    .cs-content-box {
-      max-width: 540px;
+    .cs-content-unit {
+      flex: 0 1 540px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
+      align-items: center;
+      text-align: center;
+      padding-bottom: clamp(10px, 2.5vh, 26px);
     }
 
     /* Eyebrow: ─── MR. DENTALSHOW ─── */
     .cs-eyebrow-row {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
       margin-bottom: 4px;
     }
@@ -332,6 +343,8 @@
       margin: 2px 0 10px 0;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: 2px;
     }
 
@@ -354,8 +367,9 @@
 
     /* Meta Rows */
     .cs-meta-row {
-      display: flex;
+      display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
     }
 
@@ -380,6 +394,7 @@
       font-size: clamp(12px, 1vw, 13.5px);
       font-weight: 500;
       line-height: 1.35;
+      text-align: center;
     }
 
     .cs-pin-icon {
@@ -397,7 +412,7 @@
       border: 1.5px solid rgba(0, 210, 211, 0.38);
       border-radius: 16px;
       padding: clamp(10px, 1.6vh, 14px) clamp(14px, 1.8vw, 20px);
-      margin: clamp(12px, 1.8vh, 18px) 0;
+      margin: clamp(12px, 1.8vh, 18px) auto;
       box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -453,6 +468,7 @@
     .cs-social-row {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
     }
@@ -493,11 +509,11 @@
     }
 
     /* ==========================================================================
-       BOTTOM FULL-WIDTH WHITE BRANDING BAR
+       BOTTOM FULL-WIDTH WHITE BRANDING BAR (Always visible at bottom)
        ========================================================================== */
     .cs-footer-bar {
       flex: 0 0 auto;
-      height: 68px;
+      height: 72px;
       width: 100%;
       background: #ffffff;
       padding: 8px clamp(16px, 4vw, 48px);
@@ -518,7 +534,7 @@
     }
 
     .cs-footer-ds-logo {
-      height: 42px;
+      height: 44px;
       width: auto;
       max-width: 220px;
       object-fit: contain;
@@ -526,7 +542,7 @@
 
     .cs-footer-divider {
       width: 1.5px;
-      height: 36px;
+      height: 38px;
       background: #cbd5e1;
       border-radius: 2px;
     }
@@ -538,7 +554,7 @@
     }
 
     .cs-footer-tndtma-seal {
-      height: 40px;
+      height: 42px;
       width: auto;
       object-fit: contain;
     }
@@ -559,7 +575,7 @@
     }
 
     .cs-tndtma-name {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 900;
       color: #023868;
       line-height: 1.15;
@@ -567,7 +583,7 @@
     }
 
     .cs-tndtma-desc {
-      font-size: 10.5px;
+      font-size: 11px;
       font-weight: 600;
       color: #023868;
       opacity: 0.92;
@@ -623,17 +639,20 @@
         padding: 30px 16px 24px 16px;
       }
 
-      .cs-stage-grid {
-        grid-template-columns: 1fr;
-        justify-items: center;
+      .cs-stage-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         text-align: center;
         gap: 24px;
+        max-height: none;
       }
 
-      .cs-mascot-box {
+      .cs-mascot-unit {
         width: 100%;
-        max-width: 360px;
+        max-width: 320px;
         height: auto;
+        aspect-ratio: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -658,6 +677,7 @@
 
       .cs-mascot-img {
         height: 280px;
+        width: auto;
         margin: 0 auto;
       }
 
@@ -671,10 +691,11 @@
         transform: translateX(-50%);
       }
 
-      .cs-content-box {
+      .cs-content-unit {
         align-items: center;
         text-align: center;
         max-width: 500px;
+        padding-bottom: 0;
       }
 
       .cs-meta-row {
@@ -724,10 +745,10 @@
   <div class="cs-layout">
     <!-- Main Center Stage -->
     <main class="cs-stage-wrap">
-      <div class="cs-stage-grid">
+      <div class="cs-stage-container">
 
-        <!-- LEFT COLUMN: MASCOT & SPEECH BUBBLE (Exact coordinate mapping to match mockup) -->
-        <div class="cs-mascot-box">
+        <!-- LEFT COLUMN: MASCOT & SPEECH BUBBLE (Exact coordinate mapping to match reference) -->
+        <div class="cs-mascot-unit">
           <!-- Floating Speech Bubble (Positioned to the right of beaver head, NEVER covers face) -->
           <div class="cs-speech-bubble" role="status" aria-label="Our brand new website is Coming Soon">
             <!-- Accent marks on top right -->
@@ -759,8 +780,8 @@
             alt="Dental Show 2027 Mascot Mr. Dentalshow - Official Ambassador" class="cs-mascot-img" />
         </div>
 
-        <!-- RIGHT COLUMN: HERO TYPOGRAPHY, COUNTDOWN & SOCIALS -->
-        <div class="cs-content-box">
+        <!-- RIGHT COLUMN: HERO TYPOGRAPHY, COUNTDOWN & SOCIALS (CENTERED) -->
+        <div class="cs-content-unit">
           <!-- Eyebrow: ─── MR. DENTALSHOW ─── -->
           <div class="cs-eyebrow-row">
             <span class="cs-eyebrow-line" aria-hidden="true"></span>
