@@ -3,66 +3,80 @@
 # ======================================================================
 
 # ----------------------------------------------------------------------
-# 1. DIRECTORY LISTING & SERVER SIGNATURE
+# 1. DIRECTORY LISTING & CONTENT NEGOTIATION
 # ----------------------------------------------------------------------
-# Disable directory browsing (prevents users from seeing folder files)
-Options -Indexes
-
-# Hide Apache version and server identity
-ServerSignature Off
+# Disable directory listing and turn off MultiViews to prevent URL rewrite conflicts
+Options -Indexes -MultiViews
 
 # Default document priority
 DirectoryIndex index.html home.html index.php
 
 # ----------------------------------------------------------------------
-# 2. REWRITE ENGINE INITIALIZATION
+# 2. REWRITE ENGINE (ROUTING, SSL & CLEAN URLS)
 # ----------------------------------------------------------------------
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
 
     # ------------------------------------------------------------------
-    # 2.1 FORCE HTTPS (SSL)
+    # 2.1 PROTECT HIDDEN FILES (EXCEPT .well-known FOR SSL RENEWALS)
     # ------------------------------------------------------------------
-    # Redirect all HTTP requests to HTTPS (handles reverse proxies & load balancers)
+    # Block access to .git, .env, etc., while allowing Let's Encrypt / AutoSSL
+    RewriteCond %{REQUEST_URI} !^/\.well-known [NC]
+    RewriteRule (^|/)\. - [F,L]
+
+    # ------------------------------------------------------------------
+    # 2.2 FORCE HTTPS (SSL)
+    # ------------------------------------------------------------------
+    # Redirect HTTP to HTTPS in production (safely bypassed on localhost)
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
     RewriteCond %{HTTPS} !=on
     RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+    RewriteCond %{HTTP:X-Forwarded-SSL} !on [NC]
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
     # ------------------------------------------------------------------
-    # 2.2 CANONICAL HOSTNAME (Optional: www vs non-www)
+    # 2.3 CANONICAL HOSTNAME (Optional: www vs non-www)
     # ------------------------------------------------------------------
-    # To enforce non-www (https://dentalshow.in instead of www.dentalshow.in),
-    # uncomment the two lines below:
+    # To enforce non-www (https://dentalshow.in), uncomment below:
     # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
     # RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
     # ------------------------------------------------------------------
-    # 2.3 CLEAN EXTENSIONLESS URLS (.html)
+    # 2.4 STRIP TRAILING SLASH FROM NON-DIRECTORIES
     # ------------------------------------------------------------------
-    # 1. Redirect direct requests for index.html to site root /
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+    # ------------------------------------------------------------------
+    # 2.5 SPECIAL ROUTE: /events (RESOLVES DIRECTORY VS events.html CLASH)
+    # ------------------------------------------------------------------
+    RewriteRule ^events/$ /events [R=301,L]
+    RewriteRule ^events$ events.html [L]
+
+    # ------------------------------------------------------------------
+    # 2.6 CANONICAL ROOT FOR index.html
+    # ------------------------------------------------------------------
+    # Redirect direct requests for index.html to site root /
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.html[\s?] [NC]
     RewriteRule ^index\.html$ / [R=301,L]
 
-    # 2. Internally rewrite extensionless requests to matching .html file
+    # ------------------------------------------------------------------
+    # 2.7 EXTENSIONLESS CLEAN URLS (.html)
+    # ------------------------------------------------------------------
     # Example: /about -> /about.html, /events/dental-show-2027 -> /events/dental-show-2027.html
     RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !\.html$ [NC]
+    RewriteCond %{DOCUMENT_ROOT}/$1.html -f [OR]
     RewriteCond %{REQUEST_FILENAME}.html -f
-    RewriteRule ^(.*)$ $1.html [NC,L]
-
-    # ------------------------------------------------------------------
-    # 2.4 BLOCK HIDDEN FILES AND DIRECTORIES
-    # ------------------------------------------------------------------
-    # Prevent direct access to .git, .env, .htaccess, etc.
-    RewriteCond %{SCRIPT_FILENAME} -d [OR]
-    RewriteCond %{SCRIPT_FILENAME} -f
-    RewriteRule "(^|/)\." - [F]
+    RewriteRule ^(.*)$ $1.html [L]
 </IfModule>
 
 # ----------------------------------------------------------------------
 # 3. BLOCK SENSITIVE FILES & EXTENSIONS
 # ----------------------------------------------------------------------
-<FilesMatch "(^#.*#|\.(bak|conf|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op]|tpl|git|env)|~)$">
+# Block access to backup files, logs, environment configs, and scripts
+<FilesMatch "(^#.*#|^\.env|^\.git|\.(bak|conf|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op]|tpl)|~)$">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -72,8 +86,8 @@ DirectoryIndex index.html home.html index.php
     </IfModule>
 </FilesMatch>
 
-# Specifically protect this .htaccess and any .htpasswd
-<Files ~ "^.*\.([Hh][Tt][AaPp].*)">
+# Specifically protect .htaccess and .htpasswd files
+<FilesMatch "^\.([Hh][Tt])">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -81,7 +95,7 @@ DirectoryIndex index.html home.html index.php
         Order allow,deny
         Deny from all
     </IfModule>
-</Files>
+</FilesMatch>
 
 # ----------------------------------------------------------------------
 # 4. CUSTOM ERROR PAGES
@@ -91,7 +105,7 @@ ErrorDocument 403 /404.html
 ErrorDocument 500 /500.html
 
 # ----------------------------------------------------------------------
-# 5. CHARACTER ENCODING & MIME TYPES
+# 5. DEFAULT CHARSET & MIME TYPES
 # ----------------------------------------------------------------------
 AddDefaultCharset UTF-8
 
@@ -115,23 +129,11 @@ AddDefaultCharset UTF-8
 # 6. GZIP / DEFLATE COMPRESSION (PERFORMANCE)
 # ----------------------------------------------------------------------
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html
-    AddOutputFilterByType DEFLATE text/plain
-    AddOutputFilterByType DEFLATE text/xml
-    AddOutputFilterByType DEFLATE text/css
-    AddOutputFilterByType DEFLATE text/javascript
-    AddOutputFilterByType DEFLATE application/javascript
-    AddOutputFilterByType DEFLATE application/x-javascript
-    AddOutputFilterByType DEFLATE application/json
-    AddOutputFilterByType DEFLATE application/xml
-    AddOutputFilterByType DEFLATE application/xhtml+xml
-    AddOutputFilterByType DEFLATE application/rss+xml
-    AddOutputFilterByType DEFLATE application/atom+xml
-    AddOutputFilterByType DEFLATE image/svg+xml
-    AddOutputFilterByType DEFLATE font/ttf
-    AddOutputFilterByType DEFLATE font/otf
-    AddOutputFilterByType DEFLATE font/woff
-    AddOutputFilterByType DEFLATE font/woff2
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+    AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE application/json application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml application/atom+xml image/svg+xml
+    AddOutputFilterByType DEFLATE font/ttf font/otf font/woff font/woff2
 </IfModule>
 
 # ----------------------------------------------------------------------
@@ -144,19 +146,21 @@ AddDefaultCharset UTF-8
     # HTML Documents (keep relatively short so updates deploy quickly)
     ExpiresByType text/html "access plus 1 hour"
 
-    # CSS and JavaScript
+    # CSS & JavaScript
     ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
     ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/x-javascript "access plus 1 year"
 
-    # Images and Media
-    ExpiresByType image/jpg "access plus 1 year"
+    # Images
     ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
 
     # Web Fonts
     ExpiresByType font/ttf "access plus 1 year"
@@ -165,9 +169,16 @@ AddDefaultCharset UTF-8
     ExpiresByType font/woff2 "access plus 1 year"
     ExpiresByType application/font-woff "access plus 1 year"
     ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType application/x-font-woff "access plus 1 year"
 
     # Documents & Brochures
     ExpiresByType application/pdf "access plus 1 month"
+
+    # Data interchange
+    ExpiresByType application/json "access plus 0 seconds"
+    ExpiresByType application/xml "access plus 0 seconds"
+    ExpiresByType text/xml "access plus 0 seconds"
 </IfModule>
 
 # ----------------------------------------------------------------------
@@ -189,16 +200,20 @@ AddDefaultCharset UTF-8
     # Restrict unnecessary browser features
     Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
 
-    # HTTP Strict Transport Security (HSTS) - Enabled over HTTPS
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+    # HTTP Strict Transport Security (HSTS) - Set for direct SSL or reverse proxy SSL
+    <IfModule mod_setenvif.c>
+        SetEnvIf HTTPS on IS_HTTPS
+        SetEnvIf X-Forwarded-Proto "^https$" IS_HTTPS
+    </IfModule>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=IS_HTTPS
 </IfModule>
 
 # ----------------------------------------------------------------------
 # 9. CROSS-ORIGIN (CORS) FOR FONTS & STATIC ASSETS
 # ----------------------------------------------------------------------
-<FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
-    <IfModule mod_headers.c>
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
         Header set Access-Control-Allow-Origin "*"
-    </IfModule>
-</FilesMatch>
+    </FilesMatch>
+</IfModule>
 

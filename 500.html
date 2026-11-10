@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-scroll-behavior="smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>500 - Server Error | Dental Show 2027</title>
+  <meta name="description" content="We're experiencing temporary technical difficulties. Please try again shortly." />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-icon.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Clean Standalone Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .error-hero {
+      min-height: 65vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+    }
+    .error-card {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 48px 32px;
+      box-shadow: 0 20px 40px rgba(1, 21, 38, 0.08);
+      border: 1px solid rgba(2, 62, 115, 0.1);
+    }
+    .error-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e11d48;
+      background: rgba(225, 29, 72, 0.1);
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .error-code {
+      font-size: clamp(4rem, 10vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1;
+      color: #023e73;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.04em;
+    }
+    .error-title {
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      font-weight: 800;
+      color: #011526;
+      margin-bottom: 14px;
+    }
+    .error-desc {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #475569;
+      margin-bottom: 32px;
+    }
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+    .error-mascot {
+      width: 140px;
+      height: auto;
+      margin: 0 auto 20px auto;
+      display: block;
+      filter: drop-shadow(0 12px 20px rgba(2, 62, 115, 0.15));
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Header -->
+  <header class="exhibz-header">
+    <div class="container exhibz-header__inner">
+      <a class="exhibz-logo" aria-label="Dental Show 2027 home" href="/home.html">
+        <div class="site-brand-wrap">
+          <img alt="Dental Show 2027 Logo" width="240" height="80" decoding="async" class="exhibz-logo__img exhibz-logo__img--light" src="/images/logos/dark-header-logo.png" />
+          <img alt="Dental Show 2027 Logo" width="240" height="80" decoding="async" class="exhibz-logo__img exhibz-logo__img--dark" src="/images/logos/dental_show_2027_logo.png" />
+        </div>
+      </a>
+      <nav class="exhibz-nav" aria-label="Primary">
+        <ul class="exhibz-nav__list">
+          <li class="exhibz-nav__item"><a class="exhibz-nav__link" href="/home.html">Home</a></li>
+          <li class="exhibz-nav__item"><a class="exhibz-nav__link" href="/about.html">About us</a></li>
+          <li class="exhibz-nav__item"><a class="exhibz-nav__link" href="/events.html">Events</a></li>
+          <li class="exhibz-nav__item"><a class="exhibz-nav__link" href="/gallery.html">Gallery</a></li>
+          <li class="exhibz-nav__item"><a class="exhibz-nav__link" href="/contact.html">Contact us</a></li>
+        </ul>
+        <div class="header-actions">
+          <a class="btn-header-visitor" href="/visitor-registration.html"><span>Visitor registration</span></a>
+          <a class="btn-header-exhibitor" href="/exhibitor-registration.html"><span>Exhibitor registration</span></a>
+        </div>
+      </nav>
+      <button type="button" id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Error Content -->
+  <main id="main">
+    <section class="error-hero">
+      <div class="container">
+        <div class="error-card">
+          <img src="/images/dental-show-mascot-new.png" alt="Mr. Dentalshow Mascot" class="error-mascot" />
+          <div class="error-badge">500 Server Error</div>
+          <div class="error-code">500</div>
+          <h1 class="error-title">Internal Server Error</h1>
+          <p class="error-desc">
+            Something unexpected occurred on our server. We are looking into it. Please try refreshing in a moment.
+          </p>
+          <div class="error-actions">
+            <button onclick="window.location.reload()" class="btn btn--primary">
+              <span>Reload Page</span>
+            </button>
+            <a href="/home.html" class="btn btn--outline">
+              <span>Back to Home</span>
+            </a>
+            <a href="/contact.html" class="btn btn--outline">
+              <span>Contact Support</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo" aria-label="Site Footer">
+    <div class="container footer-container">
+      <div class="footer-bottom-row">
+        <div class="footer-bottom-info">
+          <p class="footer-bottom-address">New No.2, Mini Street, Kodambakkam, Chennai - 600 024, India.</p>
+          <p class="footer-bottom-copyright">© 2027 Dental Show · Organised by TNDTMA. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
+
