@@ -74,29 +74,33 @@
       overflow: hidden;
     }
 
-    /* Main Center Stage (Anchored to the floor right above footer) */
+    /* ==========================================================================
+       MAIN CENTER STAGE: CENTERED HORIZONTALLY & VERTICALLY
+       With balanced top, bottom, left, and right spacing for breathing room
+       ========================================================================== */
     .cs-stage-wrap {
       flex: 1 1 auto;
       width: 100%;
       min-height: 0;
       display: flex;
-      align-items: flex-end;
-      padding: 0 clamp(20px, 4vw, 64px);
+      align-items: center; /* Vertically centered */
+      justify-content: center; /* Horizontally centered */
+      padding: clamp(16px, 3vh, 36px) clamp(20px, 4vw, 56px); /* Top, bottom, left, right space */
       box-sizing: border-box;
       position: relative;
       z-index: 1;
     }
 
-    /* Stage Container (Full-bleed: Mascot on LEFT, Content on RIGHT) */
+    /* Stage Container (Centered card layout matching screenshot) */
     .cs-stage-container {
       width: 100%;
-      height: 100%;
-      max-height: calc(100vh - 72px);
+      max-width: 1140px;
+      margin: 0 auto;
       display: flex;
       flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: clamp(16px, 3vw, 48px);
+      align-items: center; /* Harmonious vertical centering of mascot & content */
+      justify-content: center;
+      gap: clamp(24px, 4vw, 56px);
     }
 
     /* ==========================================================================
@@ -106,8 +110,7 @@
     .cs-mascot-unit {
       position: relative;
       flex: 0 0 auto;
-      height: 100%;
-      max-height: calc(100vh - 72px);
+      height: clamp(330px, 54vh, 460px);
       aspect-ratio: 3375 / 4772;
       display: flex;
       align-items: flex-end;
@@ -124,19 +127,19 @@
       height: 95%;
       background: radial-gradient(circle, rgba(0, 210, 211, 0.38) 0%, rgba(6, 157, 191, 0.2) 45%, transparent 70%);
       border-radius: 50%;
-      filter: blur(32px);
+      filter: blur(28px);
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Glowing Floor Stage Disc (Right on top of the footer line) */
+    /* Glowing Floor Stage Disc */
     .cs-mascot-glow-disc {
       position: absolute;
       bottom: -4px;
       left: 50%;
       transform: translateX(-50%);
       width: 88%;
-      height: 34px;
+      height: 32px;
       background: radial-gradient(ellipse at 50% 50%, #00e5ff 0%, rgba(6, 157, 191, 0.75) 45%, transparent 75%);
       border-radius: 50%;
       filter: blur(8px);
@@ -160,7 +163,7 @@
       opacity: 0.95;
     }
 
-    /* Mascot Character (Shifted bottom -3.9% so paws touch the floor disc with ZERO gap) */
+    /* Mascot Character (Positioned on the glowing disc) */
     .cs-mascot-img {
       position: absolute;
       bottom: -3.9%;
@@ -219,11 +222,11 @@
       position: absolute;
       top: 1%;
       left: 54%;
-      width: clamp(210px, 18vw, 260px);
+      width: clamp(210px, 18vw, 250px);
       background: #ffffff;
       border: 3px solid #00d2d3;
       border-radius: 28px;
-      padding: 12px 18px 14px 18px;
+      padding: 11px 16px 13px 16px;
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42), 0 0 20px rgba(0, 210, 211, 0.32);
       z-index: 5;
       text-align: center;
@@ -302,17 +305,14 @@
     }
 
     /* ==========================================================================
-       RIGHT COLUMN: TYPOGRAPHY, COUNTDOWN & SOCIALS (ANCHORED RIGHT, VERTICALLY BALANCED)
+       RIGHT COLUMN: TYPOGRAPHY, COUNTDOWN & SOCIALS (CENTERED)
        ========================================================================== */
     .cs-content-unit {
-      flex: 0 1 clamp(440px, 46vw, 600px);
-      height: 100%;
+      flex: 0 1 clamp(420px, 44vw, 540px);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      padding: 16px 0 10px 0;
       box-sizing: border-box;
     }
 
@@ -352,7 +352,7 @@
     }
 
     .cs-heading-top {
-      font-size: clamp(24px, 2.5vw, 36px);
+      font-size: clamp(24px, 2.6vw, 34px);
       font-weight: 800;
       color: #ffffff;
       line-height: 1.15;
@@ -360,7 +360,7 @@
     }
 
     .cs-heading-accent {
-      font-size: clamp(34px, 3.6vw, 50px);
+      font-size: clamp(32px, 3.6vw, 48px);
       font-weight: 900;
       color: #38bdf8;
       line-height: 1.06;
@@ -394,7 +394,7 @@
     .cs-venue-row {
       margin-top: 6px;
       color: #cbd5e1;
-      font-size: clamp(12px, 1vw, 14px);
+      font-size: clamp(12px, 1vw, 13.5px);
       font-weight: 500;
       line-height: 1.35;
       text-align: center;
@@ -410,7 +410,7 @@
     /* Countdown Card */
     .cs-countdown-card {
       width: 100%;
-      max-width: 460px;
+      max-width: 440px;
       background: rgba(2, 28, 55, 0.72);
       border: 1.5px solid rgba(0, 210, 211, 0.38);
       border-radius: 16px;
@@ -747,11 +747,11 @@
   <div class="cs-dots" aria-hidden="true"></div>
 
   <div class="cs-layout">
-    <!-- Main Center Stage -->
+    <!-- Main Center Stage: Centered Horizontally & Vertically with Spacing on all 4 sides -->
     <main class="cs-stage-wrap">
       <div class="cs-stage-container">
 
-        <!-- LEFT COLUMN: MASCOT & SPEECH BUBBLE (Exact coordinate mapping to match reference) -->
+        <!-- LEFT COLUMN: MASCOT & SPEECH BUBBLE (Exact coordinate mapping) -->
         <div class="cs-mascot-unit">
           <!-- Floating Speech Bubble (Positioned to the right of beaver head, NEVER covers face) -->
           <div class="cs-speech-bubble" role="status" aria-label="Our brand new website is Coming Soon">
@@ -784,7 +784,7 @@
             alt="Dental Show 2027 Mascot Mr. Dentalshow - Official Ambassador" class="cs-mascot-img" />
         </div>
 
-        <!-- RIGHT COLUMN: HERO TYPOGRAPHY, COUNTDOWN & SOCIALS (ANCHORED RIGHT) -->
+        <!-- RIGHT COLUMN: HERO TYPOGRAPHY, COUNTDOWN & SOCIALS (CENTERED) -->
         <div class="cs-content-unit">
           <!-- Eyebrow: ─── MR. DENTALSHOW ─── -->
           <div class="cs-eyebrow-row">
