@@ -723,23 +723,49 @@
       }
 
       .cs-footer-bar {
-        height: auto;
-        flex-direction: column;
-        gap: 10px;
-        padding: 14px 16px;
+        height: 64px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(14px, 4vw, 24px);
+        padding: 8px 16px;
         text-align: center;
       }
 
       .cs-footer-divider {
-        display: none;
+        display: block;
+        width: 1.5px;
+        height: 30px;
+        background: #cbd5e1;
+        flex-shrink: 0;
+      }
+
+      .cs-footer-brand-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .cs-footer-ds-logo {
+        height: clamp(32px, 8.5vw, 40px);
+        width: auto;
+        max-width: 150px;
+        object-fit: contain;
       }
 
       .cs-footer-tndtma-wrap {
+        display: flex;
+        align-items: center;
         justify-content: center;
+        flex-shrink: 0;
       }
 
       .cs-footer-tndtma-seal {
-        height: 38px;
+        height: clamp(32px, 8.5vw, 40px);
+        width: auto;
+        max-width: 150px;
+        object-fit: contain;
       }
     }
 
@@ -892,7 +918,8 @@
                 <circle cx="12" cy="10" r="3" fill="#00e5ff"></circle>
               </svg>
             </span>
-            <span class="cs-venue-text">Chennai Trade Centre (CTC), New Halls 2, 3 &amp; 3A <span class="cs-venue-sep">•</span> <span class="cs-venue-city">Nandambakkam, Chennai</span></span>
+            <span class="cs-venue-text">Chennai Trade Centre (CTC), New Halls 2, 3 &amp; 3A <span
+                class="cs-venue-sep">•</span> <span class="cs-venue-city">Nandambakkam, Chennai</span></span>
           </div>
 
           <!-- Live Launch Countdown Card -->
