@@ -386,15 +386,30 @@
       color: #cbd5e1;
       font-size: clamp(12px, 1vw, 13.5px);
       font-weight: 500;
-      line-height: 1.35;
+      line-height: 1.45;
       text-align: center;
+      max-width: 520px;
+      width: 100%;
     }
 
     .cs-pin-icon {
       color: #00e5ff;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      vertical-align: -2.5px;
+      margin-right: 5px;
       flex-shrink: 0;
+    }
+
+    .cs-venue-sep {
+      display: inline;
+      margin: 0 4px;
+      opacity: 0.7;
+    }
+
+    .cs-venue-city {
+      display: inline;
     }
 
     /* Countdown Card */
@@ -729,6 +744,21 @@
     }
 
     @media (max-width: 640px) {
+      .cs-venue-row {
+        font-size: 12.5px;
+        line-height: 1.4;
+        padding: 0 4px;
+      }
+
+      .cs-venue-sep {
+        display: none;
+      }
+
+      .cs-venue-city {
+        display: block;
+        margin-top: 2px;
+      }
+
       .cs-social-row {
         gap: 12px;
         flex-wrap: nowrap;
@@ -854,16 +884,15 @@
           </div>
 
           <!-- Venue row with pin icon -->
-          <div class="cs-meta-row cs-venue-row">
+          <div class="cs-venue-row">
             <span class="cs-pin-icon" aria-hidden="true">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2.4"
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2.4"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3" fill="#00e5ff"></circle>
               </svg>
             </span>
-            <span class="cs-venue-text">Chennai Trade Centre (CTC), New Halls 2, 3 &amp; 3A • Nandambakkam,
-              Chennai</span>
+            <span class="cs-venue-text">Chennai Trade Centre (CTC), New Halls 2, 3 &amp; 3A <span class="cs-venue-sep">•</span> <span class="cs-venue-city">Nandambakkam, Chennai</span></span>
           </div>
 
           <!-- Live Launch Countdown Card -->
