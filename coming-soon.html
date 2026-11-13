@@ -638,10 +638,277 @@
     }
 
     /* ==========================================================================
-       RESPONSIVENESS (TABLET & MOBILE)
+       RESPONSIVENESS (TABLET & MOBILE: 100% SINGLE-FOLD / NO SCROLL)
        ========================================================================== */
     @media (max-width: 900px) {
 
+      html,
+      body {
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+      }
+
+      .cs-layout {
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .cs-stage-wrap {
+        flex: 1 1 auto;
+        min-height: 0;
+        padding: clamp(6px, 1.5vh, 16px) 16px clamp(4px, 1vh, 10px) 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .cs-stage-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: clamp(4px, 1.2vh, 12px);
+        max-height: 100%;
+        width: 100%;
+      }
+
+      .cs-mascot-unit {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+        aspect-ratio: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0;
+        flex-shrink: 1;
+        min-height: 0;
+      }
+
+      .cs-speech-bubble {
+        position: static;
+        width: clamp(160px, 44vw, 215px);
+        max-height: clamp(80px, 14vh, 110px);
+        margin: 0 auto clamp(2px, 0.5vh, 6px) auto;
+        animation: none;
+      }
+
+      .cs-bubble-headline {
+        font-size: clamp(10.5px, 2.7vw, 13px);
+      }
+
+      .cs-bubble-pill {
+        font-size: clamp(11.5px, 3.2vw, 14.5px);
+        padding: clamp(3px, 0.5vh, 5px) clamp(12px, 3vw, 20px);
+      }
+
+      .cs-bubble-swoosh-svg {
+        width: clamp(55px, 14vw, 80px);
+        height: clamp(4px, 0.8vh, 7px);
+        margin-top: 2px;
+      }
+
+      .cs-mascot-img {
+        position: static;
+        height: clamp(120px, 19vh, 175px);
+        width: auto;
+        margin: 0 auto;
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
+      }
+
+      .cs-mascot-aura {
+        left: 50%;
+        width: 100%;
+        height: 80%;
+      }
+
+      .cs-mascot-glow-disc {
+        left: 50%;
+        transform: translateX(-50%);
+        width: clamp(140px, 38vw, 190px);
+        height: 14px;
+        bottom: -2px;
+      }
+
+      .cs-mascot-neon-rim {
+        left: 50%;
+        transform: translateX(-50%);
+        width: clamp(120px, 32vw, 160px);
+        height: 10px;
+        bottom: 0;
+      }
+
+      .cs-content-unit {
+        align-items: center;
+        text-align: center;
+        max-width: 440px;
+        padding-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .cs-heading-top {
+        font-size: clamp(13px, 3.5vw, 17px);
+      }
+
+      .cs-heading-accent {
+        font-size: clamp(20px, 5.5vw, 28px);
+      }
+
+      .cs-meta-row {
+        justify-content: center;
+      }
+
+      .cs-date-row {
+        margin-top: clamp(1px, 0.4vh, 3px);
+        font-size: clamp(12px, 3.2vw, 15px);
+        gap: 6px;
+      }
+
+      .cs-cal-icon svg {
+        width: clamp(14px, 3.8vw, 17px);
+        height: clamp(14px, 3.8vw, 17px);
+      }
+
+      .cs-venue-row {
+        margin-top: clamp(2px, 0.4vh, 4px);
+        font-size: clamp(10.5px, 2.7vw, 12px);
+        line-height: 1.35;
+        padding: 0 4px;
+      }
+
+      .cs-pin-icon svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .cs-venue-sep {
+        display: none;
+      }
+
+      .cs-venue-city {
+        display: block;
+        margin-top: 2px;
+      }
+
+      .cs-countdown-card {
+        max-width: 380px;
+        margin: clamp(4px, 0.9vh, 8px) auto;
+        padding: clamp(5px, 0.9vh, 8px) clamp(8px, 2.2vw, 14px);
+        border-radius: 12px;
+      }
+
+      .cs-countdown-header {
+        font-size: clamp(8px, 2.2vw, 9.5px);
+        margin-bottom: clamp(3px, 0.5vh, 5px);
+        gap: 5px;
+      }
+
+      .cs-countdown-header svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      .cs-timer-grid {
+        gap: clamp(4px, 1.2vw, 8px);
+      }
+
+      .cs-timer-box {
+        padding: clamp(3px, 0.5vh, 6px) clamp(4px, 1vw, 8px);
+        min-width: 0;
+        border-radius: 8px;
+      }
+
+      .cs-timer-num {
+        font-size: clamp(15px, 4.2vw, 20px);
+      }
+
+      .cs-timer-lbl {
+        font-size: clamp(7.5px, 1.8vw, 8.5px);
+        margin-top: 1px;
+      }
+
+      .cs-social-row {
+        margin-top: clamp(2px, 0.5vh, 6px);
+        gap: clamp(8px, 2.4vw, 12px);
+        flex-wrap: nowrap;
+        justify-content: center;
+      }
+
+      .cs-social-pill {
+        width: clamp(32px, 8.2vw, 38px);
+        height: clamp(32px, 8.2vw, 38px);
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        gap: 0;
+        flex-shrink: 0;
+      }
+
+      .cs-social-pill span {
+        display: none;
+      }
+
+      .cs-social-pill svg {
+        width: clamp(14px, 3.6vw, 16px);
+        height: clamp(14px, 3.6vw, 16px);
+      }
+
+      .cs-footer-bar {
+        height: clamp(46px, 6.5vh, 56px);
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(12px, 3.8vw, 22px);
+        padding: 6px 14px;
+        text-align: center;
+      }
+
+      .cs-footer-divider {
+        display: block;
+        width: 1.5px;
+        height: 24px;
+        background: #cbd5e1;
+        flex-shrink: 0;
+      }
+
+      .cs-footer-brand-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .cs-footer-ds-logo {
+        height: clamp(26px, 4.2vh, 34px);
+        width: auto;
+        max-width: 135px;
+        object-fit: contain;
+      }
+
+      .cs-footer-tndtma-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .cs-footer-tndtma-seal {
+        height: clamp(26px, 4.2vh, 34px);
+        width: auto;
+        max-width: 135px;
+        object-fit: contain;
+      }
+    }
+
+    /* Fallback for ultra-short viewports (e.g. landscape mode on mobile) */
+    @media (max-height: 480px) and (orientation: landscape) {
       html,
       body {
         height: auto;
@@ -655,159 +922,7 @@
       }
 
       .cs-stage-wrap {
-        padding: 30px 16px 24px 16px;
-      }
-
-      .cs-stage-container {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 24px;
-        max-height: none;
-      }
-
-      .cs-mascot-unit {
-        width: 100%;
-        max-width: 320px;
-        height: auto;
-        aspect-ratio: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-right: 0;
-      }
-
-      .cs-speech-bubble {
-        position: static;
-        width: min(280px, 90vw);
-        margin: 0 auto 12px auto;
-        animation: none;
-      }
-
-      .cs-mascot-img {
-        position: static;
-        height: 280px;
-        width: auto;
-        margin: 0 auto;
-      }
-
-      .cs-mascot-aura {
-        left: 50%;
-      }
-
-      .cs-mascot-glow-disc,
-      .cs-mascot-neon-rim {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .cs-content-unit {
-        align-items: center;
-        text-align: center;
-        max-width: 500px;
-        padding-bottom: 0;
-      }
-
-      .cs-meta-row {
-        justify-content: center;
-      }
-
-      .cs-countdown-card {
-        margin: 16px auto;
-      }
-
-      .cs-social-row {
-        justify-content: center;
-      }
-
-      .cs-footer-bar {
-        height: 64px;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(14px, 4vw, 24px);
-        padding: 8px 16px;
-        text-align: center;
-      }
-
-      .cs-footer-divider {
-        display: block;
-        width: 1.5px;
-        height: 30px;
-        background: #cbd5e1;
-        flex-shrink: 0;
-      }
-
-      .cs-footer-brand-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-
-      .cs-footer-ds-logo {
-        height: clamp(32px, 8.5vw, 40px);
-        width: auto;
-        max-width: 150px;
-        object-fit: contain;
-      }
-
-      .cs-footer-tndtma-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-
-      .cs-footer-tndtma-seal {
-        height: clamp(32px, 8.5vw, 40px);
-        width: auto;
-        max-width: 150px;
-        object-fit: contain;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .cs-venue-row {
-        font-size: 12.5px;
-        line-height: 1.4;
-        padding: 0 4px;
-      }
-
-      .cs-venue-sep {
-        display: none;
-      }
-
-      .cs-venue-city {
-        display: block;
-        margin-top: 2px;
-      }
-
-      .cs-social-row {
-        gap: 12px;
-        flex-wrap: nowrap;
-        justify-content: center;
-      }
-
-      .cs-social-pill {
-        width: 42px;
-        height: 42px;
-        padding: 0;
-        border-radius: 50%;
-        justify-content: center;
-        gap: 0;
-        flex-shrink: 0;
-      }
-
-      .cs-social-pill span {
-        display: none;
-      }
-
-      .cs-social-pill svg {
-        width: 18px;
-        height: 18px;
+        overflow: visible;
       }
     }
   </style>
