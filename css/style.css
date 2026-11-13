@@ -3998,7 +3998,7 @@ button {
   animation: magicalTwinkle 3.2s ease-in-out infinite 1.5s;
 }
 
-/* Speech Bubble: Positioned Safely to the Left of Mr. Dentalshow (100% Visible, Never Cut Off by Header) */
+/* Speech Bubble: Positioned Safely to the Left of Mascot (100% Visible, Never Cut Off by Header) */
 .banner-mascot-bubble {
   position: absolute;
   top: 36px;
