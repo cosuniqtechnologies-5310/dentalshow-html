@@ -55,11 +55,15 @@ DirectoryIndex index.html home.html index.php
     RewriteRule ^events$ events.html [L]
 
     # ------------------------------------------------------------------
-    # 2.6 CANONICAL ROOT FOR index.html
+    # 2.6 CANONICAL ROOT & EXTENSIONLESS REDIRECTS (.html -> clean)
     # ------------------------------------------------------------------
     # Redirect direct requests for index.html to site root /
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.html[\s?] [NC]
     RewriteRule ^index\.html$ / [R=301,L]
+
+    # Redirect direct requests ending in .html to extensionless clean URLs
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+([^?\s]+)\.html[\s?] [NC]
+    RewriteRule ^(.+)\.html$ /$1 [R=301,L]
 
     # ------------------------------------------------------------------
     # 2.7 EXTENSIONLESS CLEAN URLS (.html)
