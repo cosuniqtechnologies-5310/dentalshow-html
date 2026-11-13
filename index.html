@@ -655,110 +655,150 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
       }
 
       .cs-stage-wrap {
         flex: 1 1 auto;
         min-height: 0;
-        padding: clamp(6px, 1.5vh, 16px) 16px clamp(4px, 1vh, 10px) 16px;
+        width: 100%;
+        padding: clamp(6px, 1.2vh, 14px) 16px;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        box-sizing: border-box;
       }
 
       .cs-stage-container {
+        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        gap: clamp(4px, 1.2vh, 12px);
-        max-height: 100%;
+        gap: clamp(4px, 1vh, 8px);
         width: 100%;
+        max-width: 440px;
+        margin: 0 auto;
       }
 
       .cs-mascot-unit {
+        position: relative;
         width: 100%;
-        max-width: 260px;
+        max-width: 250px;
         height: auto;
         aspect-ratio: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-right: 0;
-        flex-shrink: 1;
+        margin: 0 auto;
+        flex: 0 0 auto;
         min-height: 0;
       }
 
       .cs-speech-bubble {
-        position: static;
-        width: clamp(160px, 44vw, 215px);
-        max-height: clamp(80px, 14vh, 110px);
-        margin: 0 auto clamp(2px, 0.5vh, 6px) auto;
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+        width: clamp(155px, 42vw, 205px);
+        aspect-ratio: 421 / 271;
+        margin: 0 auto clamp(2px, 0.4vh, 5px) auto;
         animation: none;
+        flex-shrink: 0;
       }
 
       .cs-bubble-headline {
-        font-size: clamp(10.5px, 2.7vw, 13px);
+        font-size: clamp(10px, 2.6vw, 12.5px);
       }
 
       .cs-bubble-pill {
-        font-size: clamp(11.5px, 3.2vw, 14.5px);
-        padding: clamp(3px, 0.5vh, 5px) clamp(12px, 3vw, 20px);
+        font-size: clamp(11px, 3vw, 14px);
+        padding: clamp(3px, 0.4vh, 5px) clamp(11px, 2.8vw, 18px);
       }
 
       .cs-bubble-swoosh-svg {
-        width: clamp(55px, 14vw, 80px);
-        height: clamp(4px, 0.8vh, 7px);
+        width: clamp(52px, 13vw, 75px);
+        height: clamp(4px, 0.7vh, 6px);
         margin-top: 2px;
       }
 
       .cs-mascot-img {
-        position: static;
-        height: clamp(120px, 19vh, 175px);
+        position: relative;
+        bottom: auto;
+        left: auto;
+        height: clamp(105px, 16vh, 145px);
         width: auto;
         margin: 0 auto;
-        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
+        display: block;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+        animation: csBob 4.2s ease-in-out infinite;
+        z-index: 2;
       }
 
       .cs-mascot-aura {
         left: 50%;
+        top: 60%;
         width: 100%;
-        height: 80%;
+        height: 75%;
       }
 
       .cs-mascot-glow-disc {
+        position: absolute;
+        bottom: -2px;
         left: 50%;
         transform: translateX(-50%);
-        width: clamp(140px, 38vw, 190px);
-        height: 14px;
-        bottom: -2px;
+        width: clamp(125px, 34vw, 165px);
+        height: 12px;
+        z-index: 1;
       }
 
       .cs-mascot-neon-rim {
+        position: absolute;
+        bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: clamp(120px, 32vw, 160px);
-        height: 10px;
-        bottom: 0;
+        width: clamp(105px, 28vw, 140px);
+        height: 8px;
+        z-index: 1;
+      }
+
+      .cs-sparkle-1 {
+        top: 4%;
+        left: 8px;
+        font-size: 16px;
+      }
+
+      .cs-sparkle-2 {
+        bottom: 24%;
+        left: 4px;
+        font-size: 14px;
+      }
+
+      .cs-sparkle-3 {
+        bottom: 30%;
+        right: 4px;
+        font-size: 14px;
       }
 
       .cs-content-unit {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         text-align: center;
         max-width: 440px;
         padding-bottom: 0;
-        flex-shrink: 0;
       }
 
       .cs-heading-top {
-        font-size: clamp(13px, 3.5vw, 17px);
+        font-size: clamp(12.5px, 3.3vw, 16px);
       }
 
       .cs-heading-accent {
-        font-size: clamp(20px, 5.5vw, 28px);
+        font-size: clamp(19px, 5.2vw, 26px);
       }
 
       .cs-meta-row {
@@ -766,26 +806,26 @@
       }
 
       .cs-date-row {
-        margin-top: clamp(1px, 0.4vh, 3px);
-        font-size: clamp(12px, 3.2vw, 15px);
-        gap: 6px;
+        margin-top: clamp(1px, 0.3vh, 3px);
+        font-size: clamp(11.5px, 3vw, 14px);
+        gap: 5px;
       }
 
       .cs-cal-icon svg {
-        width: clamp(14px, 3.8vw, 17px);
-        height: clamp(14px, 3.8vw, 17px);
+        width: clamp(13px, 3.5vw, 16px);
+        height: clamp(13px, 3.5vw, 16px);
       }
 
       .cs-venue-row {
-        margin-top: clamp(2px, 0.4vh, 4px);
-        font-size: clamp(10.5px, 2.7vw, 12px);
+        margin-top: clamp(2px, 0.3vh, 4px);
+        font-size: clamp(10px, 2.5vw, 11.5px);
         line-height: 1.35;
         padding: 0 4px;
       }
 
       .cs-pin-icon svg {
-        width: 13px;
-        height: 13px;
+        width: 12px;
+        height: 12px;
       }
 
       .cs-venue-sep {
@@ -794,56 +834,56 @@
 
       .cs-venue-city {
         display: block;
-        margin-top: 2px;
+        margin-top: 1px;
       }
 
       .cs-countdown-card {
-        max-width: 380px;
-        margin: clamp(4px, 0.9vh, 8px) auto;
-        padding: clamp(5px, 0.9vh, 8px) clamp(8px, 2.2vw, 14px);
+        max-width: 370px;
+        margin: clamp(4px, 0.8vh, 7px) auto;
+        padding: clamp(4px, 0.8vh, 7px) clamp(8px, 2vw, 12px);
         border-radius: 12px;
       }
 
       .cs-countdown-header {
-        font-size: clamp(8px, 2.2vw, 9.5px);
-        margin-bottom: clamp(3px, 0.5vh, 5px);
+        font-size: clamp(8px, 2vw, 9px);
+        margin-bottom: clamp(2px, 0.4vh, 4px);
         gap: 5px;
       }
 
       .cs-countdown-header svg {
-        width: 12px;
-        height: 12px;
+        width: 11px;
+        height: 11px;
       }
 
       .cs-timer-grid {
-        gap: clamp(4px, 1.2vw, 8px);
+        gap: clamp(4px, 1.2vw, 7px);
       }
 
       .cs-timer-box {
-        padding: clamp(3px, 0.5vh, 6px) clamp(4px, 1vw, 8px);
+        padding: clamp(3px, 0.4vh, 5px) clamp(4px, 1vw, 7px);
         min-width: 0;
         border-radius: 8px;
       }
 
       .cs-timer-num {
-        font-size: clamp(15px, 4.2vw, 20px);
+        font-size: clamp(14px, 4vw, 19px);
       }
 
       .cs-timer-lbl {
-        font-size: clamp(7.5px, 1.8vw, 8.5px);
+        font-size: clamp(7px, 1.7vw, 8px);
         margin-top: 1px;
       }
 
       .cs-social-row {
-        margin-top: clamp(2px, 0.5vh, 6px);
-        gap: clamp(8px, 2.4vw, 12px);
+        margin-top: clamp(2px, 0.4vh, 5px);
+        gap: clamp(8px, 2.2vw, 11px);
         flex-wrap: nowrap;
         justify-content: center;
       }
 
       .cs-social-pill {
-        width: clamp(32px, 8.2vw, 38px);
-        height: clamp(32px, 8.2vw, 38px);
+        width: clamp(30px, 7.8vw, 36px);
+        height: clamp(30px, 7.8vw, 36px);
         padding: 0;
         border-radius: 50%;
         justify-content: center;
@@ -856,24 +896,24 @@
       }
 
       .cs-social-pill svg {
-        width: clamp(14px, 3.6vw, 16px);
-        height: clamp(14px, 3.6vw, 16px);
+        width: clamp(13px, 3.4vw, 15px);
+        height: clamp(13px, 3.4vw, 15px);
       }
 
       .cs-footer-bar {
-        height: clamp(46px, 6.5vh, 56px);
+        height: clamp(44px, 6vh, 52px);
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: clamp(12px, 3.8vw, 22px);
-        padding: 6px 14px;
+        gap: clamp(10px, 3.5vw, 20px);
+        padding: 4px 12px;
         text-align: center;
       }
 
       .cs-footer-divider {
         display: block;
         width: 1.5px;
-        height: 24px;
+        height: 22px;
         background: #cbd5e1;
         flex-shrink: 0;
       }
@@ -886,9 +926,9 @@
       }
 
       .cs-footer-ds-logo {
-        height: clamp(26px, 4.2vh, 34px);
+        height: clamp(24px, 3.8vh, 32px);
         width: auto;
-        max-width: 135px;
+        max-width: 130px;
         object-fit: contain;
       }
 
@@ -900,15 +940,16 @@
       }
 
       .cs-footer-tndtma-seal {
-        height: clamp(26px, 4.2vh, 34px);
+        height: clamp(24px, 3.8vh, 32px);
         width: auto;
-        max-width: 135px;
+        max-width: 130px;
         object-fit: contain;
       }
     }
 
     /* Fallback for ultra-short viewports (e.g. landscape mode on mobile) */
     @media (max-height: 480px) and (orientation: landscape) {
+
       html,
       body {
         height: auto;
