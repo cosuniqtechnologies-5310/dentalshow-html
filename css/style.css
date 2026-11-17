@@ -20131,11 +20131,13 @@ body:has(.cs-fit-wrapper) {
 
 .feature-box-body h4 {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 24px !important;
+  font-size: clamp(18px, 4.8vw, 22px) !important;
   font-weight: 800 !important;
   margin: 0 !important;
   line-height: 1.25 !important;
   letter-spacing: -0.02em !important;
+  white-space: normal !important;
+  word-break: normal !important;
 }
 
 .feature-box-pills {
