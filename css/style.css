@@ -20672,6 +20672,33 @@ body:has(.cs-fit-wrapper) {
     flex-shrink: 0 !important;
   }
 
+  /* Countdown Eyebrow Row: single line on mobile view */
+  .countdown-eyebrow-row {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    margin-bottom: 10px !important;
+  }
+
+  .countdown-accent-dash {
+    width: 20px !important;
+    height: 2.5px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .countdown-eyebrow-row .section-eyebrow,
+  .countdown-eyebrow-row .countdown-eyebrow-text,
+  .countdown-eyebrow-text {
+    font-size: clamp(9.5px, 2.75vw, 13px) !important;
+    letter-spacing: clamp(0.5px, 0.2vw, 1.2px) !important;
+    white-space: nowrap !important;
+    display: inline !important;
+    line-height: 1 !important;
+  }
+
   .banner-title,
   .hero-area h1 {
     font-size: clamp(1.9rem, 7vw, 2.45rem) !important;
