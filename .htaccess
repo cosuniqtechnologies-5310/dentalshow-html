@@ -55,6 +55,13 @@ DirectoryIndex index.html home.html index.php
     RewriteRule ^events$ events.html [L]
 
     # ------------------------------------------------------------------
+    # 2.5B CANONICAL 301 REDIRECTS FOR RENAMED REGISTRATION PAGES
+    # ------------------------------------------------------------------
+    # Redirect legacy hyphenated registration URLs to clean non-hyphenated URLs
+    RewriteRule ^visitor-registration(\.html)?/?$ /visitorregistration [R=301,L]
+    RewriteRule ^exhibitor-registration(\.html)?/?$ /exhibitorregistration [R=301,L]
+
+    # ------------------------------------------------------------------
     # 2.6 CANONICAL ROOT & EXTENSIONLESS REDIRECTS (.html -> clean)
     # ------------------------------------------------------------------
     # Redirect direct requests for index.html to site root /
