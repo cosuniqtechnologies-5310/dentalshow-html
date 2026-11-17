@@ -13029,6 +13029,20 @@ section .event-panorama-banner .panorama-banner-excerpt,
   }
 }
 
+@media (max-width: 991px) {
+  .gallery-header-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .gallery-header-archive-wrap {
+    align-self: flex-start;
+    margin-top: 2px;
+    padding-bottom: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .fold-gallery-showcase {
     padding: 60px 0 70px;
@@ -13037,7 +13051,13 @@ section .event-panorama-banner .panorama-banner-excerpt,
   .gallery-header-top-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 10px;
+  }
+
+  .gallery-header-archive-wrap {
+    align-self: flex-start;
+    margin-top: 2px;
+    padding-bottom: 0;
   }
 
   .gallery-marquee-wrapper {
