@@ -13713,7 +13713,10 @@ section .event-panorama-banner .panorama-banner-excerpt,
 /* ==========================================================================
    REGISTRATION IFRAME CARD & EMBED CONTAINER (Desktop & Mobile Optimized)
    ========================================================================== */
-.section-visitor-portal,
+.section-visitor-portal {
+  padding: clamp(105px, 11vw, 130px) 0 60px !important;
+}
+
 .section-exhibitor-portal {
   padding: 48px 0 60px;
 }
