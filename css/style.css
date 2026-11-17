@@ -7579,10 +7579,11 @@ p.partners-cta-desc {
 
   .timeline-header-col-right {
     border-left: none !important;
-    border-top: 2px solid #0477BF !important;
+    border-top: none !important;
+    border: none !important;
     padding-left: 0 !important;
-    padding-top: 8px !important;
-    margin-top: 2px !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
   }
 
   .timeline-header-desc {
@@ -11220,9 +11221,10 @@ p.partners-cta-desc {
 
   .timeline-header-col-right {
     border-left: none;
-    border-top: 2.5px solid #0477BF;
+    border-top: none;
+    border: none;
     padding-left: 0;
-    padding-top: 18px;
+    padding-top: 0;
   }
 }
 
@@ -20718,6 +20720,16 @@ body:has(.cs-fit-wrapper) {
     white-space: nowrap !important;
     display: inline !important;
     line-height: 1 !important;
+  }
+
+  /* Timeline Header Col Right: Remove mobile top border divider */
+  .timeline-header-col-right {
+    border: none !important;
+    border-top: none !important;
+    border-left: none !important;
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
   }
 
   /* Countdown Schedule & Entry Cards: Full view of column (stacked full-width cards on mobile) */
