@@ -20644,28 +20644,29 @@ body:has(.cs-fit-wrapper) {
 
   .hero-tagline-pill {
     display: inline-flex !important;
-    align-items: flex-start !important;
-    gap: 7px !important;
-    padding: 6px 12px !important;
-    font-size: clamp(10px, 2.7vw, 11px) !important;
-    letter-spacing: 0.4px !important;
-    line-height: 1.35 !important;
-    border-radius: 20px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 6px !important;
+    padding: 5px 12px !important;
+    font-size: clamp(8.8px, 2.5vw, 11px) !important;
+    letter-spacing: 0.25px !important;
+    line-height: 1 !important;
+    border-radius: 30px !important;
     max-width: 100% !important;
-    white-space: normal !important;
+    white-space: nowrap !important;
     box-sizing: border-box !important;
   }
 
   .hero-tagline-pill span:not(.live-pulse-dot),
   .hero-tagline-pill .hero-tagline-text {
-    min-width: 0 !important;
-    white-space: normal !important;
-    word-break: normal !important;
-    display: inline-block !important;
+    white-space: nowrap !important;
+    display: inline !important;
+    line-height: 1 !important;
   }
 
   .hero-tagline-pill .live-pulse-dot {
-    margin-top: 4px !important;
+    margin-top: 0 !important;
+    align-self: center !important;
     flex-shrink: 0 !important;
   }
 
