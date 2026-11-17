@@ -19979,6 +19979,44 @@ body:has(.cs-fit-wrapper) {
   display: none !important;
 }
 
+/* Contact Page Banner Mascot: Enlarged Mascot Without Bubble/Pill */
+.banner-mascot-stage:has(.contact-mascot-lg) {
+  max-width: 320px !important;
+}
+
+.banner-mascot-img.contact-mascot-lg {
+  width: 245px !important;
+  max-height: 320px !important;
+  height: auto !important;
+}
+
+.banner-mascot-stage:has(.contact-mascot-lg) .banner-mascot-pedestal {
+  width: 190px !important;
+  height: 16px !important;
+}
+
+@media (max-width: 991px) {
+  .banner-mascot-stage:has(.contact-mascot-lg) {
+    max-width: 280px !important;
+  }
+
+  .banner-mascot-img.contact-mascot-lg {
+    width: 225px !important;
+    max-height: 295px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-mascot-stage:has(.contact-mascot-lg) {
+    max-width: 260px !important;
+  }
+
+  .banner-mascot-img.contact-mascot-lg {
+    width: 210px !important;
+    max-height: 280px !important;
+  }
+}
+
 
 /* ==========================================================================
    COUNTDOWN EVENT DETAILS & 3-TIER FEATURE BOXES FIX (HIGH CONTRAST & TYPOGRAPHY)
