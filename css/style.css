@@ -3535,6 +3535,10 @@ button {
   gap: 10px;
 }
 
+.footer-nav-col--contact .footer-social-circles {
+  margin-top: 16px;
+}
+
 .footer-social-icon-btn {
   width: 36px;
   height: 36px;
