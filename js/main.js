@@ -730,19 +730,53 @@
         return visibleList;
       }
 
-      yearPills.forEach(function (pill) {
-        pill.addEventListener('click', function () {
-          yearPills.forEach(function (p) {
+      function setYearFilter(targetYear) {
+        var foundMatch = false;
+        yearPills.forEach(function (p) {
+          var yrName = p.querySelector('.year-name');
+          var val = yrName ? yrName.textContent.trim() : p.textContent.trim();
+          var normalized = val.indexOf('All') !== -1 ? 'All' : val;
+          if (normalized === targetYear) {
+            foundMatch = true;
+          }
+        });
+        if (!foundMatch) targetYear = 'All';
+
+        selectedYear = targetYear;
+        yearPills.forEach(function (p) {
+          var yrName = p.querySelector('.year-name');
+          var val = yrName ? yrName.textContent.trim() : p.textContent.trim();
+          var normalized = val.indexOf('All') !== -1 ? 'All' : val;
+          if (normalized === selectedYear) {
+            p.classList.add('is-active');
+            p.setAttribute('aria-selected', 'true');
+          } else {
             p.classList.remove('is-active');
             p.setAttribute('aria-selected', 'false');
-          });
-          pill.classList.add('is-active');
-          pill.setAttribute('aria-selected', 'true');
+          }
+        });
+        filterGallery();
+      }
 
+      // Check URL query param (?year=2026) or hash (#2026) on initial load
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var urlYear = params.get('year') || (window.location.hash ? window.location.hash.replace('#', '').replace('year=', '') : '');
+        if (urlYear) {
+          setYearFilter(urlYear.trim());
+        }
+      } catch (e) {}
+
+      yearPills.forEach(function (pill) {
+        pill.addEventListener('click', function () {
           var yrName = pill.querySelector('.year-name');
           var val = yrName ? yrName.textContent.trim() : pill.textContent.trim();
-          selectedYear = val.indexOf('All') !== -1 ? 'All' : val;
-          filterGallery();
+          var nextYear = val.indexOf('All') !== -1 ? 'All' : val;
+          setYearFilter(nextYear);
+          try {
+            var newUrl = window.location.pathname + (nextYear === 'All' ? '' : '?year=' + encodeURIComponent(nextYear));
+            window.history.replaceState(null, '', newUrl);
+          } catch (e) {}
         });
       });
 
@@ -1116,7 +1150,7 @@
           '        <a href="visitorregistration" class="modal-action-btn modal-action-btn--visitor"><span>Register as Visitor (Free Pass)</span> →</a>',
           '        <a href="exhibitorregistration" class="modal-action-btn modal-action-btn--exhibitor"><span>Book Exhibitor Stall</span> →</a>'
         ].join('') : [
-          '        <a href="gallery" class="modal-action-btn modal-action-btn--gallery"><span>View Central Photo Gallery</span> →</a>',
+          '        <a href="gallery?year=' + encodeURIComponent(event.year) + '" class="modal-action-btn modal-action-btn--gallery"><span>View Central Photo Gallery</span> →</a>',
           '        <a href="about" class="modal-action-btn modal-action-btn--about"><span>Read About 20 Years Journey</span> →</a>'
         ].join(''),
         '      </div>',
