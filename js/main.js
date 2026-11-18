@@ -1045,6 +1045,40 @@
       });
     }
 
+    // Check URL query param (?year=2026) or hash on initial load
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var urlYear = params.get('year') || (window.location.hash ? window.location.hash.replace('#', '').replace('year=', '') : '');
+      if (urlYear) {
+        urlYear = urlYear.trim();
+        searchQuery = urlYear;
+        if (searchInput) searchInput.value = urlYear;
+        var yNum = parseInt(urlYear, 10);
+        if (!isNaN(yNum)) {
+          if (yNum === 2027) activeTab = 'Upcoming';
+          else if (yNum >= 2020 && yNum <= 2026) activeTab = '2020-2026';
+          else if (yNum >= 2013 && yNum <= 2019) activeTab = '2013-2019';
+          else activeTab = 'All';
+
+          tabButtons.forEach(function (t) {
+            var tabId = t.getAttribute('id') || '';
+            if (
+              (activeTab === 'Upcoming' && tabId.indexOf('Upcoming') !== -1) ||
+              (activeTab === '2020-2026' && tabId.indexOf('2020-2026') !== -1) ||
+              (activeTab === '2013-2019' && tabId.indexOf('2013-2019') !== -1) ||
+              (activeTab === 'All' && tabId.indexOf('All') !== -1)
+            ) {
+              t.classList.add('is-active');
+              t.setAttribute('aria-selected', 'true');
+            } else {
+              t.classList.remove('is-active');
+              t.setAttribute('aria-selected', 'false');
+            }
+          });
+        }
+      }
+    } catch (e) {}
+
     renderEvents();
   }
 
