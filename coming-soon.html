@@ -1090,19 +1090,19 @@
             </div>
             <div class="cs-timer-grid">
               <div class="cs-timer-box">
-                <div class="cs-timer-num" id="cs-days">29</div>
+                <div class="cs-timer-num" id="cs-days">00</div>
                 <div class="cs-timer-lbl">DAYS</div>
               </div>
               <div class="cs-timer-box">
-                <div class="cs-timer-num" id="cs-hours">23</div>
+                <div class="cs-timer-num" id="cs-hours">00</div>
                 <div class="cs-timer-lbl">HOURS</div>
               </div>
               <div class="cs-timer-box">
-                <div class="cs-timer-num" id="cs-minutes">58</div>
+                <div class="cs-timer-num" id="cs-minutes">00</div>
                 <div class="cs-timer-lbl">MINS</div>
               </div>
               <div class="cs-timer-box">
-                <div class="cs-timer-num" id="cs-seconds">27</div>
+                <div class="cs-timer-num" id="cs-seconds">00</div>
                 <div class="cs-timer-lbl">SECS</div>
               </div>
             </div>
@@ -1177,27 +1177,24 @@
     </footer>
   </div>
 
-  <!-- Persistent 30-Day Countdown Script -->
+  <!-- Live Launch Countdown Script (Today at 6:00 PM IST) -->
   <script>
     (function () {
-      var STORAGE_KEY = 'dentalshow_30d_target';
-      var now = Date.now();
-      var targetTime = localStorage.getItem(STORAGE_KEY);
-
-      // Start 30 days from first visit, or reuse existing target
-      if (!targetTime || isNaN(targetTime) || Number(targetTime) <= now) {
-        targetTime = now + (30 * 24 * 60 * 60 * 1000);
-        try {
-          localStorage.setItem(STORAGE_KEY, targetTime);
-        } catch (e) { }
-      } else {
-        targetTime = Number(targetTime);
-      }
-
       var daysEl = document.getElementById("cs-days");
       var hoursEl = document.getElementById("cs-hours");
       var minsEl = document.getElementById("cs-minutes");
       var secsEl = document.getElementById("cs-seconds");
+      var headerText = document.querySelector(".cs-countdown-header span");
+
+      // Purge any old 30-day target from localStorage
+      try {
+        localStorage.removeItem('dentalshow_30d_target');
+      } catch (e) { }
+
+      // Target: Today at 6:00 PM (18:00:00)
+      var now = new Date();
+      var target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0, 0, 0);
+      var targetTime = target.getTime();
 
       function updateCountdown() {
         var diff = targetTime - Date.now();
@@ -1207,6 +1204,16 @@
           if (hoursEl) hoursEl.textContent = "00";
           if (minsEl) minsEl.textContent = "00";
           if (secsEl) secsEl.textContent = "00";
+          if (headerText) headerText.textContent = "WEBSITE IS LIVE NOW!";
+          var card = document.querySelector(".cs-countdown-card");
+          if (card && !card.dataset.liveSetup) {
+            card.dataset.liveSetup = "true";
+            card.style.cursor = "pointer";
+            card.setAttribute("title", "Click to enter Dental Show 2027 official website");
+            card.onclick = function () {
+              window.location.href = "home";
+            };
+          }
           return;
         }
 

@@ -167,28 +167,24 @@
   }
 
   /* ==========================================================================
-     4. COMING SOON 30-DAY COUNTDOWN TIMER (coming-soon.html / index.html)
+     4. COMING SOON COUNTDOWN TIMER (coming-soon.html / index.html)
      ========================================================================== */
   function initComingSoonTimer() {
     var daysEl = document.getElementById("cs-days");
     var hoursEl = document.getElementById("cs-hours");
     var minsEl = document.getElementById("cs-minutes");
     var secsEl = document.getElementById("cs-seconds");
+    var headerText = document.querySelector(".cs-countdown-header span");
 
     if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
 
-    var STORAGE_KEY = 'dentalshow_30d_target';
-    var now = Date.now();
-    var targetTime = localStorage.getItem(STORAGE_KEY);
+    try {
+      localStorage.removeItem('dentalshow_30d_target');
+    } catch (e) { }
 
-    if (!targetTime || isNaN(targetTime) || Number(targetTime) <= now) {
-      targetTime = now + (30 * 24 * 60 * 60 * 1000);
-      try {
-        localStorage.setItem(STORAGE_KEY, targetTime);
-      } catch (e) { }
-    } else {
-      targetTime = Number(targetTime);
-    }
+    var now = new Date();
+    var target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0, 0, 0);
+    var targetTime = target.getTime();
 
     function tick() {
       var diff = targetTime - Date.now();
@@ -197,6 +193,16 @@
         hoursEl.textContent = "00";
         minsEl.textContent = "00";
         secsEl.textContent = "00";
+        if (headerText) headerText.textContent = "WEBSITE IS LIVE NOW!";
+        var card = document.querySelector(".cs-countdown-card");
+        if (card && !card.dataset.liveSetup) {
+          card.dataset.liveSetup = "true";
+          card.style.cursor = "pointer";
+          card.setAttribute("title", "Click to enter Dental Show 2027 official website");
+          card.onclick = function () {
+            window.location.href = "home";
+          };
+        }
         return;
       }
 
