@@ -1177,7 +1177,7 @@
     </footer>
   </div>
 
-  <!-- Live Launch Countdown Script (Today at 6:00 PM IST) -->
+  <!-- Live Launch Countdown Script (Monday at 6:00 PM IST) -->
   <script>
     (function () {
       var daysEl = document.getElementById("cs-days");
@@ -1191,10 +1191,12 @@
         localStorage.removeItem('dentalshow_30d_target');
       } catch (e) { }
 
-      // Target: Today at 6:00 PM (18:00:00)
-      var now = new Date();
-      var target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0, 0, 0);
+      // Target: Monday 6:00 PM IST (23 November 2026 at 18:00:00 IST)
+      var target = new Date('2026-11-23T18:00:00+05:30');
       var targetTime = target.getTime();
+      if (isNaN(targetTime)) {
+        targetTime = new Date(2026, 10, 23, 18, 0, 0, 0).getTime();
+      }
 
       function updateCountdown() {
         var diff = targetTime - Date.now();
