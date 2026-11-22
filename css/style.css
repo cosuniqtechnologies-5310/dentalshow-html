@@ -13854,6 +13854,81 @@ section .event-panorama-banner .panorama-banner-excerpt,
 /* ==========================================================================
    REGISTRATION IFRAME CARD & EMBED CONTAINER (Desktop & Mobile Optimized)
    ========================================================================== */
+html.registration-fullscreen-page,
+body.registration-fullscreen-page {
+  height: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #ffffff !important;
+}
+
+.registration-standalone-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 68px;
+  background: #ffffff;
+  border-bottom: 1px solid #eef2f6;
+  box-shadow: 0 2px 12px rgba(2, 62, 115, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 clamp(16px, 3vw, 40px);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.registration-standalone-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.registration-standalone-logo img {
+  height: 52px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+}
+
+.registration-standalone-main {
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding-top: 68px;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.registration-standalone-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+@media (max-width: 991px) {
+  .registration-standalone-header {
+    height: 58px;
+    padding: 0 16px;
+  }
+  .registration-standalone-logo img {
+    height: 44px;
+    max-width: 190px;
+  }
+  .registration-standalone-main {
+    padding-top: 58px;
+  }
+}
+
 .section-visitor-portal,
 .section-exhibitor-portal {
   padding: 86px 0 0 0 !important;
