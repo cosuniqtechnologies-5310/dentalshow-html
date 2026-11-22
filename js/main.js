@@ -1252,12 +1252,88 @@
       contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
         var submitBtn = contactForm.querySelector('button[type="submit"]');
+        var statusEl = document.getElementById('contact-form-status');
+
+        // Check Google reCAPTCHA
+        if (typeof grecaptcha !== 'undefined') {
+          var captchaResponse = grecaptcha.getResponse();
+          if (!captchaResponse) {
+            if (statusEl) {
+              statusEl.style.color = '#dc2626';
+              statusEl.textContent = 'Please complete the Google reCAPTCHA verification.';
+            } else {
+              alert('Please complete the Google reCAPTCHA verification.');
+            }
+            return;
+          }
+        }
+
+        var originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Send message';
         if (submitBtn) {
           submitBtn.disabled = true;
-          submitBtn.textContent = 'Message Sent Successfully ✓';
+          submitBtn.innerHTML = 'Sending enquiry...';
         }
-        alert('Thank you! Your message has been received by the TNDTMA Dental Show team. We will get back to you shortly.');
-        contactForm.reset();
+        if (statusEl) {
+          statusEl.style.color = '#0284c7';
+          statusEl.textContent = 'Sending your message, please wait...';
+        }
+
+        var formData = new FormData(contactForm);
+
+        fetch(contactForm.getAttribute('action') || 'send-contact.php', {
+          method: 'POST',
+          body: formData
+        })
+          .then(function (res) {
+            return res.json().catch(function () {
+              return {
+                status: res.ok ? 'success' : 'error',
+                message: res.ok ? 'Thank you! Your message has been sent successfully.' : 'Server encountered an error.'
+              };
+            });
+          })
+          .then(function (data) {
+            if (data && data.status === 'success') {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Message Sent Successfully ✓';
+              }
+              if (statusEl) {
+                statusEl.style.color = '#15803d';
+                statusEl.textContent = data.message || 'Thank you! Your enquiry has been sent. We will connect with you shortly.';
+              } else {
+                alert(data.message || 'Thank you! Your enquiry has been sent.');
+              }
+              contactForm.reset();
+              if (typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset();
+              }
+            } else {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+              }
+              var errMessage = (data && data.message) ? data.message : 'Failed to send enquiry. Please try again.';
+              if (statusEl) {
+                statusEl.style.color = '#dc2626';
+                statusEl.textContent = errMessage;
+              } else {
+                alert(errMessage);
+              }
+            }
+          })
+          .catch(function (err) {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnHtml;
+            }
+            if (statusEl) {
+              statusEl.style.color = '#dc2626';
+              statusEl.textContent = 'Network error. Please try again or email us directly at dentalshoworgsecy@gmail.com.';
+            } else {
+              alert('Network error. Please try again or email dentalshoworgsecy@gmail.com.');
+            }
+          });
       });
     }
 
