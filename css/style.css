@@ -345,10 +345,11 @@ button {
   background: #ffffff;
   border-bottom: 1px solid rgba(2, 62, 115, 0.1);
   box-shadow: 0 4px 20px rgba(2, 62, 115, 0.06);
-  padding: 0 clamp(32px, 4vw, 64px);
+  padding: 0 clamp(16px, 3vw, 48px);
   display: flex;
   align-items: center;
   transition: all 0.3s var(--ease);
+  overflow: visible;
 }
 
 .exhibz-header.is-sticky {
@@ -358,7 +359,7 @@ button {
   border-bottom: 1px solid rgba(2, 62, 115, 0.14);
   height: 70px;
   min-height: 70px;
-  padding: 0 clamp(32px, 4vw, 64px);
+  padding: 0 clamp(16px, 3vw, 48px);
 }
 
 .exhibz-header__inner {
@@ -370,16 +371,32 @@ button {
   max-width: 1440px;
   margin: 0 auto;
   height: 100%;
+  overflow: visible;
 }
 
+/* Logo: big, left-anchored, overflows header downward on white card */
 .exhibz-logo {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  height: 100%;
+  align-self: flex-start;
   line-height: 1;
   text-decoration: none;
   flex-shrink: 0;
+  background: #ffffff;
+  padding: 8px 20px 18px 20px;
+  border-radius: 0 0 18px 18px;
+  border: 1px solid rgba(2, 62, 115, 0.09);
+  border-top: none;
+  box-shadow: 0 12px 32px rgba(2, 62, 115, 0.13), 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-left: 0;
+  position: relative;
+  z-index: 1001;
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+}
+
+.exhibz-logo:hover {
+  box-shadow: 0 18px 42px rgba(2, 62, 115, 0.19), 0 4px 12px rgba(0, 0, 0, 0.07);
 }
 
 .site-brand-wrap {
@@ -387,22 +404,27 @@ button {
   align-items: center;
   justify-content: center;
   line-height: 1;
-  transform: translateY(2px);
   transition: transform 0.25s ease;
 }
 
 .site-brand-wrap:hover {
-  transform: translateY(1px) scale(1.02);
+  transform: scale(1.02);
 }
 
 .exhibz-header.is-sticky .site-brand-wrap {
-  transform: translateY(1px);
+  transform: none;
+}
+
+/* Sticky: compact overflow logo */
+.exhibz-header.is-sticky .exhibz-logo {
+  padding: 6px 18px 14px 18px;
+  box-shadow: 0 8px 22px rgba(2, 62, 115, 0.11), 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .exhibz-logo__img {
-  height: 56px;
+  height: 82px;
   width: auto;
-  max-width: 240px;
+  max-width: 260px;
   object-fit: contain;
   transition: height 0.3s ease;
 }
@@ -437,7 +459,7 @@ button {
 }
 
 .exhibz-header.is-sticky .exhibz-logo__img {
-  height: 48px;
+  height: 64px;
 }
 
 .exhibz-nav {
@@ -556,9 +578,18 @@ button {
     min-height: 74px;
   }
 
+  .exhibz-logo {
+    padding: 6px 14px 14px 14px;
+    border-radius: 0 0 14px 14px;
+  }
+
   .exhibz-logo__img {
+    height: 58px;
+    max-width: 170px;
+  }
+
+  .exhibz-header.is-sticky .exhibz-logo__img {
     height: 48px;
-    max-width: 190px;
   }
 
   .menu-toggle {
@@ -8097,16 +8128,15 @@ p.partners-cta-desc {
   border-radius: 0;
   box-shadow: none;
   border: none;
-  transform: translateY(2px);
   transition: transform 0.25s ease;
 }
 
 .site-brand-wrap:hover {
-  transform: translateY(1px) scale(1.02);
+  transform: scale(1.02);
 }
 
 .exhibz-header.is-sticky .site-brand-wrap {
-  transform: translateY(1px);
+  transform: none;
   padding: 0;
 }
 
