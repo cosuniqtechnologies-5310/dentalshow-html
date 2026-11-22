@@ -612,30 +612,31 @@ button {
     justify-content: center;
     align-self: flex-start;
     background: #ffffff;
-    padding: 6px 16px 16px 16px;
-    border-radius: 0 0 16px 16px;
-    border: 1px solid rgba(2, 62, 115, 0.09);
+    padding: 6px 14px 14px 14px;
+    border-radius: 0 0 6px 6px;
+    border: 1px solid rgba(2, 62, 115, 0.08);
     border-top: none;
-    box-shadow: 0 10px 28px rgba(2, 62, 115, 0.16), 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: none;
     margin-left: 0;
     position: relative;
     z-index: 1001;
   }
 
   .exhibz-header.is-sticky .exhibz-logo {
-    padding: 4px 14px 12px 14px;
-    box-shadow: 0 8px 20px rgba(2, 62, 115, 0.12);
+    padding: 4px 12px 10px 12px;
+    border-radius: 0 0 6px 6px;
+    box-shadow: none;
   }
 
   .exhibz-logo__img {
-    height: 64px;
+    height: 72px;
     width: auto;
-    max-width: 180px;
+    max-width: 210px;
     object-fit: contain;
   }
 
   .exhibz-header.is-sticky .exhibz-logo__img {
-    height: 52px;
+    height: 58px;
   }
 
   .menu-toggle {
