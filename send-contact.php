@@ -67,7 +67,14 @@ if (!empty($recaptchaSecret)) {
     if ($verifyResult) {
         $json = json_decode($verifyResult, true);
         if (!empty($json['success'])) {
-            $captchaSuccess = true;
+            // In v3, check score if available (score >= 0.3 considered human)
+            if (isset($json['score'])) {
+                if ($json['score'] >= 0.3) {
+                    $captchaSuccess = true;
+                }
+            } else {
+                $captchaSuccess = true;
+            }
         }
     }
 

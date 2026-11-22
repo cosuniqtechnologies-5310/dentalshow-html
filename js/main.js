@@ -1253,87 +1253,90 @@
         e.preventDefault();
         var submitBtn = contactForm.querySelector('button[type="submit"]');
         var statusEl = document.getElementById('contact-form-status');
-
-        // Check Google reCAPTCHA
-        if (typeof grecaptcha !== 'undefined') {
-          var captchaResponse = grecaptcha.getResponse();
-          if (!captchaResponse) {
-            if (statusEl) {
-              statusEl.style.color = '#dc2626';
-              statusEl.textContent = 'Please complete the Google reCAPTCHA verification.';
-            } else {
-              alert('Please complete the Google reCAPTCHA verification.');
-            }
-            return;
-          }
-        }
-
         var originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Send message';
+
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.innerHTML = 'Sending enquiry...';
         }
         if (statusEl) {
           statusEl.style.color = '#0284c7';
-          statusEl.textContent = 'Sending your message, please wait...';
+          statusEl.textContent = 'Verifying and sending your message...';
         }
 
-        var formData = new FormData(contactForm);
+        function submitFormWithToken(token) {
+          var formData = new FormData(contactForm);
+          if (token) {
+            formData.set('g-recaptcha-response', token);
+          }
 
-        fetch(contactForm.getAttribute('action') || 'send-contact.php', {
-          method: 'POST',
-          body: formData
-        })
-          .then(function (res) {
-            return res.json().catch(function () {
-              return {
-                status: res.ok ? 'success' : 'error',
-                message: res.ok ? 'Thank you! Your message has been sent successfully.' : 'Server encountered an error.'
-              };
-            });
+          fetch(contactForm.getAttribute('action') || 'send-contact.php', {
+            method: 'POST',
+            body: formData
           })
-          .then(function (data) {
-            if (data && data.status === 'success') {
-              if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Message Sent Successfully ✓';
-              }
-              if (statusEl) {
-                statusEl.style.color = '#15803d';
-                statusEl.textContent = data.message || 'Thank you! Your enquiry has been sent. We will connect with you shortly.';
+            .then(function (res) {
+              return res.json().catch(function () {
+                return {
+                  status: res.ok ? 'success' : 'error',
+                  message: res.ok ? 'Thank you! Your message has been sent successfully.' : 'Server encountered an error.'
+                };
+              });
+            })
+            .then(function (data) {
+              if (data && data.status === 'success') {
+                if (submitBtn) {
+                  submitBtn.disabled = false;
+                  submitBtn.innerHTML = 'Message Sent Successfully ✓';
+                }
+                if (statusEl) {
+                  statusEl.style.color = '#15803d';
+                  statusEl.textContent = data.message || 'Thank you! Your enquiry has been sent. We will connect with you shortly.';
+                } else {
+                  alert(data.message || 'Thank you! Your enquiry has been sent.');
+                }
+                contactForm.reset();
               } else {
-                alert(data.message || 'Thank you! Your enquiry has been sent.');
+                if (submitBtn) {
+                  submitBtn.disabled = false;
+                  submitBtn.innerHTML = originalBtnHtml;
+                }
+                var errMessage = (data && data.message) ? data.message : 'Failed to send enquiry. Please try again.';
+                if (statusEl) {
+                  statusEl.style.color = '#dc2626';
+                  statusEl.textContent = errMessage;
+                } else {
+                  alert(errMessage);
+                }
               }
-              contactForm.reset();
-              if (typeof grecaptcha !== 'undefined') {
-                grecaptcha.reset();
-              }
-            } else {
+            })
+            .catch(function (err) {
               if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnHtml;
               }
-              var errMessage = (data && data.message) ? data.message : 'Failed to send enquiry. Please try again.';
               if (statusEl) {
                 statusEl.style.color = '#dc2626';
-                statusEl.textContent = errMessage;
+                statusEl.textContent = 'Network error. Please try again or email us directly at dentalshoworgsecy@gmail.com.';
               } else {
-                alert(errMessage);
+                alert('Network error. Please try again or email dentalshoworgsecy@gmail.com.');
               }
-            }
-          })
-          .catch(function (err) {
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.innerHTML = originalBtnHtml;
-            }
-            if (statusEl) {
-              statusEl.style.color = '#dc2626';
-              statusEl.textContent = 'Network error. Please try again or email us directly at dentalshoworgsecy@gmail.com.';
-            } else {
-              alert('Network error. Please try again or email dentalshoworgsecy@gmail.com.');
-            }
+            });
+        }
+
+        if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
+          grecaptcha.ready(function () {
+            grecaptcha.execute('6LdkQi0uAAAAAKAev4mpZExpCAhR6-Jj3N7L5q31', { action: 'contact_submit' })
+              .then(function (token) {
+                submitFormWithToken(token);
+              })
+              .catch(function (err) {
+                console.error('reCAPTCHA error:', err);
+                submitFormWithToken('');
+              });
           });
+        } else {
+          submitFormWithToken('');
+        }
       });
     }
 
