@@ -399,7 +399,7 @@ button {
   flex-shrink: 0;
   background: #ffffff;
   padding: 18px 20px 18px 20px;
-  border-radius: 0 0 18px 18px;
+  border-radius: 0 0 18px 0px;
   border: 1px solid rgba(2, 62, 115, 0.09);
   border-top: none;
   box-shadow: 0 12px 32px rgba(2, 62, 115, 0.13), 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -613,7 +613,7 @@ button {
     align-self: flex-start;
     background: #ffffff;
     padding: 14px 14px 14px 14px;
-    border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 0px;
     border: 1px solid rgba(2, 62, 115, 0.08);
     border-top: none;
     box-shadow: none;
@@ -8631,8 +8631,8 @@ p.partners-cta-desc {
 .chatbox-mascot-img {
   width: 36px;
   height: 36px;
-  object-fit: cover;
-  border-radius: 50%;
+  object-fit: contain;
+  padding: 7px;
 }
 
 .chatbox-identity-text {
@@ -8718,6 +8718,39 @@ p.partners-cta-desc {
   align-items: center;
 }
 
+/* ==========================================================================
+   GLOBAL VENUE PILL – dark navy style (📍 Chennai Trade Centre Halls 2, 3 & 3A)
+   Apply class="venue-pill" anywhere a venue location badge is needed sitewide.
+   ========================================================================== */
+.venue-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: #023E73 !important;
+  border: 1.5px solid rgba(6, 157, 191, 0.5) !important;
+  padding: 6px 14px;
+  border-radius: 999px;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(2, 62, 115, 0.25);
+}
+
+.venue-pill .venue-pin-icon {
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.venue-pill svg {
+  flex-shrink: 0;
+}
+
+/* Chatbox venue pill inside the mascot chatbox – inherits global venue-pill */
 .chatbox-venue-pill,
 .mascot-chatbox .chatbox-venue-pill {
   display: inline-flex;
@@ -8725,13 +8758,14 @@ p.partners-cta-desc {
   gap: 5px;
   font-size: 12px;
   font-weight: 700;
-  color: #0369a1 !important;
-  -webkit-text-fill-color: #0369a1 !important;
-  background: #f0f9ff !important;
-  border: 1px solid #bae6fd !important;
-  padding: 3px 9px;
-  border-radius: 20px;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: #023E73 !important;
+  border: 1.5px solid rgba(6, 157, 191, 0.4) !important;
+  padding: 4px 10px;
+  border-radius: 999px;
   line-height: 1.25;
+  box-shadow: 0 2px 8px rgba(2, 62, 115, 0.2);
 }
 
 .chatbox-pin-dot {
@@ -13920,10 +13954,12 @@ body.registration-fullscreen-page {
     height: 58px;
     padding: 0 16px;
   }
+
   .registration-standalone-logo img {
     height: 44px;
     max-width: 190px;
   }
+
   .registration-standalone-main {
     padding-top: 58px;
   }
@@ -13939,6 +13975,7 @@ body.registration-fullscreen-page {
 }
 
 @media (max-width: 991px) {
+
   .section-visitor-portal,
   .section-exhibitor-portal {
     padding-top: 74px !important;
@@ -14094,6 +14131,7 @@ body.registration-fullscreen-page {
 }
 
 @media (max-width: 991px) {
+
   .iframe-embed-wrapper,
   .registration-iframe-fullscreen {
     min-height: calc(100vh - 74px) !important;
