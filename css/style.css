@@ -13968,44 +13968,43 @@ body.registration-fullscreen-page {
 
 .section-visitor-portal,
 .section-exhibitor-portal {
-  padding: 140px 16px 80px !important;
+  padding: 86px 0 0px !important;
   margin: 0 !important;
   width: 100% !important;
+  max-width: 100% !important;
   min-height: calc(100vh - 200px);
   background: #f8fafc !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
+  display: block !important;
   box-sizing: border-box !important;
 }
 
 @media (max-width: 991px) {
+
   .section-visitor-portal,
   .section-exhibitor-portal {
-    padding: 100px 12px 60px !important;
+    padding: 100px 0 60px !important;
   }
 }
 
 .registration-form-wrap {
-  --f-card-width: 700px;
-  width: 100%;
-  max-width: var(--f-card-width, 700px);
-  margin: 0 auto;
-  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .registration-form-iframe {
-  --f-card-width: 700px;
   width: 100% !important;
-  max-width: var(--f-card-width, 700px) !important;
+  max-width: 100% !important;
   height: 1550px !important;
   min-height: 1500px !important;
   border: none !important;
   display: block !important;
   margin: 0 auto !important;
-  background: #ffffff !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 24px rgba(2, 62, 115, 0.08) !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .section-exhibitor-portal .registration-form-iframe {
