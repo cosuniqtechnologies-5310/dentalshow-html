@@ -1350,6 +1350,29 @@
         form.reset();
       });
     });
+    // Auto-resize registration iframe if embed provider sends postMessage height
+    window.addEventListener('message', function (e) {
+      if (e.data) {
+        var h = null;
+        if (typeof e.data === 'object') {
+          h = e.data.height || e.data.frameHeight || e.data.scrollHeight;
+        } else if (typeof e.data === 'string') {
+          try {
+            var parsed = JSON.parse(e.data);
+            h = parsed.height || parsed.frameHeight || parsed.scrollHeight;
+          } catch (err) {
+            var match = e.data.match(/height[:\s=]+(\d+)/i);
+            if (match) h = parseInt(match[1]);
+          }
+        }
+        if (h && h > 400) {
+          var iframe = document.querySelector('.registration-form-iframe');
+          if (iframe) {
+            iframe.style.setProperty('height', (h + 30) + 'px', 'important');
+          }
+        }
+      }
+    });
   }
 
 })();

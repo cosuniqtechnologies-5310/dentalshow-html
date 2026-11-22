@@ -13995,14 +13995,31 @@ body.registration-fullscreen-page {
 .registration-form-iframe {
   width: 100% !important;
   max-width: 700px !important;
-  height: 1150px !important;
-  min-height: 1000px !important;
+  height: 1550px !important;
+  min-height: 1500px !important;
   border: none !important;
   display: block !important;
   margin: 0 auto !important;
   background: #ffffff !important;
   border-radius: 12px !important;
   box-shadow: 0 4px 24px rgba(2, 62, 115, 0.08) !important;
+}
+
+.section-exhibitor-portal .registration-form-iframe {
+  height: 2000px !important;
+  min-height: 1900px !important;
+}
+
+@media (max-width: 991px) {
+  .registration-form-iframe {
+    height: 1650px !important;
+    min-height: 1550px !important;
+  }
+
+  .section-exhibitor-portal .registration-form-iframe {
+    height: 2150px !important;
+    min-height: 2000px !important;
+  }
 }
 
 .registration-iframe-fullscreen,
