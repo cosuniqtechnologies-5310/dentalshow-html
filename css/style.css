@@ -21923,3 +21923,99 @@ body:has(.cs-fit-wrapper) {
     font-size: 22px;
   }
 }
+
+
+/* ==========================================================================
+   STALL BOOKING BUTTON STYLES (Header, Hero, Countdown, Tracks)
+   ========================================================================== */
+.btn-header-stall {
+  isolation: isolate !important;
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 18px !important;
+  background: linear-gradient(135deg, #069DBF 0%, #0284c7 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #069DBF !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(6, 157, 191, 0.35) !important;
+  transition: all 0.25s ease !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+
+.btn-header-stall:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px rgba(6, 157, 191, 0.55) !important;
+  background: linear-gradient(135deg, #0284c7 0%, #069DBF 100%) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.btn-header-stall span,
+.btn-header-stall * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.btn-hero-stall {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 22px !important;
+  background: linear-gradient(135deg, #00A86B 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  font-family: var(--font-heading), sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+  border-radius: 8px !important;
+  border: 1.5px solid #00A86B !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 16px rgba(0, 168, 107, 0.4) !important;
+  transition: all 0.25s ease !important;
+  cursor: pointer !important;
+}
+
+.btn-hero-stall:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0, 168, 107, 0.55) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.btn-countdown-stall {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 11px 24px !important;
+  background: linear-gradient(135deg, #069DBF 0%, #0284c7 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+  border-radius: 8px !important;
+  border: 1.5px solid #069DBF !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(6, 157, 191, 0.35) !important;
+  transition: all 0.25s ease !important;
+}
+
+.btn-countdown-stall:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px rgba(6, 157, 191, 0.5) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+@media (max-width: 991px) {
+  .btn-header-stall {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 12px !important;
+  }
+}
