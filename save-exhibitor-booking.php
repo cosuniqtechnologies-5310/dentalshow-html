@@ -261,8 +261,11 @@ try {
 // -------------------------------------------------------------
 $zohoApiKey = 'PHtE6r1YF+DjjzF98EcB5/+6Q5GjZI4rqOkxKlZF4YdCWaIASU1T/doslj+w+U1+BKJKQaPJmt47s+zNtrjRIma4ZGgaWmqyqK3sx/VYSPOZsbq6x00VtFoSc0fdUIDvdd5v0CfWvtbYNA==';
 $fromEmail = 'orgsecy@dentalshow.in';
-$adminEmail = 'mailinaiworks@gmail.com';
-$secondaryAdminEmail = 'dentalshoworgsecy@gmail.com';
+$adminEmails = [
+    'mailinaiworks@gmail.com',
+    'cosuniqtechnologies@gmail.com',
+    'dentalshoworgsecy@gmail.com'
+];
 
 function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody)
 {
@@ -384,10 +387,10 @@ $adminHtml = "
 
 $adminText = "New Exhibitor Booking Application\nRef: {$bookingRef}\nCompany: {$companyName}\nContact: {$contactPerson} ({$mobile})\nEmail: {$email}\nStall Type: {$stallType}\nStalls: {$stallsRequired}";
 
-sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show Portal', $adminEmail, 'Dental Show Admin', $email, "New Exhibitor Booking: {$companyName} ({$bookingRef})", $adminHtml, $adminText);
-
-if (!empty($secondaryAdminEmail) && $secondaryAdminEmail !== $adminEmail) {
-    sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show Portal', $secondaryAdminEmail, 'Dental Show Admin', $email, "New Exhibitor Booking: {$companyName} ({$bookingRef})", $adminHtml, $adminText);
+foreach ($adminEmails as $adminTo) {
+    if (!empty($adminTo)) {
+        sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show Portal', $adminTo, 'Dental Show Admin', $email, "New Exhibitor Booking: {$companyName} ({$bookingRef})", $adminHtml, $adminText);
+    }
 }
 
 // -------------------------------------------------------------

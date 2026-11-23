@@ -9,8 +9,11 @@ header('Content-Type: application/json; charset=UTF-8');
 // Configuration
 $zohoApiKey = 'PHtE6r1YF+DjjzF98EcB5/+6Q5GjZI4rqOkxKlZF4YdCWaIASU1T/doslj+w+U1+BKJKQaPJmt47s+zNtrjRIma4ZGgaWmqyqK3sx/VYSPOZsbq6x00VtFoSc0fdUIDvdd5v0CfWvtbYNA==';
 $recaptchaSecret = '6LdkQi0uAAAAAILAnqmbz4tCkgwANt7bz4uA-2_b';
-$adminEmail = 'mailinaiworks@gmail.com';
-$secondaryAdminEmail = 'dentalshoworgsecy@gmail.com';
+$adminEmails = [
+    'mailinaiworks@gmail.com',
+    'cosuniqtechnologies@gmail.com',
+    'dentalshoworgsecy@gmail.com'
+];
 $fromEmail = 'orgsecy@dentalshow.in';
 $replyToEmail = 'dentalshoworgsecy@gmail.com';
 
@@ -174,30 +177,24 @@ $adminHtmlBody = "<html><body style='font-family:Arial,sans-serif;color:#1e293b;
     . "<p>Regards,<br><strong>Dental Show Website</strong></p>"
     . "</body></html>";
 
-$adminSendResult = sendZohoZeptoMail(
-    $zohoApiKey,
-    $fromEmail,
-    'Dental Show Website',
-    $adminEmail,
-    'Dental Show Admin',
-    $email, // Reply-To person who inquired
-    $adminSubject,
-    $adminHtmlBody,
-    $adminTextBody
-);
-
-if (!empty($secondaryAdminEmail) && $secondaryAdminEmail !== $adminEmail) {
-    sendZohoZeptoMail(
-        $zohoApiKey,
-        $fromEmail,
-        'Dental Show Website',
-        $secondaryAdminEmail,
-        'Dental Show Admin',
-        $email,
-        $adminSubject,
-        $adminHtmlBody,
-        $adminTextBody
-    );
+$adminSendResult = ['success' => false];
+foreach ($adminEmails as $adminTo) {
+    if (!empty($adminTo)) {
+        $res = sendZohoZeptoMail(
+            $zohoApiKey,
+            $fromEmail,
+            'Dental Show Website',
+            $adminTo,
+            'Dental Show Admin',
+            $email, // Reply-To person who inquired
+            $adminSubject,
+            $adminHtmlBody,
+            $adminTextBody
+        );
+        if (!empty($res['success'])) {
+            $adminSendResult['success'] = true;
+        }
+    }
 }
 
 // -------------------------------------------------------------
