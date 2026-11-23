@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         http_response_code(405);
         echo json_encode(['status' => 'error', 'message' => 'Method Not Allowed']);
     } else {
-        header('Location: exhibitorregistration.html');
+        header('Location: space-booking.html');
     }
     exit;
 }
@@ -413,7 +413,7 @@ if ($isAjax) {
     
     <div style='display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;'>
       <a href='home' style='display: inline-block; padding: 12px 24px; background: #00A86B; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14.5px;'>Return to Home</a>
-      <a href='exhibitorregistration' style='display: inline-block; padding: 12px 24px; background: #f1f5f9; color: #023E73; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14.5px;'>Submit Another Form</a>
+      <a href='space-booking' style='display: inline-block; padding: 12px 24px; background: #f1f5f9; color: #023E73; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14.5px;'>Submit Another Form</a>
     </div>
   </div>
 </body>
