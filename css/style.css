@@ -3422,9 +3422,6 @@ button {
 .footer-org-badge {
   display: inline-flex;
   align-items: center;
-  padding: 6px 10px;
-  background: rgba(59, 191, 143, 0.08);
-  border: 1px solid rgba(59, 191, 143, 0.25);
   border-radius: 10px;
   margin-bottom: 14px;
 }
@@ -9354,7 +9351,9 @@ p.partners-cta-desc {
   gap: 8px;
   transition: all 0.3s ease;
   border: none;
-}.btn-hero-visitor:hover {
+}
+
+.btn-hero-visitor:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(6, 157, 191, 0.6);
   color: #ffffff;
@@ -20297,13 +20296,12 @@ body:has(.cs-fit-wrapper) {
   align-items: center !important;
   justify-content: flex-start !important;
   width: fit-content !important;
-  padding: 8px 12px !important;
   gap: 0 !important;
 }
 
 .footer-tndtma-logo-img {
   width: auto !important;
-  height: 52px !important;
+  height: 100px !important;
   max-width: 190px !important;
   object-fit: contain !important;
   flex-shrink: 0 !important;
@@ -21679,7 +21677,7 @@ body:has(.cs-fit-wrapper) {
    ========================================================================== */
 .stall-top-banner {
   position: relative;
-  margin-top: 86px;
+  margin-top: 0px;
   width: 100%;
   overflow: hidden;
   display: block;
@@ -21693,6 +21691,9 @@ body:has(.cs-fit-wrapper) {
   height: auto;
   object-fit: cover;
   pointer-events: none;
+  margin-bottom: 40px;
+  border: 1px solid #0284c7;
+  border-radius: 10px;
 }
 
 /* Text block below the banner image */
@@ -21765,9 +21766,11 @@ body:has(.cs-fit-wrapper) {
   .stall-top-banner {
     margin-top: 72px;
   }
+
   .stall-page-heading .booking-header-title {
     font-size: 19px;
   }
+
   .stall-page-heading .booking-header-meta {
     font-size: 13px;
   }
@@ -21899,7 +21902,7 @@ body:has(.cs-fit-wrapper) {
   transition: all 0.2s ease;
 }
 
-.membership-card-radio input[type="radio"]:checked + .membership-card-label {
+.membership-card-radio input[type="radio"]:checked+.membership-card-label {
   border-color: #00A86B;
   background: #f0fdf4;
   color: #008756;
@@ -22088,12 +22091,15 @@ body:has(.cs-fit-wrapper) {
   .membership-selector-group {
     grid-template-columns: 1fr;
   }
+
   .package-inclusions-grid {
     grid-template-columns: 1fr;
   }
+
   .booking-header-card {
     padding: 28px 18px;
   }
+
   .booking-header-title {
     font-size: 22px;
   }
@@ -22261,6 +22267,7 @@ body:has(.cs-fit-wrapper) {
 
 /* MOBILE RESPONSIVE (≤576px): Clean full-width stack with comfortable touch targets — ZERO CLIPPING! */
 @media (max-width: 576px) {
+
   .hero-cta-buttons,
   .countdown-actions-group {
     display: flex !important;
@@ -22384,7 +22391,8 @@ body:has(.cs-fit-wrapper) {
 }
 
 /* Prevent horizontal overflow on entire site */
-html, body {
+html,
+body {
   overflow-x: hidden !important;
   max-width: 100vw !important;
 }
@@ -22430,71 +22438,71 @@ html, body {
 .btn-submit-booking {
   position: relative !important;
   overflow: hidden !important;
-  transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), 
-              box-shadow 0.28s cubic-bezier(0.25, 1, 0.5, 1), 
-              border-color 0.28s ease, 
-              background 0.28s ease !important;
+  transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.28s cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 0.28s ease,
+    background 0.28s ease !important;
 }
 
 /* Ensure text & icons sit above the sliding ::before layer */
-.btn > *,
+.btn>*,
 .btn span,
-.btn-hero-visitor > *,
+.btn-hero-visitor>*,
 .btn-hero-visitor span,
-#hero-visitor-btn > *,
+#hero-visitor-btn>*,
 #hero-visitor-btn span,
-.btn-hero-exhibitor > *,
+.btn-hero-exhibitor>*,
 .btn-hero-exhibitor span,
-#hero-exhibitor-btn > *,
+#hero-exhibitor-btn>*,
 #hero-exhibitor-btn span,
-.btn-hero-stall > *,
+.btn-hero-stall>*,
 .btn-hero-stall span,
-#hero-stall-btn > *,
+#hero-stall-btn>*,
 #hero-stall-btn span,
-.btn-countdown-primary > *,
+.btn-countdown-primary>*,
 .btn-countdown-primary span,
-#countdown-register-btn > *,
+#countdown-register-btn>*,
 #countdown-register-btn span,
-.btn-countdown-secondary > *,
+.btn-countdown-secondary>*,
 .btn-countdown-secondary span,
-#countdown-exhibitor-btn > *,
+#countdown-exhibitor-btn>*,
 #countdown-exhibitor-btn span,
-.btn-countdown-stall > *,
+.btn-countdown-stall>*,
 .btn-countdown-stall span,
-#countdown-stall-btn > *,
+#countdown-stall-btn>*,
 #countdown-stall-btn span,
-.btn-header-visitor > *,
+.btn-header-visitor>*,
 .btn-header-visitor span,
-.btn-header-exhibitor > *,
+.btn-header-exhibitor>*,
 .btn-header-exhibitor span,
-.btn-header-stall > *,
+.btn-header-stall>*,
 .btn-header-stall span,
-.cta-track-btn > *,
+.cta-track-btn>*,
 .cta-track-btn span,
-.cta-track-btn--visitor > *,
+.cta-track-btn--visitor>*,
 .cta-track-btn--visitor span,
-.cta-track-btn--exhibitor > *,
+.cta-track-btn--exhibitor>*,
 .cta-track-btn--exhibitor span,
-#cta-visitor-register-btn > *,
+#cta-visitor-register-btn>*,
 #cta-visitor-register-btn span,
-#cta-exhibitor-register-btn > *,
+#cta-exhibitor-register-btn>*,
 #cta-exhibitor-register-btn span,
-.btn-gallery-explore-all > *,
+.btn-gallery-explore-all>*,
 .btn-gallery-explore-all span,
 .btn-gallery-explore-all svg,
-.btn-events-view-all > *,
+.btn-events-view-all>*,
 .btn-events-view-all span,
 .btn-events-view-all svg,
-.btn-view-all-top > *,
+.btn-view-all-top>*,
 .btn-view-all-top span,
 .btn-view-all-top svg,
-#btn-header-gallery > *,
+#btn-header-gallery>*,
 #btn-header-gallery span,
 #btn-header-gallery svg,
-#btn-events-view-all-top > *,
+#btn-events-view-all-top>*,
 #btn-events-view-all-top span,
 #btn-events-view-all-top svg,
-.btn-submit-booking > *,
+.btn-submit-booking>*,
 .btn-submit-booking span,
 .btn-submit-booking svg {
   position: relative !important;
@@ -22751,7 +22759,7 @@ html, body {
   -webkit-text-fill-color: #ffffff !important;
 }
 
-.btn-submit-booking > *,
+.btn-submit-booking>*,
 .btn-submit-booking span,
 .btn-submit-booking svg {
   position: relative !important;
@@ -22771,7 +22779,7 @@ html, body {
   -webkit-text-fill-color: #ffffff !important;
 }
 
-.btn-submit-booking:hover > *,
+.btn-submit-booking:hover>*,
 .btn-submit-booking:hover span,
 .btn-submit-booking:hover svg {
   color: #ffffff !important;
@@ -22794,4 +22802,3 @@ html, body {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
-
