@@ -22137,3 +22137,98 @@ body:has(.cs-fit-wrapper) {
   box-sizing: border-box !important;
   line-height: 1.2 !important;
 }
+
+
+/* ==========================================================================
+   UNIFIED BUTTON HOVER SYSTEM — Single consistent rule for all CTAs
+   Rule:
+     Dark/filled buttons  → keep bg, lift, color stays white
+     Light/white buttons  → flip to dark navy (#023E73) bg, text white
+   ========================================================================== */
+
+/* -- DARK FILLED BUTTONS: Green (Visitor / Primary) ----------------------- */
+.btn-hero-visitor:hover,
+#hero-visitor-btn:hover,
+.btn-countdown-primary:hover,
+#countdown-register-btn:hover,
+.btn-header-visitor:hover,
+#cta-visitor-register-btn:hover,
+.btn-hero-stall:hover,
+#hero-stall-btn:hover,
+.btn-countdown-stall:hover,
+#countdown-stall-btn:hover,
+.btn-header-stall:hover,
+.btn-submit-booking:hover {
+  transform: translateY(-2px) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: 0 8px 22px rgba(0, 168, 107, 0.45) !important;
+}
+
+.btn-hero-visitor:hover *,
+#hero-visitor-btn:hover *,
+.btn-countdown-primary:hover *,
+#countdown-register-btn:hover *,
+.btn-header-visitor:hover *,
+.btn-hero-stall:hover *,
+#hero-stall-btn:hover *,
+.btn-countdown-stall:hover *,
+#countdown-stall-btn:hover *,
+.btn-header-stall:hover * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* -- DARK FILLED BUTTONS: Arrow nudge ------------------------------------ */
+.btn-hero-visitor:hover .btn-arrow,
+#hero-visitor-btn:hover .btn-arrow,
+.btn-countdown-primary:hover .btn-arrow,
+#countdown-register-btn:hover .btn-arrow {
+  transform: translateX(4px) !important;
+}
+
+/* -- LIGHT/WHITE BUTTONS: Exhibitor (white bg → dark navy on hover) ------- */
+.btn-hero-exhibitor:hover,
+#hero-exhibitor-btn:hover,
+.btn-countdown-secondary:hover,
+#countdown-exhibitor-btn:hover,
+.btn-header-exhibitor:hover,
+#cta-exhibitor-register-btn:hover,
+.cta-track-btn--visitor:hover,
+.cta-track-btn--exhibitor:hover {
+  background: #023E73 !important;
+  border-color: #023E73 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px rgba(2, 62, 115, 0.35) !important;
+}
+
+.btn-hero-exhibitor:hover *,
+#hero-exhibitor-btn:hover *,
+.btn-hero-exhibitor:hover span,
+#hero-exhibitor-btn:hover span,
+.btn-countdown-secondary:hover *,
+#countdown-exhibitor-btn:hover *,
+.btn-countdown-secondary:hover span,
+#countdown-exhibitor-btn:hover span,
+.btn-header-exhibitor:hover *,
+.btn-header-exhibitor:hover span,
+#cta-exhibitor-register-btn:hover *,
+.cta-track-btn--visitor:hover *,
+.cta-track-btn--exhibitor:hover * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* -- DARK BUTTONS (Header Exhibitor / gallery / view-all) → white on hover */
+.btn-gallery-explore-all:hover,
+.btn-events-view-all:hover,
+.btn-view-all-top:hover,
+#btn-header-gallery:hover,
+#btn-events-view-all-top:hover {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: translateY(-2px) !important;
+}
