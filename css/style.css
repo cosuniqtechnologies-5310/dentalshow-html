@@ -21670,15 +21670,30 @@ body:has(.cs-fit-wrapper) {
 }
 
 .booking-header-card {
-  background: linear-gradient(135deg, #023E73 0%, #069DBF 100%);
+  background: url('../images/stall-booking-banner.png') center center / cover no-repeat;
   color: #ffffff;
   border-radius: 16px;
-  padding: 32px 28px;
+  padding: 40px 28px;
   margin-bottom: 24px;
-  box-shadow: 0 10px 30px rgba(2, 62, 115, 0.15);
+  box-shadow: 0 10px 30px rgba(2, 62, 115, 0.25);
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+.booking-header-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(2, 62, 115, 0.72) 0%, rgba(6, 157, 191, 0.60) 100%);
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.booking-header-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .booking-header-badge {
@@ -22000,7 +22015,7 @@ body:has(.cs-fit-wrapper) {
     grid-template-columns: 1fr;
   }
   .booking-header-card {
-    padding: 24px 18px;
+    padding: 28px 18px;
   }
   .booking-header-title {
     font-size: 22px;
@@ -22518,25 +22533,6 @@ html, body {
 .btn-header-exhibitor::before,
 .btn-gallery-explore-all::before,
 .btn-events-view-all::before,
-.btn-view-all-top::before,
-#btn-header-gallery::before,
-#btn-events-view-all-top::before {
-  background: #1e293b !important;
-}
-
-/* 4. HOVER STATES: TEXT COLOR WHITE (#ffffff) ACROSS ALL BUTTONS */
-.btn:hover,
-.btn:hover *,
-.btn:hover span,
-.btn-hero-visitor:hover,
-.btn-hero-visitor:hover *,
-.btn-hero-visitor:hover span,
-#hero-visitor-btn:hover,
-#hero-visitor-btn:hover *,
-#hero-visitor-btn:hover span,
-.btn-hero-exhibitor:hover,
-.btn-hero-exhibitor:hover *,
-.btn-hero-exhibitor:hover span,
 #hero-exhibitor-btn:hover,
 #hero-exhibitor-btn:hover *,
 #hero-exhibitor-btn:hover span,
