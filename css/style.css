@@ -22232,3 +22232,40 @@ body:has(.cs-fit-wrapper) {
   -webkit-text-fill-color: #ffffff !important;
   transform: translateY(-2px) !important;
 }
+
+
+/* ==========================================================================
+   FIX: Correct ::before slide color for white/light buttons
+   The slide pseudo-element must match the hover bg (#023E73 for white buttons)
+   ========================================================================== */
+
+/* White buttons → slide in dark navy so hover color is correct */
+.btn-hero-exhibitor::before,
+#hero-exhibitor-btn::before,
+.btn-countdown-secondary::before,
+#countdown-exhibitor-btn::before,
+.btn-header-exhibitor::before,
+.cta-track-btn--visitor::before,
+.cta-track-btn--exhibitor::before,
+#cta-exhibitor-register-btn::before {
+  background: #023E73 !important;
+}
+
+/* Stall / green buttons — disable slide (already solid gradient) */
+.btn-hero-stall::before,
+#hero-stall-btn::before,
+.btn-countdown-stall::before,
+#countdown-stall-btn::before,
+.btn-header-stall::before {
+  display: none !important;
+}
+
+/* Visitor / primary green buttons — slide uses a slightly darker green */
+.btn-hero-visitor::before,
+#hero-visitor-btn::before,
+.btn-countdown-primary::before,
+#countdown-register-btn::before,
+.btn-header-visitor::before,
+#cta-visitor-register-btn::before {
+  background: #007a52 !important;
+}
