@@ -60,6 +60,8 @@ DirectoryIndex index.html home.html index.php
     # Redirect legacy hyphenated registration URLs to clean non-hyphenated URLs
     RewriteRule ^visitor-registration(\.html)?/?$ /visitorregistration [R=301,L]
     RewriteRule ^exhibitor-registration(\.html)?/?$ /exhibitorregistration [R=301,L]
+    RewriteRule ^coming-soon(\.html)?/?$ / [R=301,L]
+    RewriteRule ^home(\.html)?/?$ / [R=301,L]
 
     # ------------------------------------------------------------------
     # 2.6 CANONICAL ROOT & EXTENSIONLESS REDIRECTS (.html -> clean)

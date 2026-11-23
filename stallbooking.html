@@ -58,7 +58,7 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   <header class="exhibz-header ">
-    <div class="container exhibz-header__inner"><a class="exhibz-logo " aria-label="Dental Show 2027 home" href="home">
+    <div class="container exhibz-header__inner"><a class="exhibz-logo " aria-label="Dental Show 2027 home" href="/">
         <div class="site-brand-wrap"><img alt="Dental Show 2027 Logo" width="240" height="80" decoding="async"
             data-nimg="1" class="exhibz-logo__img exhibz-logo__img--light" style="color:transparent"
             src="images/logos/dark-header-logo.png" /><img alt="Dental Show 2027 Logo" width="240" height="80"
@@ -67,7 +67,7 @@
       </a>
       <nav class="exhibz-nav " aria-label="Primary">
         <ul class="exhibz-nav__list">
-          <li class="exhibz-nav__item"><a class="exhibz-nav__link " href="home">Home</a></li>
+          <li class="exhibz-nav__item"><a class="exhibz-nav__link " href="/">Home</a></li>
           <li class="exhibz-nav__item"><a class="exhibz-nav__link " href="about">About us</a></li>
           <li class="exhibz-nav__item"><a class="exhibz-nav__link " href="events">Events</a></li>
           <li class="exhibz-nav__item"><a class="exhibz-nav__link " href="gallery">Gallery</a></li>
@@ -109,8 +109,10 @@
               <h2 class="available-stalls-title">Available Stalls</h2>
               <p class="available-stalls-sub">Hall 2 &amp; 3 · Chennai Trade Centre · 300+ Premium Stalls</p>
             </div>
-            <button type="button" class="btn-zoom-trigger" id="btn-zoom-trigger" aria-label="Open floor plan in fullscreen">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <button type="button" class="btn-zoom-trigger" id="btn-zoom-trigger"
+              aria-label="Open floor plan in fullscreen">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 <line x1="11" y1="8" x2="11" y2="14"></line>
@@ -120,11 +122,13 @@
             </button>
           </div>
 
-          <div class="stall-plan-frame" id="stall-plan-frame" role="button" tabindex="0" title="Click to view full screen">
+          <div class="stall-plan-frame" id="stall-plan-frame" role="button" tabindex="0"
+            title="Click to view full screen">
             <img src="images/stall-booking-banner.png" class="stall-plan-img" id="stall-plan-thumbnail"
               alt="Available Stalls Floor Plan - Dental Show 2027" />
             <div class="stall-plan-overlay-hint">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="15 3 21 3 21 9"></polyline>
                 <polyline points="9 21 3 21 3 15"></polyline>
                 <line x1="21" y1="3" x2="14" y2="10"></line>
@@ -278,8 +282,8 @@
             <div class="form__row">
               <div class="field">
                 <label for="preferred_zone">Preferred Stall Location / Zone</label>
-                <input id="preferred_zone" name="preferred_zone"
-                  placeholder="e.g. O1, O2 & O3" />
+                <input id="preferred_zone" name="preferred_zone" placeholder="e.g. O1, O2, O3 and...etc" />
+                placeholder="e.g. O1, O2 & O3" />
               </div>
               <div class="field">
                 <label for="space_sqmtr">Approx. Space Requirement (sq. mtr.)</label>
@@ -561,7 +565,7 @@
         <div class="footer-nav-col">
           <h4 class="footer-col-title">Explore</h4>
           <ul class="footer-col-links">
-            <li><a href="home">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="about">About Us</a></li>
             <li><a href="events">Events</a></li>
             <li><a href="gallery">Gallery</a></li>
@@ -804,15 +808,18 @@
   </script>
 
   <!-- FULLSCREEN STALL FLOOR PLAN MODAL -->
-  <div id="stall-modal" class="stall-modal" role="dialog" aria-modal="true" aria-label="Available Stalls Fullscreen View">
+  <div id="stall-modal" class="stall-modal" role="dialog" aria-modal="true"
+    aria-label="Available Stalls Fullscreen View">
     <button type="button" class="stall-modal__close" id="stall-modal-close" aria-label="Close fullscreen view">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
       </svg>
     </button>
     <div class="stall-modal__content" id="stall-modal-content">
-      <img src="images/stall-booking-banner.png" class="stall-modal__img" alt="Available Stalls Floor Plan Fullscreen" />
+      <img src="images/stall-booking-banner.png" class="stall-modal__img"
+        alt="Available Stalls Floor Plan Fullscreen" />
     </div>
   </div>
 </body>
