@@ -75,7 +75,8 @@
         </ul>
         <div class="header-actions"><a class="btn-header-visitor" href="visitorregistration"><span>Visitor
               Registration</span></a><a class="btn-header-exhibitor" href="exhibitorregistration"><span>Exhibitor
-              Registration</span></a><a class="btn-header-stall" href="stallbooking"><span>Stall Booking</span></a></div>
+              Registration</span></a><a class="btn-header-stall" href="stallbooking"><span>Stall Booking</span></a>
+        </div>
       </nav><button type="button" id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false"><svg
           class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -87,20 +88,23 @@
   <main id="main">
     <section class="section-exhibitor-portal" style="padding: 120px 16px 80px !important;">
       <div class="space-booking-wrapper">
-        
+
         <!-- Header Banner Card -->
         <div class="booking-header-card">
           <span class="booking-header-badge">Dental Show 2027</span>
           <h1 class="booking-header-title">SPACE BOOKING / EXHIBITOR APPLICATION FORM</h1>
-          <p class="booking-header-meta" style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">
-            Hosted by <strong style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">Tamil Nadu Dental Traders &amp; Manufacturers Association (TNDTMA)</strong><br>
-            <strong style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">6–7 February 2027</strong> | Chennai Trade Centre, Nandambakkam, Chennai
+          <p class="booking-header-meta"
+            style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">
+            Hosted by <strong style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">Tamil Nadu
+              Dental Traders &amp; Manufacturers Association (TNDTMA)</strong><br>
+            <strong style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">6–7 February
+              2027</strong> | Chennai Trade Centre, Nandambakkam, Chennai
           </p>
           <span class="booking-header-theme">Theme: See • Touch • Feel • Experience</span>
         </div>
 
         <form class="space-booking-form" action="save-exhibitor-booking.php" method="POST">
-          
+
           <!-- SECTION 1: EXHIBITOR DETAILS -->
           <div class="booking-section-card">
             <h2 class="booking-section-title">
@@ -108,7 +112,8 @@
             </h2>
 
             <div style="margin-bottom: 16px;">
-              <label style="display:block;font-size:13.5px;font-weight:700;color:#023E73;margin-bottom:8px;">Membership Status *</label>
+              <label style="display:block;font-size:13.5px;font-weight:700;color:#023E73;margin-bottom:8px;">Membership
+                Status *</label>
               <div class="membership-selector-group">
                 <label class="membership-card-radio">
                   <input type="radio" name="membership_status" value="TNDTMA Member" checked />
@@ -129,12 +134,17 @@
               <div class="field">
                 <label for="company_name">Company / Organisation *</label>
                 <input id="company_name" name="company_name" placeholder="Enter Registered Company Name" required />
-                <span class="field-error-msg" id="error-company_name" style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter your Company / Organisation name.</span>
+                <span class="field-error-msg" id="error-company_name"
+                  style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter your
+                  Company / Organisation name.</span>
               </div>
               <div class="field">
-                <label for="fascia_name">Fascia / Display Name * <small style="font-weight:400;color:#64748b;">(Name to appear on Stall Board)</small></label>
+                <label for="fascia_name">Fascia / Display Name * <small style="font-weight:400;color:#64748b;">(Name to
+                    appear on Stall Board)</small></label>
                 <input id="fascia_name" name="fascia_name" placeholder="Exact Stall Fascia Header Name" required />
-                <span class="field-error-msg" id="error-fascia_name" style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter the Fascia / Display name to appear on the stall board.</span>
+                <span class="field-error-msg" id="error-fascia_name"
+                  style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter the
+                  Fascia / Display name to appear on the stall board.</span>
               </div>
             </div>
 
@@ -171,9 +181,12 @@
 
             <div class="form__row" style="margin-bottom:14px;">
               <div class="field">
-                <label for="email">E-mail Address * <small style="font-weight:400;color:#64748b;">(Confirmation will be sent here)</small></label>
+                <label for="email">E-mail Address * <small style="font-weight:400;color:#64748b;">(Confirmation will be
+                    sent here)</small></label>
                 <input id="email" type="email" name="email" placeholder="official@company.com" required />
-                <span class="field-error-msg" id="error-email" style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter a valid official Email address.</span>
+                <span class="field-error-msg" id="error-email"
+                  style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter a
+                  valid official Email address.</span>
               </div>
               <div class="field">
                 <label for="website">Website</label>
@@ -199,7 +212,8 @@
               </div>
               <div class="field">
                 <label for="alt_contact_no">Alternate Contact / Phone No.</label>
-                <input id="alt_contact_no" type="tel" name="alt_contact_no" placeholder="Landline or Alternate Mobile" />
+                <input id="alt_contact_no" type="tel" name="alt_contact_no"
+                  placeholder="Landline or Alternate Mobile" />
               </div>
             </div>
           </div>
@@ -213,7 +227,8 @@
             <div class="form__row" style="margin-bottom:14px;">
               <div class="field">
                 <label for="stall_type">Stall Category</label>
-                <select id="stall_type" name="stall_type" style="width:100%;padding:11px 14px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:14.5px;">
+                <select id="stall_type" name="stall_type"
+                  style="width:100%;padding:11px 14px;border:1.5px solid #cbd5e1;border-radius:8px;font-size:14.5px;">
                   <option value="Regular Stall">Regular Stall</option>
                   <option value="Corner Stall">Corner Stall</option>
                   <option value="Island / Special Space (Bare Space)">Island / Special Space (Bare Space Only)</option>
@@ -232,7 +247,8 @@
             <div class="form__row">
               <div class="field">
                 <label for="preferred_zone">Preferred Stall Location / Zone</label>
-                <input id="preferred_zone" name="preferred_zone" placeholder="e.g. Hall 2 / Near Entrance / Central Aisle" />
+                <input id="preferred_zone" name="preferred_zone"
+                  placeholder="e.g. Hall 2 / Near Entrance / Central Aisle" />
               </div>
               <div class="field">
                 <label for="space_sqmtr">Approx. Space Requirement (sq. mtr.)</label>
@@ -281,7 +297,8 @@
             </div>
 
             <div class="charges-note">
-              <strong>Payment Schedule:</strong> Advance 50% with booking; balance payable on or before <strong>15/01/2027</strong>.<br>
+              <strong>Payment Schedule:</strong> Advance 50% with booking; balance payable on or before
+              <strong>15/01/2027</strong>.<br>
               GST and applicable statutory charges are extra unless specifically stated otherwise.
             </div>
           </div>
@@ -293,34 +310,53 @@
             </h2>
 
             <p style="font-size:13.5px;color:#475569;margin:0 0 14px;line-height:1.5;">
-              Standard stall construction / wall panels as specified by the organiser • Company fascia / name panel • Lighting points as per stall package • Power connection as per approved package • Furniture / information counter • Exhibitor passes as per organiser guidelines.
+              Standard stall construction / wall panels as specified by the organiser • Company fascia / name panel •
+              Lighting points as per stall package • Power connection as per approved package • Furniture / information
+              counter • Exhibitor passes as per organiser guidelines.
             </p>
 
             <div class="package-inclusions-grid">
               <div class="package-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
                 <span><strong>1 Octanorm Table &amp; 2 Chairs</strong></span>
               </div>
               <div class="package-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
                 <span><strong>1 Power Point &amp; 1 Dustbin</strong></span>
               </div>
               <div class="package-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
                 <span><strong>2 Lunches per day complimentary</strong></span>
               </div>
               <div class="package-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
                 <span><strong>6 Tea/Coffee Coupons per day</strong></span>
               </div>
               <div class="package-item" style="grid-column: 1 / -1;">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
                 <span><strong>12 Nos. Water Bottles (500ml) per day per stall, complimentary</strong></span>
               </div>
             </div>
 
             <p style="font-size:12.5px;color:#64748b;margin:14px 0 0;line-height:1.5;font-style:italic;">
-              Important: Final stall dimensions, inclusions, electrical load, branding specifications, move-in / move-out timings and other technical details will be governed by the Exhibitor Manual and the final floor plan issued by TNDTMA.
+              Important: Final stall dimensions, inclusions, electrical load, branding specifications, move-in /
+              move-out timings and other technical details will be governed by the Exhibitor Manual and the final floor
+              plan issued by TNDTMA.
             </p>
           </div>
 
@@ -348,8 +384,10 @@
                   <strong>BARB0KKNAGA</strong>
                 </div>
               </div>
-              <div style="margin-top:14px;padding-top:10px;border-top:1px dashed #86efac;font-size:13.5px;color:#1e293b;">
-                <strong>Contact Details:</strong> Mobile: <strong>+91 87780 02030</strong> &amp; Email: <strong>dentalshoworgsecy@gmail.com</strong>
+              <div
+                style="margin-top:14px;padding-top:10px;border-top:1px dashed #86efac;font-size:13.5px;color:#1e293b;">
+                <strong>Contact Details:</strong> Mobile: <strong>+91 87780 02030</strong> &amp; Email:
+                <strong>dentalshoworgsecy@gmail.com</strong>
               </div>
             </div>
           </div>
@@ -362,23 +400,55 @@
 
             <div class="rules-scroll-box">
               <ol>
-                <li><strong>Eligibility &amp; Application:</strong> Participation is subject to acceptance of the completed application by TNDTMA and availability of exhibition space. Submission of this form does not by itself constitute confirmation of allotment.</li>
-                <li><strong>Stall Allotment:</strong> TNDTMA reserves the right to determine stall location, size and category based on the approved floor plan, operational requirements and availability. Stall allotment will be confirmed separately.</li>
-                <li><strong>Payment:</strong> The exhibitor shall make payments according to the schedule communicated by TNDTMA. Taxes, statutory charges and additional services, where applicable, shall be payable by the exhibitor.</li>
-                <li><strong>Confirmation &amp; Cancellation:</strong> Stall confirmation, cancellation and refund conditions shall be governed by the terms communicated in the official exhibitor agreement / allotment letter. TNDTMA reserves the right to reallocate space in case of non-payment within the stipulated period.</li>
-                <li><strong>Sub-Letting / Sharing:</strong> Sub-letting, assignment or sharing of the allotted stall with another company or organisation is not permitted without prior written approval from TNDTMA.</li>
-                <li><strong>Exhibitor Products &amp; Activities:</strong> Exhibitors shall display and promote only lawful products, services and educational activities relevant to the exhibition. Any activity that may cause nuisance, obstruction or safety concerns is prohibited.</li>
-                <li><strong>Branding &amp; Stall Construction:</strong> All stall construction, branding, electrical work, demonstrations and special installations must comply with technical specifications, height limits and deadlines communicated by TNDTMA and the appointed exhibition contractor.</li>
-                <li><strong>Move-in &amp; Move-out:</strong> Exhibitors shall move-in, set up and remove exhibits strictly within the timings communicated by TNDTMA. Goods, displays and materials must be removed promptly after the exhibition closes.</li>
-                <li><strong>Safety &amp; Compliance:</strong> Exhibitors are responsible for the safe operation of equipment, demonstrations and materials within their stall and shall comply with venue, fire-safety, electrical and other applicable regulations.</li>
-                <li><strong>Conduct:</strong> Exhibitors, their representatives, contractors and staff shall maintain professional conduct and shall not obstruct aisles, neighbouring stalls, entrances, exits or common areas.</li>
-                <li><strong>Photography / Publicity:</strong> TNDTMA may photograph or record the exhibition and use such material for legitimate event documentation and promotional purposes. Exhibitors shall not make public statements representing the exhibition or TNDTMA without prior approval.</li>
-                <li><strong>Confidentiality:</strong> Exhibitors shall not disclose or misuse confidential business information belonging to TNDTMA, other exhibitors, speakers, visitors or partners that they may access during the event.</li>
-                <li><strong>Liability:</strong> TNDTMA shall not be liable for loss, theft, damage, injury or interruption except to the extent required by applicable law. Exhibitors are responsible for securing their own exhibits, materials and insurance.</li>
-                <li><strong>Termination of Right to Exhibit:</strong> TNDTMA may terminate an exhibitor’s participation for breach of these rules, non-payment, unlawful activity, safety concerns, misrepresentation or conduct that materially affects the exhibition.</li>
-                <li><strong>Cancellation / Changes to Exhibition:</strong> TNDTMA reserves the right, where reasonably necessary, to modify the floor plan, venue arrangements, timings or other operational aspects of the exhibition.</li>
-                <li><strong>Governing Law:</strong> These Rules &amp; Regulations shall be governed by the laws applicable in India.</li>
-                <li><strong>Dispute Resolution:</strong> Any dispute relating to participation shall first be addressed through good-faith discussion with TNDTMA.</li>
+                <li><strong>Eligibility &amp; Application:</strong> Participation is subject to acceptance of the
+                  completed application by TNDTMA and availability of exhibition space. Submission of this form does not
+                  by itself constitute confirmation of allotment.</li>
+                <li><strong>Stall Allotment:</strong> TNDTMA reserves the right to determine stall location, size and
+                  category based on the approved floor plan, operational requirements and availability. Stall allotment
+                  will be confirmed separately.</li>
+                <li><strong>Payment:</strong> The exhibitor shall make payments according to the schedule communicated
+                  by TNDTMA. Taxes, statutory charges and additional services, where applicable, shall be payable by the
+                  exhibitor.</li>
+                <li><strong>Confirmation &amp; Cancellation:</strong> Stall confirmation, cancellation and refund
+                  conditions shall be governed by the terms communicated in the official exhibitor agreement / allotment
+                  letter. TNDTMA reserves the right to reallocate space in case of non-payment within the stipulated
+                  period.</li>
+                <li><strong>Sub-Letting / Sharing:</strong> Sub-letting, assignment or sharing of the allotted stall
+                  with another company or organisation is not permitted without prior written approval from TNDTMA.</li>
+                <li><strong>Exhibitor Products &amp; Activities:</strong> Exhibitors shall display and promote only
+                  lawful products, services and educational activities relevant to the exhibition. Any activity that may
+                  cause nuisance, obstruction or safety concerns is prohibited.</li>
+                <li><strong>Branding &amp; Stall Construction:</strong> All stall construction, branding, electrical
+                  work, demonstrations and special installations must comply with technical specifications, height
+                  limits and deadlines communicated by TNDTMA and the appointed exhibition contractor.</li>
+                <li><strong>Move-in &amp; Move-out:</strong> Exhibitors shall move-in, set up and remove exhibits
+                  strictly within the timings communicated by TNDTMA. Goods, displays and materials must be removed
+                  promptly after the exhibition closes.</li>
+                <li><strong>Safety &amp; Compliance:</strong> Exhibitors are responsible for the safe operation of
+                  equipment, demonstrations and materials within their stall and shall comply with venue, fire-safety,
+                  electrical and other applicable regulations.</li>
+                <li><strong>Conduct:</strong> Exhibitors, their representatives, contractors and staff shall maintain
+                  professional conduct and shall not obstruct aisles, neighbouring stalls, entrances, exits or common
+                  areas.</li>
+                <li><strong>Photography / Publicity:</strong> TNDTMA may photograph or record the exhibition and use
+                  such material for legitimate event documentation and promotional purposes. Exhibitors shall not make
+                  public statements representing the exhibition or TNDTMA without prior approval.</li>
+                <li><strong>Confidentiality:</strong> Exhibitors shall not disclose or misuse confidential business
+                  information belonging to TNDTMA, other exhibitors, speakers, visitors or partners that they may access
+                  during the event.</li>
+                <li><strong>Liability:</strong> TNDTMA shall not be liable for loss, theft, damage, injury or
+                  interruption except to the extent required by applicable law. Exhibitors are responsible for securing
+                  their own exhibits, materials and insurance.</li>
+                <li><strong>Termination of Right to Exhibit:</strong> TNDTMA may terminate an exhibitor’s participation
+                  for breach of these rules, non-payment, unlawful activity, safety concerns, misrepresentation or
+                  conduct that materially affects the exhibition.</li>
+                <li><strong>Cancellation / Changes to Exhibition:</strong> TNDTMA reserves the right, where reasonably
+                  necessary, to modify the floor plan, venue arrangements, timings or other operational aspects of the
+                  exhibition.</li>
+                <li><strong>Governing Law:</strong> These Rules &amp; Regulations shall be governed by the laws
+                  applicable in India.</li>
+                <li><strong>Dispute Resolution:</strong> Any dispute relating to participation shall first be addressed
+                  through good-faith discussion with TNDTMA.</li>
               </ol>
             </div>
 
@@ -387,7 +457,10 @@
               <label class="declaration-label">
                 <input type="checkbox" name="agree_declaration" value="1" checked />
                 <span>
-                  <strong>DECLARATION:</strong> I / We hereby declare that the information provided in this application is true and correct to the best of my / our knowledge. I / We have read, understood and agree to abide by the Rules &amp; Regulations, Exhibitor Manual, venue requirements and other instructions issued by TNDTMA for Dental Show 2027.
+                  <strong>DECLARATION:</strong> I / We hereby declare that the information provided in this application
+                  is true and correct to the best of my / our knowledge. I / We have read, understood and agree to abide
+                  by the Rules &amp; Regulations, Exhibitor Manual, venue requirements and other instructions issued by
+                  TNDTMA for Dental Show 2027.
                 </span>
               </label>
             </div>
@@ -399,15 +472,22 @@
               </div>
               <div class="field">
                 <label for="signatory_designation">Designation</label>
-                <input id="signatory_designation" name="signatory_designation" placeholder="e.g. Director / Authorised Signatory" />
+                <input id="signatory_designation" name="signatory_designation"
+                  placeholder="e.g. Director / Authorised Signatory" />
               </div>
             </div>
           </div>
 
           <!-- VALIDATION ALERT BOX -->
-          <div id="booking-validation-alert" style="display:none;margin-top:20px;margin-bottom:20px;padding:16px 20px;border-radius:10px;background:#fef2f2;border:1.5px solid #f87171;color:#b91c1c;font-size:14px;line-height:1.5;">
+          <div id="booking-validation-alert"
+            style="display:none;margin-top:20px;margin-bottom:20px;padding:16px 20px;border-radius:10px;background:#fef2f2;border:1.5px solid #f87171;color:#b91c1c;font-size:14px;line-height:1.5;">
             <div style="font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
               <span>Please complete the mandatory fields to proceed:</span>
             </div>
             <ul id="booking-validation-list" style="margin:4px 0 0;padding-left:24px;font-weight:600;"></ul>
@@ -417,7 +497,11 @@
           <div style="margin-top: 14px; margin-bottom: 40px;">
             <button type="submit" class="btn-submit-booking">
               <span>Submit Space Booking Application</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
             <p style="text-align:center;font-size:13px;color:#64748b;margin-top:12px;">
               🔒 Your application details will be securely saved and an official acknowledgment sent to your email.

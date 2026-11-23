@@ -22140,127 +22140,184 @@ body:has(.cs-fit-wrapper) {
 
 
 /* ==========================================================================
-   UNIFIED BUTTON HOVER SYSTEM — Single consistent rule for all CTAs
-   Rule:
-     Dark/filled buttons  → keep bg, lift, color stays white
-     Light/white buttons  → flip to dark navy (#023E73) bg, text white
+   UNIFIED HIGH-CONTRAST BUTTON HOVER & SLIDE ANIMATION SYSTEM
+   - Font color ALWAYS pure white on hover (#ffffff)
+   - Left-to-right slide transition on all CTAs
+   - White/light buttons hover to vibrant electric cyan/blue (#0477BF -> #069DBF)
+     with glowing cyan border (#38bdf8), so they POP and NEVER merge with the hero banner!
+   - Dark/green buttons hover to deeper rich emerald (#007a52)
+   - Stall buttons hover to deep rich ocean cyan (#026597)
    ========================================================================== */
 
-/* -- DARK FILLED BUTTONS: Green (Visitor / Primary) ----------------------- */
-.btn-hero-visitor:hover,
-#hero-visitor-btn:hover,
-.btn-countdown-primary:hover,
-#countdown-register-btn:hover,
-.btn-header-visitor:hover,
-#cta-visitor-register-btn:hover,
-.btn-hero-stall:hover,
-#hero-stall-btn:hover,
-.btn-countdown-stall:hover,
-#countdown-stall-btn:hover,
-.btn-header-stall:hover,
-.btn-submit-booking:hover {
-  transform: translateY(-2px) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  box-shadow: 0 8px 22px rgba(0, 168, 107, 0.45) !important;
+/* 1. BUTTON CONTAINERS & TEXT STACKING */
+.btn,
+.btn-hero-visitor,
+#hero-visitor-btn,
+.btn-hero-exhibitor,
+#hero-exhibitor-btn,
+.btn-hero-stall,
+#hero-stall-btn,
+.btn-countdown-primary,
+#countdown-register-btn,
+.btn-countdown-secondary,
+#countdown-exhibitor-btn,
+.btn-countdown-stall,
+#countdown-stall-btn,
+.btn-header-visitor,
+.btn-header-exhibitor,
+.btn-header-stall,
+.cta-track-btn,
+.cta-track-btn--visitor,
+.cta-track-btn--exhibitor,
+#cta-visitor-register-btn,
+#cta-exhibitor-register-btn,
+.btn-gallery-explore-all,
+.btn-events-view-all,
+.btn-view-all-top,
+#btn-header-gallery,
+#btn-events-view-all-top,
+.btn-submit-booking {
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), 
+              box-shadow 0.28s cubic-bezier(0.25, 1, 0.5, 1), 
+              border-color 0.28s ease, 
+              background 0.28s ease !important;
 }
 
-.btn-hero-visitor:hover *,
-#hero-visitor-btn:hover *,
-.btn-countdown-primary:hover *,
-#countdown-register-btn:hover *,
-.btn-header-visitor:hover *,
-.btn-hero-stall:hover *,
-#hero-stall-btn:hover *,
-.btn-countdown-stall:hover *,
-#countdown-stall-btn:hover *,
-.btn-header-stall:hover * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+/* Ensure text & icons sit above the sliding ::before layer */
+.btn > *,
+.btn span,
+.btn-hero-visitor > *,
+.btn-hero-visitor span,
+#hero-visitor-btn > *,
+#hero-visitor-btn span,
+.btn-hero-exhibitor > *,
+.btn-hero-exhibitor span,
+#hero-exhibitor-btn > *,
+#hero-exhibitor-btn span,
+.btn-hero-stall > *,
+.btn-hero-stall span,
+#hero-stall-btn > *,
+#hero-stall-btn span,
+.btn-countdown-primary > *,
+.btn-countdown-primary span,
+#countdown-register-btn > *,
+#countdown-register-btn span,
+.btn-countdown-secondary > *,
+.btn-countdown-secondary span,
+#countdown-exhibitor-btn > *,
+#countdown-exhibitor-btn span,
+.btn-countdown-stall > *,
+.btn-countdown-stall span,
+#countdown-stall-btn > *,
+#countdown-stall-btn span,
+.btn-header-visitor > *,
+.btn-header-visitor span,
+.btn-header-exhibitor > *,
+.btn-header-exhibitor span,
+.btn-header-stall > *,
+.btn-header-stall span,
+.cta-track-btn > *,
+.cta-track-btn span,
+.cta-track-btn--visitor > *,
+.cta-track-btn--visitor span,
+.cta-track-btn--exhibitor > *,
+.cta-track-btn--exhibitor span,
+#cta-visitor-register-btn > *,
+#cta-visitor-register-btn span,
+#cta-exhibitor-register-btn > *,
+#cta-exhibitor-register-btn span {
+  position: relative !important;
+  z-index: 2 !important;
+  pointer-events: none;
+  transition: color 0.22s ease !important;
 }
 
-/* -- DARK FILLED BUTTONS: Arrow nudge ------------------------------------ */
-.btn-hero-visitor:hover .btn-arrow,
-#hero-visitor-btn:hover .btn-arrow,
-.btn-countdown-primary:hover .btn-arrow,
-#countdown-register-btn:hover .btn-arrow {
-  transform: translateX(4px) !important;
+/* 2. LEFT-TO-RIGHT SLIDE PSEUDO-ELEMENT FOR ALL BUTTONS */
+.btn::before,
+.btn-hero-visitor::before,
+#hero-visitor-btn::before,
+.btn-hero-exhibitor::before,
+#hero-exhibitor-btn::before,
+.btn-hero-stall::before,
+#hero-stall-btn::before,
+.btn-countdown-primary::before,
+#countdown-register-btn::before,
+.btn-countdown-secondary::before,
+#countdown-exhibitor-btn::before,
+.btn-countdown-stall::before,
+#countdown-stall-btn::before,
+.btn-header-visitor::before,
+.btn-header-exhibitor::before,
+.btn-header-stall::before,
+.cta-track-btn::before,
+.cta-track-btn--visitor::before,
+.cta-track-btn--exhibitor::before,
+#cta-visitor-register-btn::before,
+#cta-exhibitor-register-btn::before,
+.btn-gallery-explore-all::before,
+.btn-events-view-all::before,
+.btn-view-all-top::before,
+.btn-submit-booking::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: inherit !important;
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+  transition: transform 0.32s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
 }
 
-/* -- LIGHT/WHITE BUTTONS: Exhibitor (white bg → dark navy on hover) ------- */
-.btn-hero-exhibitor:hover,
-#hero-exhibitor-btn:hover,
-.btn-countdown-secondary:hover,
-#countdown-exhibitor-btn:hover,
-.btn-header-exhibitor:hover,
-#cta-exhibitor-register-btn:hover,
-.cta-track-btn--visitor:hover,
-.cta-track-btn--exhibitor:hover {
-  background: #023E73 !important;
-  border-color: #023E73 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 22px rgba(2, 62, 115, 0.35) !important;
+/* Trigger slide on hover */
+.btn:hover::before,
+.btn-hero-visitor:hover::before,
+#hero-visitor-btn:hover::before,
+.btn-hero-exhibitor:hover::before,
+#hero-exhibitor-btn:hover::before,
+.btn-hero-stall:hover::before,
+#hero-stall-btn:hover::before,
+.btn-countdown-primary:hover::before,
+#countdown-register-btn:hover::before,
+.btn-countdown-secondary:hover::before,
+#countdown-exhibitor-btn:hover::before,
+.btn-countdown-stall:hover::before,
+#countdown-stall-btn:hover::before,
+.btn-header-visitor:hover::before,
+.btn-header-exhibitor:hover::before,
+.btn-header-stall:hover::before,
+.cta-track-btn:hover::before,
+.cta-track-btn--visitor:hover::before,
+.cta-track-btn--exhibitor:hover::before,
+#cta-visitor-register-btn:hover::before,
+#cta-exhibitor-register-btn:hover::before,
+.btn-gallery-explore-all:hover::before,
+.btn-events-view-all:hover::before,
+.btn-view-all-top:hover::before,
+.btn-submit-booking:hover::before {
+  transform: scaleX(1) !important;
 }
 
-.btn-hero-exhibitor:hover *,
-#hero-exhibitor-btn:hover *,
-.btn-hero-exhibitor:hover span,
-#hero-exhibitor-btn:hover span,
-.btn-countdown-secondary:hover *,
-#countdown-exhibitor-btn:hover *,
-.btn-countdown-secondary:hover span,
-#countdown-exhibitor-btn:hover span,
-.btn-header-exhibitor:hover *,
-.btn-header-exhibitor:hover span,
-#cta-exhibitor-register-btn:hover *,
-.cta-track-btn--visitor:hover *,
-.cta-track-btn--exhibitor:hover * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
+/* 3. SLIDE COLORS PER BUTTON TYPE */
 
-/* -- DARK BUTTONS (Header Exhibitor / gallery / view-all) → white on hover */
-.btn-gallery-explore-all:hover,
-.btn-events-view-all:hover,
-.btn-view-all-top:hover,
-#btn-header-gallery:hover,
-#btn-events-view-all-top:hover {
-  background: #0f172a !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  transform: translateY(-2px) !important;
-}
-
-
-/* ==========================================================================
-   FIX: Correct ::before slide color for white/light buttons
-   The slide pseudo-element must match the hover bg (#023E73 for white buttons)
-   ========================================================================== */
-
-/* White buttons → slide in dark navy so hover color is correct */
+/* A) White/Exhibitor Buttons -> Slides Vibrant Electric Blue / Cyan (DOES NOT MERGE WITH NAVY BANNER!) */
 .btn-hero-exhibitor::before,
 #hero-exhibitor-btn::before,
 .btn-countdown-secondary::before,
 #countdown-exhibitor-btn::before,
-.btn-header-exhibitor::before,
 .cta-track-btn--visitor::before,
 .cta-track-btn--exhibitor::before,
 #cta-exhibitor-register-btn::before {
-  background: #023E73 !important;
+  background: linear-gradient(135deg, #0477BF 0%, #069DBF 100%) !important;
 }
 
-/* Stall / green buttons — disable slide (already solid gradient) */
-.btn-hero-stall::before,
-#hero-stall-btn::before,
-.btn-countdown-stall::before,
-#countdown-stall-btn::before,
-.btn-header-stall::before {
-  display: none !important;
-}
-
-/* Visitor / primary green buttons — slide uses a slightly darker green */
+/* B) Green / Visitor Primary Buttons -> Slides Deep Rich Emerald */
 .btn-hero-visitor::before,
 #hero-visitor-btn::before,
 .btn-countdown-primary::before,
@@ -22270,156 +22327,166 @@ body:has(.cs-fit-wrapper) {
   background: #007a52 !important;
 }
 
-
-/* ==========================================================================
-   FIX: Add overflow:hidden to all CTA buttons so ::before slide stays inside
-   ========================================================================== */
-.btn,
-.btn-hero-visitor,
-#hero-visitor-btn,
-.btn-hero-exhibitor,
-#hero-exhibitor-btn,
-.btn-hero-stall,
-#hero-stall-btn,
-.btn-countdown-primary,
-#countdown-register-btn,
-.btn-countdown-secondary,
-#countdown-exhibitor-btn,
-.btn-countdown-stall,
-#countdown-stall-btn,
-.btn-header-visitor,
-.btn-header-exhibitor,
-.btn-header-stall,
-.cta-track-btn,
-.cta-track-btn--visitor,
-.cta-track-btn--exhibitor,
-#cta-visitor-register-btn,
-#cta-exhibitor-register-btn,
-.btn-gallery-explore-all,
-.btn-events-view-all,
-.btn-view-all-top,
-#btn-header-gallery,
-#btn-events-view-all-top,
-.btn-submit-booking {
-  overflow: hidden !important;
-  position: relative !important;
-  isolation: isolate !important;
+/* C) Cyan / Stall Booking Buttons -> Slides Rich Deep Ocean Cyan */
+.btn-hero-stall::before,
+#hero-stall-btn::before,
+.btn-countdown-stall::before,
+#countdown-stall-btn::before,
+.btn-header-stall::before,
+.btn-submit-booking::before {
+  background: linear-gradient(135deg, #027a94 0%, #026597 100%) !important;
 }
 
-
-/* ==========================================================================
-   FIX: Text always visible above ::before slide — z-index stacking correction
-   Remove isolation:isolate (breaks stacking) — use explicit z-index on children
-   ========================================================================== */
-
-/* Reset isolation that was breaking stacking context */
-.btn,
-.btn-hero-visitor,
-#hero-visitor-btn,
-.btn-hero-exhibitor,
-#hero-exhibitor-btn,
-.btn-hero-stall,
-#hero-stall-btn,
-.btn-countdown-primary,
-#countdown-register-btn,
-.btn-countdown-secondary,
-#countdown-exhibitor-btn,
-.btn-countdown-stall,
-#countdown-stall-btn,
-.btn-header-visitor,
-.btn-header-exhibitor,
-.btn-header-stall,
-.cta-track-btn,
-.cta-track-btn--visitor,
-.cta-track-btn--exhibitor,
-#cta-visitor-register-btn,
-#cta-exhibitor-register-btn,
-.btn-gallery-explore-all,
-.btn-events-view-all,
-.btn-view-all-top,
-#btn-header-gallery,
-#btn-events-view-all-top,
-.btn-submit-booking {
-  isolation: auto !important;
-  position: relative !important;
-  overflow: hidden !important;
-  z-index: 0 !important;
-}
-
-/* ALL direct children + span + text nodes stay above ::before (z-index:1) */
-.btn > *,
-.btn > span,
-.btn-hero-visitor > *,
-.btn-hero-visitor > span,
-#hero-visitor-btn > *,
-#hero-visitor-btn > span,
-.btn-hero-exhibitor > *,
-.btn-hero-exhibitor > span,
-#hero-exhibitor-btn > *,
-#hero-exhibitor-btn > span,
-.btn-hero-stall > *,
-.btn-hero-stall > span,
-#hero-stall-btn > *,
-#hero-stall-btn > span,
-.btn-countdown-primary > *,
-.btn-countdown-primary > span,
-#countdown-register-btn > *,
-#countdown-register-btn > span,
-.btn-countdown-secondary > *,
-.btn-countdown-secondary > span,
-#countdown-exhibitor-btn > *,
-#countdown-exhibitor-btn > span,
-.btn-countdown-stall > *,
-.btn-countdown-stall > span,
-#countdown-stall-btn > *,
-#countdown-stall-btn > span,
-.btn-header-visitor > *,
-.btn-header-visitor > span,
-.btn-header-exhibitor > *,
-.btn-header-exhibitor > span,
-.btn-header-stall > *,
-.btn-header-stall > span,
-.cta-track-btn > *,
-.cta-track-btn--visitor > *,
-.cta-track-btn--exhibitor > *,
-#cta-visitor-register-btn > *,
-#cta-exhibitor-register-btn > * {
-  position: relative !important;
-  z-index: 3 !important;
-  pointer-events: none;
-}
-
-/* ::before stays behind text at z-index 1 */
-.btn::before,
-.btn-hero-visitor::before,
-#hero-visitor-btn::before,
-.btn-hero-exhibitor::before,
-#hero-exhibitor-btn::before,
-.btn-countdown-primary::before,
-#countdown-register-btn::before,
-.btn-countdown-secondary::before,
-#countdown-exhibitor-btn::before,
-.btn-header-visitor::before,
+/* D) Dark/Navy Header & Utility Buttons -> Slides Charcoal Blue */
 .btn-header-exhibitor::before,
-.cta-track-btn::before,
-.cta-track-btn--visitor::before,
-.cta-track-btn--exhibitor::before,
-#cta-visitor-register-btn::before,
-#cta-exhibitor-register-btn::before,
 .btn-gallery-explore-all::before,
 .btn-events-view-all::before,
-.btn-view-all-top::before {
-  z-index: 1 !important;
+.btn-view-all-top::before,
+#btn-header-gallery::before,
+#btn-events-view-all-top::before {
+  background: #1e293b !important;
 }
 
-/* White/exhibitor buttons — on hover show border so button stays defined */
+/* 4. HOVER STATES: TEXT COLOR WHITE (#ffffff) ACROSS ALL BUTTONS */
+.btn:hover,
+.btn:hover *,
+.btn:hover span,
+.btn-hero-visitor:hover,
+.btn-hero-visitor:hover *,
+.btn-hero-visitor:hover span,
+#hero-visitor-btn:hover,
+#hero-visitor-btn:hover *,
+#hero-visitor-btn:hover span,
+.btn-hero-exhibitor:hover,
+.btn-hero-exhibitor:hover *,
+.btn-hero-exhibitor:hover span,
+#hero-exhibitor-btn:hover,
+#hero-exhibitor-btn:hover *,
+#hero-exhibitor-btn:hover span,
+.btn-hero-stall:hover,
+.btn-hero-stall:hover *,
+.btn-hero-stall:hover span,
+#hero-stall-btn:hover,
+#hero-stall-btn:hover *,
+#hero-stall-btn:hover span,
+.btn-countdown-primary:hover,
+.btn-countdown-primary:hover *,
+.btn-countdown-primary:hover span,
+#countdown-register-btn:hover,
+#countdown-register-btn:hover *,
+#countdown-register-btn:hover span,
+.btn-countdown-secondary:hover,
+.btn-countdown-secondary:hover *,
+.btn-countdown-secondary:hover span,
+#countdown-exhibitor-btn:hover,
+#countdown-exhibitor-btn:hover *,
+#countdown-exhibitor-btn:hover span,
+.btn-countdown-stall:hover,
+.btn-countdown-stall:hover *,
+.btn-countdown-stall:hover span,
+#countdown-stall-btn:hover,
+#countdown-stall-btn:hover *,
+#countdown-stall-btn:hover span,
+.btn-header-visitor:hover,
+.btn-header-visitor:hover *,
+.btn-header-visitor:hover span,
+.btn-header-exhibitor:hover,
+.btn-header-exhibitor:hover *,
+.btn-header-exhibitor:hover span,
+.btn-header-stall:hover,
+.btn-header-stall:hover *,
+.btn-header-stall:hover span,
+.cta-track-btn:hover,
+.cta-track-btn:hover *,
+.cta-track-btn:hover span,
+.cta-track-btn--visitor:hover,
+.cta-track-btn--visitor:hover *,
+.cta-track-btn--visitor:hover span,
+.cta-track-btn--exhibitor:hover,
+.cta-track-btn--exhibitor:hover *,
+.cta-track-btn--exhibitor:hover span,
+#cta-visitor-register-btn:hover,
+#cta-visitor-register-btn:hover *,
+#cta-visitor-register-btn:hover span,
+#cta-exhibitor-register-btn:hover,
+#cta-exhibitor-register-btn:hover *,
+#cta-exhibitor-register-btn:hover span,
+.btn-gallery-explore-all:hover,
+.btn-gallery-explore-all:hover *,
+.btn-gallery-explore-all:hover span,
+.btn-events-view-all:hover,
+.btn-events-view-all:hover *,
+.btn-events-view-all:hover span,
+.btn-view-all-top:hover,
+.btn-view-all-top:hover *,
+.btn-view-all-top:hover span,
+#btn-header-gallery:hover,
+#btn-header-gallery:hover *,
+#btn-header-gallery:hover span,
+#btn-events-view-all-top:hover,
+#btn-events-view-all-top:hover *,
+#btn-events-view-all-top:hover span,
+.btn-submit-booking:hover,
+.btn-submit-booking:hover *,
+.btn-submit-booking:hover span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* 5. HOVER ELEVATION, BORDERS & SHADOWS */
+
+/* A) White / Exhibitor Buttons on Hover -> Stands out with cyan border & glow */
 .btn-hero-exhibitor:hover,
 #hero-exhibitor-btn:hover,
 .btn-countdown-secondary:hover,
 #countdown-exhibitor-btn:hover,
-.btn-header-exhibitor:hover,
-#cta-exhibitor-register-btn:hover,
 .cta-track-btn--visitor:hover,
-.cta-track-btn--exhibitor:hover {
-  border-color: rgba(255, 255, 255, 0.2) !important;
+.cta-track-btn--exhibitor:hover,
+#cta-exhibitor-register-btn:hover {
+  transform: translateY(-2px) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 8px 24px rgba(4, 119, 191, 0.5), 0 0 10px rgba(56, 189, 248, 0.35) !important;
+}
+
+/* B) Green / Visitor Buttons on Hover -> Deep green glow & arrow nudge */
+.btn-hero-visitor:hover,
+#hero-visitor-btn:hover,
+.btn-countdown-primary:hover,
+#countdown-register-btn:hover,
+.btn-header-visitor:hover,
+#cta-visitor-register-btn:hover {
+  transform: translateY(-2px) !important;
+  border-color: #00c882 !important;
+  box-shadow: 0 8px 24px rgba(0, 168, 107, 0.45) !important;
+}
+
+.btn-hero-visitor:hover .btn-arrow,
+#hero-visitor-btn:hover .btn-arrow,
+.btn-countdown-primary:hover .btn-arrow,
+#countdown-register-btn:hover .btn-arrow {
+  transform: translateX(4px) !important;
+}
+
+/* C) Cyan / Stall Buttons on Hover -> Bright teal glow */
+.btn-hero-stall:hover,
+#hero-stall-btn:hover,
+.btn-countdown-stall:hover,
+#countdown-stall-btn:hover,
+.btn-header-stall:hover,
+.btn-submit-booking:hover {
+  transform: translateY(-2px) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 8px 24px rgba(6, 157, 191, 0.55) !important;
+}
+
+/* D) Dark Utility Buttons on Hover */
+.btn-header-exhibitor:hover,
+.btn-gallery-explore-all:hover,
+.btn-events-view-all:hover,
+.btn-view-all-top:hover,
+#btn-header-gallery:hover,
+#btn-events-view-all-top:hover {
+  transform: translateY(-2px) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.35) !important;
 }
