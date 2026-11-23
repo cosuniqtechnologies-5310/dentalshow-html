@@ -55,13 +55,23 @@ DirectoryIndex index.html home.html index.php
     RewriteRule ^events$ events.html [L]
 
     # ------------------------------------------------------------------
-    # 2.5B CANONICAL 301 REDIRECTS FOR RENAMED REGISTRATION PAGES
+    # 2.5B CANONICAL 301 REDIRECTS: /home, /coming-soon & REGISTRATIONS
     # ------------------------------------------------------------------
+    # Permanent 301 redirect for https://dentalshow.in/home (and /home.html) to root https://dentalshow.in/
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+home(\.html)?([/?\s]|$) [NC]
+    RewriteRule ^ https://%{HTTP_HOST}/ [R=301,L]
+
+    # Permanent 301 redirect for /coming-soon (and /coming-soon.html) to root
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+coming-soon(\.html)?([/?\s]|$) [NC]
+    RewriteRule ^ https://%{HTTP_HOST}/ [R=301,L]
+
+    # RewriteRule fallback matches for /home and /coming-soon
+    RewriteRule ^home(\.html)?/?$ https://%{HTTP_HOST}/ [R=301,L]
+    RewriteRule ^coming-soon(\.html)?/?$ https://%{HTTP_HOST}/ [R=301,L]
+
     # Redirect legacy hyphenated registration URLs to clean non-hyphenated URLs
     RewriteRule ^visitor-registration(\.html)?/?$ /visitorregistration [R=301,L]
     RewriteRule ^exhibitor-registration(\.html)?/?$ /exhibitorregistration [R=301,L]
-    RewriteRule ^coming-soon(\.html)?/?$ / [R=301,L]
-    RewriteRule ^home(\.html)?/?$ / [R=301,L]
 
     # ------------------------------------------------------------------
     # 2.6 CANONICAL ROOT & EXTENSIONLESS REDIRECTS (.html -> clean)
