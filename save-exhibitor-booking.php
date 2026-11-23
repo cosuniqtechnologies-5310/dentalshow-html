@@ -65,25 +65,25 @@ if (!$pdo) {
     }
 }
 
-// Auto-create table if not exists
+// Auto-create table if not exists (Only company_name, fascia_name, and email are strictly required)
 try {
     $createTableSql = "
     CREATE TABLE IF NOT EXISTS `exhibitor_bookings` (
       `id` INT(11) NOT NULL AUTO_INCREMENT,
       `booking_ref` VARCHAR(30) NOT NULL UNIQUE,
-      `membership_status` VARCHAR(50) NOT NULL DEFAULT 'TNDTMA Member',
+      `membership_status` VARCHAR(50) DEFAULT 'TNDTMA Member',
       `company_name` VARCHAR(255) NOT NULL,
-      `address` TEXT NOT NULL,
-      `city_state` VARCHAR(150) NOT NULL,
-      `pincode` VARCHAR(20) NOT NULL,
-      `country` VARCHAR(100) NOT NULL DEFAULT 'India',
+      `address` TEXT DEFAULT NULL,
+      `city_state` VARCHAR(150) DEFAULT NULL,
+      `pincode` VARCHAR(20) DEFAULT NULL,
+      `country` VARCHAR(100) DEFAULT 'India',
       `gst_no` VARCHAR(50) DEFAULT NULL,
       `pan_no` VARCHAR(50) DEFAULT NULL,
       `phone` VARCHAR(50) DEFAULT NULL,
       `email` VARCHAR(150) NOT NULL,
       `website` VARCHAR(255) DEFAULT NULL,
-      `contact_person` VARCHAR(150) NOT NULL,
-      `mobile` VARCHAR(50) NOT NULL,
+      `contact_person` VARCHAR(150) DEFAULT NULL,
+      `mobile` VARCHAR(50) DEFAULT NULL,
       `designation` VARCHAR(100) DEFAULT NULL,
       `alt_contact_no` VARCHAR(50) DEFAULT NULL,
       `fascia_name` VARCHAR(255) NOT NULL,
@@ -92,9 +92,9 @@ try {
       `islands_required` INT(11) DEFAULT 0,
       `preferred_zone` VARCHAR(150) DEFAULT NULL,
       `space_sqmtr` VARCHAR(50) DEFAULT NULL,
-      `signatory_name` VARCHAR(150) NOT NULL,
-      `signatory_designation` VARCHAR(100) NOT NULL,
-      `agreed_terms` TINYINT(1) NOT NULL DEFAULT 1,
+      `signatory_name` VARCHAR(150) DEFAULT NULL,
+      `signatory_designation` VARCHAR(100) DEFAULT NULL,
+      `agreed_terms` TINYINT(1) DEFAULT 1,
       `ip_address` VARCHAR(45) DEFAULT NULL,
       `user_agent` TEXT DEFAULT NULL,
       `status` ENUM('pending', 'confirmed', 'cancelled') NOT NULL DEFAULT 'pending',
@@ -142,19 +142,17 @@ $signatoryName        = cleanInput($_POST['signatory_name'] ?? '');
 $signatoryDesignation = cleanInput($_POST['signatory_designation'] ?? '');
 $agreeDeclaration     = isset($_POST['agree_declaration']) ? 1 : 0;
 
-// Validation rules
+// Validation rules: ONLY Company Name, Fascia Display Name, and Email are mandatory
 $errors = [];
-if (empty($companyName))       $errors[] = "Company / Organisation name is required.";
-if (empty($address))           $errors[] = "Address is required.";
-if (empty($cityState))         $errors[] = "City / State is required.";
-if (empty($pincode))           $errors[] = "PIN Code is required.";
-if (empty($contactPerson))     $errors[] = "Contact Person name is required.";
-if (empty($mobile))            $errors[] = "Mobile number is required.";
-if (empty($fasciaName))        $errors[] = "Fascia / Display Name is required.";
-if (empty($signatoryName))     $errors[] = "Authorised Signatory Name is required.";
-if (empty($signatoryDesignation)) $errors[] = "Signatory Designation is required.";
-if (!$agreeDeclaration)        $errors[] = "You must agree to the Rules & Regulations and Declaration.";
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "A valid Email address is required.";
+if (empty($companyName)) {
+    $errors[] = "Company / Organisation name is required.";
+}
+if (empty($fasciaName)) {
+    $errors[] = "Fascia / Display Name is required.";
+}
+if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "A valid Email address is required.";
+}
 
 if (!empty($errors)) {
     if ($isAjax) {
@@ -297,6 +295,9 @@ function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyT
 }
 
 // 1. Email to Applicant
+$contactDisplay = !empty($contactPerson) ? "{$contactPerson} ({$companyName})" : $companyName;
+$recipientName  = !empty($contactPerson) ? $contactPerson : $companyName;
+
 $applicantHtml = "
 <div style='font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; color: #1e293b; background: #ffffff;'>
   <div style='text-align: center; border-bottom: 2px solid #00A86B; padding-bottom: 16px; margin-bottom: 20px;'>
@@ -304,7 +305,7 @@ $applicantHtml = "
     <p style='margin: 0; color: #64748b; font-size: 14px;'>Space Booking / Exhibitor Application Received</p>
   </div>
   
-  <p>Dear <strong>{$contactPerson}</strong> ({$companyName}),</p>
+  <p>Dear <strong>{$contactDisplay}</strong>,</p>
   <p>Thank you for submitting your Space Booking application for <strong>Dental Show 2027</strong> at Chennai Trade Centre (6–7 February 2027).</p>
   
   <div style='background: #f8fafc; border-left: 4px solid #00A86B; padding: 14px 18px; margin: 20px 0;'>
@@ -329,9 +330,9 @@ $applicantHtml = "
   <p style='margin-top: 24px;'>Thank you.<br><br>Regards,<br><strong>Team Dental Show 2027</strong><br>Tamil Nadu Dental Traders & Manufacturers Association (TNDTMA)<br>Mobile: +91 87780 02030 | Email: dentalshoworgsecy@gmail.com</p>
 </div>";
 
-$applicantText = "Dear {$contactPerson},\n\nThank you for submitting your Space Booking application for Dental Show 2027 (Ref: {$bookingRef}).\nCompany: {$companyName}\nMembership: {$membershipStatus}\nStall Type: {$stallType}\nStall(s): {$stallsRequired}\n\nOur team will connect with you shortly.\n\nRegards,\nTeam Dental Show";
+$applicantText = "Dear {$recipientName},\n\nThank you for submitting your Space Booking application for Dental Show 2027 (Ref: {$bookingRef}).\nCompany: {$companyName}\nMembership: {$membershipStatus}\nStall Type: {$stallType}\nStall(s): {$stallsRequired}\n\nOur team will connect with you shortly.\n\nRegards,\nTeam Dental Show";
 
-sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show 2027', $email, $contactPerson, $adminEmail, "Space Booking Application Received - {$bookingRef} | Dental Show 2027", $applicantHtml, $applicantText);
+sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show 2027', $email, $recipientName, $adminEmail, "Space Booking Application Received - {$bookingRef} | Dental Show 2027", $applicantHtml, $applicantText);
 
 // 2. Email to Website Admin
 $adminHtml = "
