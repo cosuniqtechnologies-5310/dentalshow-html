@@ -21596,3 +21596,330 @@ body:has(.cs-fit-wrapper) {
     width: 100% !important;
   }
 }
+
+
+/* ==========================================================================
+   SPACE BOOKING / EXHIBITOR APPLICATION FORM STYLES
+   ========================================================================== */
+.space-booking-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.booking-header-card {
+  background: linear-gradient(135deg, #023E73 0%, #069DBF 100%);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 32px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(2, 62, 115, 0.15);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-header-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.booking-header-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.booking-header-meta {
+  font-size: 14.5px;
+  opacity: 0.92;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.booking-header-theme {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 14px;
+  background: #00A86B;
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.booking-section-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(2, 62, 115, 0.04);
+}
+
+.booking-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #023E73;
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.booking-section-title .section-num-pill {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #00A86B;
+  color: #ffffff;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.membership-selector-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.membership-card-radio {
+  position: relative;
+  cursor: pointer;
+}
+
+.membership-card-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.membership-card-label {
+  display: block;
+  padding: 14px 12px;
+  text-align: center;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  font-weight: 600;
+  font-size: 14px;
+  color: #334155;
+  transition: all 0.2s ease;
+}
+
+.membership-card-radio input[type="radio"]:checked + .membership-card-label {
+  border-color: #00A86B;
+  background: #f0fdf4;
+  color: #008756;
+  box-shadow: 0 4px 12px rgba(0, 168, 107, 0.15);
+}
+
+.charges-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 14px;
+}
+
+.charges-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+}
+
+.charges-table th {
+  background: #023E73;
+  color: #ffffff;
+  padding: 12px 14px;
+  font-weight: 700;
+}
+
+.charges-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+.charges-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.charges-table tr:hover {
+  background: #f1f5f9;
+}
+
+.charges-table .highlight-price {
+  font-weight: 700;
+  color: #023E73;
+}
+
+.charges-note {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+  background: #f8fafc;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 3px solid #069DBF;
+}
+
+.package-inclusions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.package-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #334155;
+  border: 1px solid #f1f5f9;
+}
+
+.package-item .check-icon {
+  color: #00A86B;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.bank-info-box {
+  background: #f0fdf4;
+  border: 1.5px dashed #00A86B;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.bank-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.bank-info-item small {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.bank-info-item strong {
+  color: #023E73;
+  font-size: 15px;
+}
+
+.rules-scroll-box {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 18px;
+  background: #fafafa;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.rules-scroll-box ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.rules-scroll-box li {
+  margin-bottom: 8px;
+}
+
+.rules-scroll-box strong {
+  color: #1e293b;
+}
+
+.declaration-box {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.declaration-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 13.5px;
+  color: #1e293b;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.declaration-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: #00A86B;
+  flex-shrink: 0;
+}
+
+.btn-submit-booking {
+  width: 100%;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #00A86B 0%, #069DBF 100%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 168, 107, 0.28);
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-submit-booking:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 168, 107, 0.38);
+}
+
+@media (max-width: 768px) {
+  .membership-selector-group {
+    grid-template-columns: 1fr;
+  }
+  .package-inclusions-grid {
+    grid-template-columns: 1fr;
+  }
+  .booking-header-card {
+    padding: 24px 18px;
+  }
+  .booking-header-title {
+    font-size: 22px;
+  }
+}
