@@ -1,3 +1,4 @@
+
 # ======================================================================
 # Dental Show 2027 - Production Apache Server Configuration (.htaccess)
 # ======================================================================
@@ -5,138 +6,162 @@
 # ----------------------------------------------------------------------
 # 1. DIRECTORY LISTING & CONTENT NEGOTIATION
 # ----------------------------------------------------------------------
-# Disable directory listing and turn off MultiViews to prevent URL rewrite conflicts
+
 Options -Indexes -MultiViews
 
-# Default document priority
 DirectoryIndex index.html home.html index.php
+
 
 # ----------------------------------------------------------------------
 # 2. REWRITE ENGINE (ROUTING, SSL & CLEAN URLS)
 # ----------------------------------------------------------------------
+
 <IfModule mod_rewrite.c>
+
     RewriteEngine On
     RewriteBase /
 
     # ------------------------------------------------------------------
     # 2.1 PROTECT HIDDEN FILES (EXCEPT .well-known FOR SSL RENEWALS)
     # ------------------------------------------------------------------
-    # Block access to .git, .env, etc., while allowing Let's Encrypt / AutoSSL
+
     RewriteCond %{REQUEST_URI} !^/\.well-known [NC]
     RewriteRule (^|/)\. - [F,L]
 
+
     # ------------------------------------------------------------------
-    # 2.2 FORCE HTTPS (SSL)
+    # 2.2 FORCE HTTPS
     # ------------------------------------------------------------------
-    # Redirect HTTP to HTTPS in production (safely bypassed on localhost)
+
     RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
     RewriteCond %{HTTPS} !=on
     RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
     RewriteCond %{HTTP:X-Forwarded-SSL} !on [NC]
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
+
     # ------------------------------------------------------------------
-    # 2.3 CANONICAL HOSTNAME (Optional: www vs non-www)
+    # 2.3 CANONICAL HOSTNAME (NON-WWW)
     # ------------------------------------------------------------------
-    # To enforce non-www (https://dentalshow.in), uncomment below:
-    # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    # RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
 
     # ------------------------------------------------------------------
     # 2.4 STRIP TRAILING SLASH FROM NON-DIRECTORIES
     # ------------------------------------------------------------------
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [R=301,L]
 
+
     # ------------------------------------------------------------------
-    # 2.5 SPECIAL ROUTE: /events (RESOLVES DIRECTORY VS events.html CLASH)
+    # 2.5 SPECIAL ROUTE: EVENTS
     # ------------------------------------------------------------------
+
     RewriteRule ^events/$ /events [R=301,L]
     RewriteRule ^events$ events.html [L]
 
+
     # ------------------------------------------------------------------
-    # 2.5B CANONICAL 301 REDIRECTS: /home, /coming-soon & REGISTRATIONS
+    # 2.5B CANONICAL 301 REDIRECTS
     # ------------------------------------------------------------------
-    # Permanent 301 redirect for https://dentalshow.in/home (and /home.html) to root https://dentalshow.in/
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+home(\.html)?([/?\s]|$) [NC]
-    RewriteRule ^ https://%{HTTP_HOST}/ [R=301,L]
 
-    # Permanent 301 redirect for /coming-soon (and /coming-soon.html) to root
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+coming-soon(\.html)?([/?\s]|$) [NC]
-    RewriteRule ^ https://%{HTTP_HOST}/ [R=301,L]
-
-    # RewriteRule fallback matches for /home and /coming-soon
-    RewriteRule ^home(\.html)?/?$ https://%{HTTP_HOST}/ [R=301,L]
-    RewriteRule ^coming-soon(\.html)?/?$ https://%{HTTP_HOST}/ [R=301,L]
-
-    # Redirect legacy hyphenated registration URLs to clean non-hyphenated URLs
+    # Legacy registration URLs
     RewriteRule ^visitor-registration(\.html)?/?$ /visitorregistration [R=301,L]
     RewriteRule ^exhibitor-registration(\.html)?/?$ /exhibitorregistration [R=301,L]
 
+    # Coming soon page
+    RewriteRule ^coming-soon(\.html)?/?$ / [R=301,L]
+
+    # Home page canonical redirect
+    RewriteRule ^home/?$ https://dentalshow.in/ [R=301,L]
+    RewriteRule ^home\.html$ https://dentalshow.in/ [R=301,L]
+
+
     # ------------------------------------------------------------------
-    # 2.6 CANONICAL ROOT & EXTENSIONLESS REDIRECTS (.html -> clean)
+    # 2.6 CANONICAL ROOT & EXTENSIONLESS REDIRECTS
     # ------------------------------------------------------------------
-    # Redirect direct requests for index.html to site root /
+
+    # Redirect direct requests for index.html to homepage
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.html[\s?] [NC]
     RewriteRule ^index\.html$ / [R=301,L]
 
-    # Redirect direct requests ending in .html to extensionless clean URLs
+    # Redirect direct requests ending in .html to clean URLs
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+([^?\s]+)\.html[\s?] [NC]
     RewriteRule ^(.+)\.html$ /$1 [R=301,L]
 
+
     # ------------------------------------------------------------------
-    # 2.7 EXTENSIONLESS CLEAN URLS (.html)
+    # 2.7 EXTENSIONLESS CLEAN URLS
     # ------------------------------------------------------------------
-    # Example: /about -> /about.html, /events/dental-show-2027 -> /events/dental-show-2027.html
+
+    # Example:
+    # /about -> /about.html
+    # /events/dental-show-2027 -> /events/dental-show-2027.html
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} !\.html$ [NC]
     RewriteCond %{DOCUMENT_ROOT}/$1.html -f [OR]
     RewriteCond %{REQUEST_FILENAME}.html -f
     RewriteRule ^(.*)$ $1.html [L]
+
 </IfModule>
+
 
 # ----------------------------------------------------------------------
 # 3. BLOCK SENSITIVE FILES & EXTENSIONS
 # ----------------------------------------------------------------------
-# Block access to backup files, logs, environment configs, and scripts
+
 <FilesMatch "(^#.*#|^\.env|^\.git|\.(bak|conf|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op]|tpl)|~)$">
+
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
+
     <IfModule !mod_authz_core.c>
         Order allow,deny
         Deny from all
     </IfModule>
+
 </FilesMatch>
+
 
 # Specifically protect .htaccess and .htpasswd files
 <FilesMatch "^\.([Hh][Tt])">
+
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
+
     <IfModule !mod_authz_core.c>
         Order allow,deny
         Deny from all
     </IfModule>
+
 </FilesMatch>
+
 
 # ----------------------------------------------------------------------
 # 4. CUSTOM ERROR PAGES
 # ----------------------------------------------------------------------
+
 ErrorDocument 404 /404.html
 ErrorDocument 403 /404.html
 ErrorDocument 500 /500.html
 
+
 # ----------------------------------------------------------------------
 # 5. DEFAULT CHARSET & MIME TYPES
 # ----------------------------------------------------------------------
+
 AddDefaultCharset UTF-8
 
 <IfModule mod_mime.c>
-    # Charsets
+
     AddCharset UTF-8 .html .css .js .xml .json .rss .atom
 
-    # Modern Web Assets & Fonts
     AddType image/svg+xml .svg .svgz
     AddType image/webp .webp
     AddType font/woff .woff
@@ -146,27 +171,35 @@ AddDefaultCharset UTF-8
     AddType application/pdf .pdf
     AddType application/json .json
     AddType image/x-icon .ico
+
 </IfModule>
 
+
 # ----------------------------------------------------------------------
-# 6. GZIP / DEFLATE COMPRESSION (PERFORMANCE)
+# 6. GZIP / DEFLATE COMPRESSION
 # ----------------------------------------------------------------------
+
 <IfModule mod_deflate.c>
+
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
     AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
     AddOutputFilterByType DEFLATE application/json application/xml application/xhtml+xml
     AddOutputFilterByType DEFLATE application/rss+xml application/atom+xml image/svg+xml
     AddOutputFilterByType DEFLATE font/ttf font/otf font/woff font/woff2
+
 </IfModule>
 
+
 # ----------------------------------------------------------------------
-# 7. BROWSER CACHING (LEVERAGE BROWSER CACHE)
+# 7. BROWSER CACHING
 # ----------------------------------------------------------------------
+
 <IfModule mod_expires.c>
+
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
 
-    # HTML Documents (no-cache so updates deploy instantly)
+    # HTML Documents
     ExpiresByType text/html "access plus 0 seconds"
 
     # CSS & JavaScript
@@ -202,12 +235,16 @@ AddDefaultCharset UTF-8
     ExpiresByType application/json "access plus 0 seconds"
     ExpiresByType application/xml "access plus 0 seconds"
     ExpiresByType text/xml "access plus 0 seconds"
+
 </IfModule>
+
 
 # ----------------------------------------------------------------------
 # 8. SECURITY HEADERS
 # ----------------------------------------------------------------------
+
 <IfModule mod_headers.c>
+
     # Prevent HTML caching during site launch
     <FilesMatch "\.(html|htm)$">
         Header set Cache-Control "no-cache, no-store, must-revalidate"
@@ -221,29 +258,38 @@ AddDefaultCharset UTF-8
     # Clickjacking protection
     Header set X-Frame-Options "SAMEORIGIN"
 
-    # Cross-site scripting (XSS) filter
+    # XSS protection
     Header set X-XSS-Protection "1; mode=block"
 
     # Referrer policy
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 
-    # Restrict unnecessary browser features
+    # Browser permissions
     Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
 
-    # HTTP Strict Transport Security (HSTS) - Set for direct SSL or reverse proxy SSL
+    # HSTS
     <IfModule mod_setenvif.c>
         SetEnvIf HTTPS on IS_HTTPS
         SetEnvIf X-Forwarded-Proto "^https$" IS_HTTPS
     </IfModule>
+
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=IS_HTTPS
+
 </IfModule>
+
 
 # ----------------------------------------------------------------------
 # 9. CROSS-ORIGIN (CORS) FOR FONTS & STATIC ASSETS
 # ----------------------------------------------------------------------
+
 <IfModule mod_headers.c>
+
     <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
         Header set Access-Control-Allow-Origin "*"
     </FilesMatch>
+
 </IfModule>
 
+# ======================================================================
+# END OF CONFIGURATION
+# ======================================================================
