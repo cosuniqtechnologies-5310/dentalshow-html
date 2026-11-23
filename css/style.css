@@ -22269,3 +22269,39 @@ body:has(.cs-fit-wrapper) {
 #cta-visitor-register-btn::before {
   background: #007a52 !important;
 }
+
+
+/* ==========================================================================
+   FIX: Add overflow:hidden to all CTA buttons so ::before slide stays inside
+   ========================================================================== */
+.btn,
+.btn-hero-visitor,
+#hero-visitor-btn,
+.btn-hero-exhibitor,
+#hero-exhibitor-btn,
+.btn-hero-stall,
+#hero-stall-btn,
+.btn-countdown-primary,
+#countdown-register-btn,
+.btn-countdown-secondary,
+#countdown-exhibitor-btn,
+.btn-countdown-stall,
+#countdown-stall-btn,
+.btn-header-visitor,
+.btn-header-exhibitor,
+.btn-header-stall,
+.cta-track-btn,
+.cta-track-btn--visitor,
+.cta-track-btn--exhibitor,
+#cta-visitor-register-btn,
+#cta-exhibitor-register-btn,
+.btn-gallery-explore-all,
+.btn-events-view-all,
+.btn-view-all-top,
+#btn-header-gallery,
+#btn-events-view-all-top,
+.btn-submit-booking {
+  overflow: hidden !important;
+  position: relative !important;
+  isolation: isolate !important;
+}
