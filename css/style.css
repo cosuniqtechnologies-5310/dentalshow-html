@@ -22386,7 +22386,25 @@ html, body {
 #cta-visitor-register-btn > *,
 #cta-visitor-register-btn span,
 #cta-exhibitor-register-btn > *,
-#cta-exhibitor-register-btn span {
+#cta-exhibitor-register-btn span,
+.btn-gallery-explore-all > *,
+.btn-gallery-explore-all span,
+.btn-gallery-explore-all svg,
+.btn-events-view-all > *,
+.btn-events-view-all span,
+.btn-events-view-all svg,
+.btn-view-all-top > *,
+.btn-view-all-top span,
+.btn-view-all-top svg,
+#btn-header-gallery > *,
+#btn-header-gallery span,
+#btn-header-gallery svg,
+#btn-events-view-all-top > *,
+#btn-events-view-all-top span,
+#btn-events-view-all-top svg,
+.btn-submit-booking > *,
+.btn-submit-booking span,
+.btn-submit-booking svg {
   position: relative !important;
   z-index: 2 !important;
   pointer-events: none;
@@ -22649,3 +22667,58 @@ html, body {
   border-color: #38bdf8 !important;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.35) !important;
 }
+
+/* ==========================================================================
+   STALL BOOKING & SUBMIT APPLICATION HOVER FIX (White text & visible icons)
+   ========================================================================== */
+.btn-submit-booking {
+  position: relative !important;
+  overflow: hidden !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.btn-submit-booking > *,
+.btn-submit-booking span,
+.btn-submit-booking svg {
+  position: relative !important;
+  z-index: 3 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+  pointer-events: none;
+  transition: color 0.22s ease, stroke 0.22s ease !important;
+}
+
+.btn-submit-booking:hover,
+.btn-submit-booking:focus,
+.btn-submit-booking:active {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.btn-submit-booking:hover > *,
+.btn-submit-booking:hover span,
+.btn-submit-booking:hover svg {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.btn-header-stall,
+.btn-header-stall:hover,
+.btn-header-stall span,
+.btn-header-stall *,
+.btn-hero-stall,
+.btn-hero-stall:hover,
+.btn-hero-stall span,
+.btn-hero-stall *,
+.btn-countdown-stall,
+.btn-countdown-stall:hover,
+.btn-countdown-stall span,
+.btn-countdown-stall * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
