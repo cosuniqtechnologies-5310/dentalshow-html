@@ -355,7 +355,7 @@ $applicantHtml = "
     <strong>IFSC:</strong> BARB0KKNAGA
   </p>
   
-  <p style='margin-top: 24px;'>Thank you.<br><br>Regards,<br><strong>Team Dental Show 2027</strong><br>Tamil Nadu Dental Traders & Manufacturers Association (TNDTMA)<br>Mobile: +91 87780 02030 | Email: dentalshoworgsecy@gmail.com</p>
+  <p style='margin-top: 24px;'>Thank you.<br><br>Regards,<br><strong>Team Dental Show 2027</strong><br>Tamil Nadu Dental Traders & Manufacturers Association (TNDTMA)<br>Mobile: +91 88072 07540 | Email: dentalshoworgsecy@gmail.com</p>
 </div>";
 
 $applicantText = "Dear {$recipientName},\n\nThank you for submitting your Space Booking application for Dental Show 2027 (Ref: {$bookingRef}).\nCompany: {$companyName}\nMembership: {$membershipStatus}\nStall Type: {$stallType}\nStall(s): {$stallsRequired}\n\nOur team will connect with you shortly.\n\nRegards,\nTeam Dental Show";
