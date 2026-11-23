@@ -158,14 +158,36 @@ if (!empty($errors)) {
     if ($isAjax) {
         header('Content-Type: application/json; charset=UTF-8');
         http_response_code(400);
-        echo json_encode(['status' => 'error', 'message' => implode(' ', $errors)]);
+        echo json_encode(['status' => 'error', 'message' => implode(' ', $errors), 'errors' => $errors]);
     } else {
-        echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Submission Error</title><link rel='stylesheet' href='css/style.css'></head><body>";
-        echo "<div style='max-width:600px;margin:80px auto;padding:30px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.1);font-family:sans-serif;'>";
-        echo "<h2 style='color:#dc2626;'>Please complete required fields:</h2><ul>";
-        foreach ($errors as $err) echo "<li style='color:#4b5563;margin-bottom:6px;'>{$err}</li>";
-        echo "</ul><a href='javascript:history.back()' class='btn btn--primary' style='display:inline-block;margin-top:16px;padding:10px 20px;background:#00A86B;color:#fff;text-decoration:none;border-radius:6px;'>← Go Back & Edit</a>";
-        echo "</div></body></html>";
+        echo "<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Validation Error – Dental Show 2027</title>
+  <link rel='stylesheet' href='css/style.css'>
+</head>
+<body style='background: #f8fafc; font-family: Inter, sans-serif; margin: 0; padding: 40px 16px;'>
+  <div style='max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; padding: 36px 30px; box-shadow: 0 10px 40px rgba(2, 62, 115, 0.08); text-align: center;'>
+    <div style='width: 68px; height: 68px; background: #fef2f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;'>
+      <svg width='36' height='36' viewBox='0 0 24 24' fill='none' stroke='#dc2626' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'></circle><line x1='12' y1='8' x2='12' y2='12'></line><line x1='12' y1='16' x2='12.01' y2='16'></line></svg>
+    </div>
+    <h1 style='color: #023E73; font-size: 24px; margin: 0 0 10px; font-weight: 800;'>Please Complete Mandatory Fields</h1>
+    <p style='color: #64748b; font-size: 14.5px; margin: 0 0 20px;'>The following mandatory information is missing or incomplete:</p>
+    
+    <div style='background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 16px 20px; text-align: left; margin-bottom: 24px;'>
+      <ul style='margin: 0; padding-left: 20px; color: #b91c1c; font-size: 14px; line-height: 1.7;'>";
+        foreach ($errors as $err) {
+            echo "<li><strong>{$err}</strong></li>";
+        }
+    echo "</ul>
+    </div>
+    
+    <a href='javascript:history.back()' style='display: inline-block; padding: 12px 28px; background: #00A86B; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14.5px; box-shadow: 0 4px 14px rgba(0, 168, 107, 0.3);'>← Go Back &amp; Complete Form</a>
+  </div>
+</body>
+</html>";
     }
     exit;
 }

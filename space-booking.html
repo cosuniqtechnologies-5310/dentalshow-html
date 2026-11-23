@@ -129,10 +129,12 @@
               <div class="field">
                 <label for="company_name">Company / Organisation *</label>
                 <input id="company_name" name="company_name" placeholder="Enter Registered Company Name" required />
+                <span class="field-error-msg" id="error-company_name" style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter your Company / Organisation name.</span>
               </div>
               <div class="field">
                 <label for="fascia_name">Fascia / Display Name * <small style="font-weight:400;color:#64748b;">(Name to appear on Stall Board)</small></label>
                 <input id="fascia_name" name="fascia_name" placeholder="Exact Stall Fascia Header Name" required />
+                <span class="field-error-msg" id="error-fascia_name" style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter the Fascia / Display name to appear on the stall board.</span>
               </div>
             </div>
 
@@ -171,6 +173,7 @@
               <div class="field">
                 <label for="email">E-mail Address * <small style="font-weight:400;color:#64748b;">(Confirmation will be sent here)</small></label>
                 <input id="email" type="email" name="email" placeholder="official@company.com" required />
+                <span class="field-error-msg" id="error-email" style="display:none;color:#dc2626;font-size:12.5px;font-weight:600;margin-top:4px;">Please enter a valid official Email address.</span>
               </div>
               <div class="field">
                 <label for="website">Website</label>
@@ -401,8 +404,17 @@
             </div>
           </div>
 
+          <!-- VALIDATION ALERT BOX -->
+          <div id="booking-validation-alert" style="display:none;margin-top:20px;margin-bottom:20px;padding:16px 20px;border-radius:10px;background:#fef2f2;border:1.5px solid #f87171;color:#b91c1c;font-size:14px;line-height:1.5;">
+            <div style="font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>Please complete the mandatory fields to proceed:</span>
+            </div>
+            <ul id="booking-validation-list" style="margin:4px 0 0;padding-left:24px;font-weight:600;"></ul>
+          </div>
+
           <!-- SUBMIT BUTTON -->
-          <div style="margin-top: 24px; margin-bottom: 40px;">
+          <div style="margin-top: 14px; margin-bottom: 40px;">
             <button type="submit" class="btn-submit-booking">
               <span>Submit Space Booking Application</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -523,6 +535,110 @@
 
   <!-- Standalone JavaScript -->
   <script src="js/main.js"></script>
+
+  <!-- Stall Booking Validation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.querySelector('.space-booking-form');
+      if (!form) return;
+
+      var companyInput = document.getElementById('company_name');
+      var fasciaInput = document.getElementById('fascia_name');
+      var emailInput = document.getElementById('email');
+      var alertBox = document.getElementById('booking-validation-alert');
+      var errorList = document.getElementById('booking-validation-list');
+      var submitBtn = form.querySelector('.btn-submit-booking');
+
+      // Clear field error state on user typing
+      [companyInput, fasciaInput, emailInput].forEach(function (input) {
+        if (!input) return;
+        input.addEventListener('input', function () {
+          input.style.borderColor = '#cbd5e1';
+          input.style.boxShadow = 'none';
+          var errSpan = document.getElementById('error-' + input.id);
+          if (errSpan) errSpan.style.display = 'none';
+          if (alertBox) alertBox.style.display = 'none';
+        });
+      });
+
+      form.addEventListener('submit', function (e) {
+        var errors = [];
+        var firstErrorField = null;
+
+        // Reset previous errors
+        [companyInput, fasciaInput, emailInput].forEach(function (input) {
+          if (input) {
+            input.style.borderColor = '#cbd5e1';
+            input.style.boxShadow = 'none';
+          }
+        });
+        document.querySelectorAll('.field-error-msg').forEach(function (el) {
+          el.style.display = 'none';
+        });
+
+        // 1. Company Name validation
+        if (!companyInput || !companyInput.value.trim()) {
+          errors.push('Company / Organisation name is required.');
+          if (companyInput) {
+            companyInput.style.borderColor = '#dc2626';
+            companyInput.style.boxShadow = '0 0 0 3px rgba(220, 38, 38, 0.15)';
+            var errEl = document.getElementById('error-company_name');
+            if (errEl) errEl.style.display = 'block';
+            if (!firstErrorField) firstErrorField = companyInput;
+          }
+        }
+
+        // 2. Fascia / Display Name validation
+        if (!fasciaInput || !fasciaInput.value.trim()) {
+          errors.push('Fascia / Display Name is required.');
+          if (fasciaInput) {
+            fasciaInput.style.borderColor = '#dc2626';
+            fasciaInput.style.boxShadow = '0 0 0 3px rgba(220, 38, 38, 0.15)';
+            var errEl = document.getElementById('error-fascia_name');
+            if (errEl) errEl.style.display = 'block';
+            if (!firstErrorField) firstErrorField = fasciaInput;
+          }
+        }
+
+        // 3. Email validation
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailInput || !emailInput.value.trim() || !emailPattern.test(emailInput.value.trim())) {
+          errors.push('A valid official E-mail Address is required (confirmation will be sent here).');
+          if (emailInput) {
+            emailInput.style.borderColor = '#dc2626';
+            emailInput.style.boxShadow = '0 0 0 3px rgba(220, 38, 38, 0.15)';
+            var errEl = document.getElementById('error-email');
+            if (errEl) errEl.style.display = 'block';
+            if (!firstErrorField) firstErrorField = emailInput;
+          }
+        }
+
+        if (errors.length > 0) {
+          e.preventDefault();
+          if (alertBox && errorList) {
+            errorList.innerHTML = '';
+            errors.forEach(function (err) {
+              var li = document.createElement('li');
+              li.textContent = err;
+              errorList.appendChild(li);
+            });
+            alertBox.style.display = 'block';
+          }
+          if (firstErrorField) {
+            firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            firstErrorField.focus();
+          }
+          return false;
+        }
+
+        // If valid, show submitting feedback
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span>Submitting Application... Please wait</span>';
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
