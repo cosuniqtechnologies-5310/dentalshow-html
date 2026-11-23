@@ -102,8 +102,38 @@
           </p>
           <span class="booking-header-theme">See • Touch • Feel • Experience</span>
         </div>
-        <img src="images/stall-booking-banner.png" class="stall-top-banner__img"
-          alt="Stall Booking Floor Plan - Dental Show 2027" />
+        <!-- AVAILABLE STALLS FLOOR PLAN CARD -->
+        <div class="available-stalls-card">
+          <div class="available-stalls-header">
+            <div class="available-stalls-title-group">
+              <h2 class="available-stalls-title">Available Stalls</h2>
+              <p class="available-stalls-sub">Hall 2 &amp; 3 · Chennai Trade Centre · 300+ Premium Stalls</p>
+            </div>
+            <button type="button" class="btn-zoom-trigger" id="btn-zoom-trigger" aria-label="Open floor plan in fullscreen">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>Click to Zoom</span>
+            </button>
+          </div>
+
+          <div class="stall-plan-frame" id="stall-plan-frame" role="button" tabindex="0" title="Click to view full screen">
+            <img src="images/stall-booking-banner.png" class="stall-plan-img" id="stall-plan-thumbnail"
+              alt="Available Stalls Floor Plan - Dental Show 2027" />
+            <div class="stall-plan-overlay-hint">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <polyline points="9 21 3 21 3 15"></polyline>
+                <line x1="21" y1="3" x2="14" y2="10"></line>
+                <line x1="3" y1="21" x2="10" y2="14"></line>
+              </svg>
+              <span>Click for Fullscreen View</span>
+            </div>
+          </div>
+        </div>
         <form class="space-booking-form" action="save-exhibitor-booking.php" method="POST">
 
           <!-- SECTION 1: EXHIBITOR DETAILS -->
@@ -722,8 +752,69 @@
           submitBtn.innerHTML = '<span>Submitting Application... Please wait</span>';
         }
       });
+
+      // Fullscreen Stall Floor Plan Modal Handler
+      (function () {
+        var modal = document.getElementById('stall-modal');
+        var closeBtn = document.getElementById('stall-modal-close');
+        var frame = document.getElementById('stall-plan-frame');
+        var zoomBtn = document.getElementById('btn-zoom-trigger');
+
+        function openModal() {
+          if (modal) {
+            modal.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+          }
+        }
+
+        function closeModal() {
+          if (modal) {
+            modal.classList.remove('is-active');
+            document.body.style.overflow = '';
+          }
+        }
+
+        if (frame) {
+          frame.addEventListener('click', openModal);
+          frame.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openModal();
+            }
+          });
+        }
+        if (zoomBtn) zoomBtn.addEventListener('click', openModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+        if (modal) {
+          modal.addEventListener('click', function (e) {
+            if (e.target === modal || e.target.id === 'stall-modal-content') {
+              closeModal();
+            }
+          });
+        }
+
+        window.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && modal && modal.classList.contains('is-active')) {
+            closeModal();
+          }
+        });
+      })();
     });
   </script>
+
+  <!-- FULLSCREEN STALL FLOOR PLAN MODAL -->
+  <div id="stall-modal" class="stall-modal" role="dialog" aria-modal="true" aria-label="Available Stalls Fullscreen View">
+    <button type="button" class="stall-modal__close" id="stall-modal-close" aria-label="Close fullscreen view">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="stall-modal__content" id="stall-modal-content">
+      <img src="images/stall-booking-banner.png" class="stall-modal__img" alt="Available Stalls Floor Plan Fullscreen" />
+    </div>
+  </div>
 </body>
 
 </html>

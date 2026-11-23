@@ -21690,10 +21690,249 @@ body:has(.cs-fit-wrapper) {
   width: 100%;
   height: auto;
   object-fit: cover;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
   margin-bottom: 40px;
   border: 1px solid #0284c7;
   border-radius: 10px;
+}
+
+/* ==========================================================================
+   AVAILABLE STALLS SECTION & FULLSCREEN MODAL
+   ========================================================================== */
+.available-stalls-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px 28px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 20px rgba(2, 62, 115, 0.06);
+}
+
+.available-stalls-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.available-stalls-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.available-stalls-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #023E73;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.available-stalls-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 22px;
+  background: #00A86B;
+  border-radius: 4px;
+}
+
+.available-stalls-sub {
+  margin: 0;
+  font-size: 13.5px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.btn-zoom-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #f0fdf4;
+  color: #00875A !important;
+  border: 1.5px solid #86efac;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-zoom-trigger:hover {
+  background: #00A86B;
+  color: #ffffff !important;
+  border-color: #00A86B;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 168, 107, 0.25);
+}
+
+.btn-zoom-trigger svg {
+  stroke: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.btn-zoom-trigger:hover svg {
+  transform: scale(1.15);
+}
+
+.stall-plan-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid #cbd5e1;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.stall-plan-frame:hover {
+  border-color: #00A86B;
+  box-shadow: 0 8px 30px rgba(0, 168, 107, 0.2);
+  transform: translateY(-2px);
+}
+
+.stall-plan-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.stall-plan-frame:hover .stall-plan-img {
+  transform: scale(1.015);
+}
+
+.stall-plan-overlay-hint {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(2, 62, 115, 0.9);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.stall-plan-frame:hover .stall-plan-overlay-hint {
+  background: #00A86B;
+  transform: scale(1.04);
+}
+
+/* --- FULLSCREEN STALL MODAL --- */
+.stall-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(1, 22, 39, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 999999;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  box-sizing: border-box;
+}
+
+.stall-modal.is-active {
+  display: flex !important;
+  opacity: 1;
+}
+
+.stall-modal__close {
+  position: fixed;
+  top: 22px;
+  right: 26px;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000001;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.stall-modal__close:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
+  transform: scale(1.12);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45);
+}
+
+.stall-modal__content {
+  width: 100%;
+  height: 100%;
+  max-width: 98vw;
+  max-height: 94vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px 20px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.stall-modal__img {
+  max-width: 96vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+  background: #ffffff;
+  cursor: zoom-out;
+}
+
+@media (max-width: 768px) {
+  .available-stalls-card {
+    padding: 18px 16px 20px;
+  }
+  .available-stalls-title {
+    font-size: 19px;
+  }
+  .stall-modal__close {
+    top: 14px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+  }
+  .stall-plan-overlay-hint {
+    padding: 6px 12px;
+    font-size: 12px;
+    bottom: 10px;
+    right: 10px;
+  }
 }
 
 /* Text block below the banner image */
