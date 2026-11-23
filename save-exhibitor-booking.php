@@ -8,8 +8,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
 
-$isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') 
-          || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
+$isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+    || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
 
 // Only allow POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -30,9 +30,9 @@ $dbConfig = [
     'database' => 'u672271818_dentalshow',
     'username' => 'u672271818_dentalshowuser',
     'password' => '49~rg*:94W&j',
-    'port'     => 3306,
+    'port' => 3306,
     // Tries localhost first (standard on Hostinger shared/cloud server), then remote host
-    'hosts'    => ['localhost', 'srv2204.hstgr.io', '127.0.0.1']
+    'hosts' => ['localhost', 'srv2204.hstgr.io', '127.0.0.1']
 ];
 
 $pdo = null;
@@ -42,9 +42,9 @@ foreach ($dbConfig['hosts'] as $host) {
     try {
         $dsn = "mysql:host={$host};port={$dbConfig['port']};dbname={$dbConfig['database']};charset=utf8mb4";
         $pdo = new PDO($dsn, $dbConfig['username'], $dbConfig['password'], [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_TIMEOUT            => 5
+            PDO::ATTR_TIMEOUT => 5
         ]);
         break; // Successfully connected
     } catch (PDOException $e) {
@@ -111,36 +111,37 @@ try {
 // -------------------------------------------------------------
 // Sanitize and Validate Inputs
 // -------------------------------------------------------------
-function cleanInput($data) {
+function cleanInput($data)
+{
     return htmlspecialchars(trim($data ?? ''), ENT_QUOTES, 'UTF-8');
 }
 
-$membershipStatus     = cleanInput($_POST['membership_status'] ?? 'TNDTMA Member');
-$companyName          = cleanInput($_POST['company_name'] ?? '');
-$address              = cleanInput($_POST['address'] ?? '');
-$cityState            = cleanInput($_POST['city_state'] ?? '');
-$pincode              = cleanInput($_POST['pincode'] ?? '');
-$country              = cleanInput($_POST['country'] ?? 'India');
-$gstNo                = cleanInput($_POST['gst_no'] ?? '');
-$panNo                = cleanInput($_POST['pan_no'] ?? '');
-$phone                = cleanInput($_POST['phone'] ?? '');
-$email                = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
-$website              = cleanInput($_POST['website'] ?? '');
-$contactPerson        = cleanInput($_POST['contact_person'] ?? '');
-$mobile               = cleanInput($_POST['mobile'] ?? '');
-$designation          = cleanInput($_POST['designation'] ?? '');
-$altContactNo         = cleanInput($_POST['alt_contact_no'] ?? '');
-$fasciaName           = cleanInput($_POST['fascia_name'] ?? '');
+$membershipStatus = cleanInput($_POST['membership_status'] ?? 'TNDTMA Member');
+$companyName = cleanInput($_POST['company_name'] ?? '');
+$address = cleanInput($_POST['address'] ?? '');
+$cityState = cleanInput($_POST['city_state'] ?? '');
+$pincode = cleanInput($_POST['pincode'] ?? '');
+$country = cleanInput($_POST['country'] ?? 'India');
+$gstNo = cleanInput($_POST['gst_no'] ?? '');
+$panNo = cleanInput($_POST['pan_no'] ?? '');
+$phone = cleanInput($_POST['phone'] ?? '');
+$email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+$website = cleanInput($_POST['website'] ?? '');
+$contactPerson = cleanInput($_POST['contact_person'] ?? '');
+$mobile = cleanInput($_POST['mobile'] ?? '');
+$designation = cleanInput($_POST['designation'] ?? '');
+$altContactNo = cleanInput($_POST['alt_contact_no'] ?? '');
+$fasciaName = cleanInput($_POST['fascia_name'] ?? '');
 
-$stallType            = cleanInput($_POST['stall_type'] ?? 'Regular Stall');
-$stallsRequired       = intval($_POST['stalls_required'] ?? 0);
-$islandsRequired      = intval($_POST['islands_required'] ?? 0);
-$preferredZone        = cleanInput($_POST['preferred_zone'] ?? '');
-$spaceSqmtr           = cleanInput($_POST['space_sqmtr'] ?? '');
+$stallType = cleanInput($_POST['stall_type'] ?? 'Regular Stall');
+$stallsRequired = intval($_POST['stalls_required'] ?? 0);
+$islandsRequired = intval($_POST['islands_required'] ?? 0);
+$preferredZone = cleanInput($_POST['preferred_zone'] ?? '');
+$spaceSqmtr = cleanInput($_POST['space_sqmtr'] ?? '');
 
-$signatoryName        = cleanInput($_POST['signatory_name'] ?? '');
+$signatoryName = cleanInput($_POST['signatory_name'] ?? '');
 $signatoryDesignation = cleanInput($_POST['signatory_designation'] ?? '');
-$agreeDeclaration     = isset($_POST['agree_declaration']) ? 1 : 0;
+$agreeDeclaration = isset($_POST['agree_declaration']) ? 1 : 0;
 
 // Validation rules: ONLY Company Name, Fascia Display Name, and Email are mandatory
 $errors = [];
@@ -181,7 +182,7 @@ if (!empty($errors)) {
         foreach ($errors as $err) {
             echo "<li><strong>{$err}</strong></li>";
         }
-    echo "</ul>
+        echo "</ul>
     </div>
     
     <a href='javascript:history.back()' style='display: inline-block; padding: 12px 28px; background: #00A86B; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14.5px; box-shadow: 0 4px 14px rgba(0, 168, 107, 0.3);'>← Go Back &amp; Complete Form</a>
@@ -214,33 +215,33 @@ try {
     ");
 
     $stmt->execute([
-        ':booking_ref'            => $bookingRef,
-        ':membership_status'      => $membershipStatus,
-        ':company_name'           => $companyName,
-        ':address'                => $address,
-        ':city_state'             => $cityState,
-        ':pincode'                => $pincode,
-        ':country'                => $country,
-        ':gst_no'                 => $gstNo,
-        ':pan_no'                 => $panNo,
-        ':phone'                  => $phone,
-        ':email'                  => $email,
-        ':website'                => $website,
-        ':contact_person'         => $contactPerson,
-        ':mobile'                 => $mobile,
-        ':designation'            => $designation,
-        ':alt_contact_no'         => $altContactNo,
-        ':fascia_name'            => $fasciaName,
-        ':stall_type'             => $stallType,
-        ':stalls_required'        => $stallsRequired,
-        ':islands_required'       => $islandsRequired,
-        ':preferred_zone'         => $preferredZone,
-        ':space_sqmtr'            => $spaceSqmtr,
-        ':signatory_name'         => $signatoryName,
-        ':signatory_designation'  => $signatoryDesignation,
-        ':agreed_terms'           => $agreeDeclaration,
-        ':ip_address'             => $_SERVER['REMOTE_ADDR'] ?? '',
-        ':user_agent'             => $_SERVER['HTTP_USER_AGENT'] ?? ''
+        ':booking_ref' => $bookingRef,
+        ':membership_status' => $membershipStatus,
+        ':company_name' => $companyName,
+        ':address' => $address,
+        ':city_state' => $cityState,
+        ':pincode' => $pincode,
+        ':country' => $country,
+        ':gst_no' => $gstNo,
+        ':pan_no' => $panNo,
+        ':phone' => $phone,
+        ':email' => $email,
+        ':website' => $website,
+        ':contact_person' => $contactPerson,
+        ':mobile' => $mobile,
+        ':designation' => $designation,
+        ':alt_contact_no' => $altContactNo,
+        ':fascia_name' => $fasciaName,
+        ':stall_type' => $stallType,
+        ':stalls_required' => $stallsRequired,
+        ':islands_required' => $islandsRequired,
+        ':preferred_zone' => $preferredZone,
+        ':space_sqmtr' => $spaceSqmtr,
+        ':signatory_name' => $signatoryName,
+        ':signatory_designation' => $signatoryDesignation,
+        ':agreed_terms' => $agreeDeclaration,
+        ':ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
+        ':user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? ''
     ]);
 
 } catch (PDOException $e) {
@@ -259,10 +260,12 @@ try {
 // Dispatch Email via Zoho CPaaS / ZeptoMail
 // -------------------------------------------------------------
 $zohoApiKey = 'PHtE6r1YF+DjjzF98EcB5/+6Q5GjZI4rqOkxKlZF4YdCWaIASU1T/doslj+w+U1+BKJKQaPJmt47s+zNtrjRIma4ZGgaWmqyqK3sx/VYSPOZsbq6x00VtFoSc0fdUIDvdd5v0CfWvtbYNA==';
-$fromEmail  = 'orgsecy@dentalshow.in';
-$adminEmail = 'dentalshoworgsecy@gmail.com';
+$fromEmail = 'orgsecy@dentalshow.in';
+$adminEmail = 'mailinaiworks@gmail.com';
+$secondaryAdminEmail = 'dentalshoworgsecy@gmail.com';
 
-function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody) {
+function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody)
+{
     $endpoints = [
         'https://api.zeptomail.in/v1.1/email',
         'https://cpaas.zoho.in/v1.1/email'
@@ -271,25 +274,25 @@ function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyT
     $payload = [
         'from' => [
             'address' => $fromEmail,
-            'name'    => $fromName
+            'name' => $fromName
         ],
         'to' => [
             [
                 'email_address' => [
                     'address' => $toEmail,
-                    'name'    => $toName
+                    'name' => $toName
                 ]
             ]
         ],
         'reply_to' => [
             [
                 'address' => $replyTo,
-                'name'    => 'Team Dental Show'
+                'name' => 'Team Dental Show'
             ]
         ],
-        'subject'   => $subject,
-        'htmlbody'  => $htmlBody,
-        'textbody'  => $textBody
+        'subject' => $subject,
+        'htmlbody' => $htmlBody,
+        'textbody' => $textBody
     ];
 
     $jsonData = json_encode($payload);
@@ -318,7 +321,7 @@ function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyT
 
 // 1. Email to Applicant
 $contactDisplay = !empty($contactPerson) ? "{$contactPerson} ({$companyName})" : $companyName;
-$recipientName  = !empty($contactPerson) ? $contactPerson : $companyName;
+$recipientName = !empty($contactPerson) ? $contactPerson : $companyName;
 
 $applicantHtml = "
 <div style='font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; color: #1e293b; background: #ffffff;'>
@@ -383,15 +386,19 @@ $adminText = "New Exhibitor Booking Application\nRef: {$bookingRef}\nCompany: {$
 
 sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show Portal', $adminEmail, 'Dental Show Admin', $email, "New Exhibitor Booking: {$companyName} ({$bookingRef})", $adminHtml, $adminText);
 
+if (!empty($secondaryAdminEmail) && $secondaryAdminEmail !== $adminEmail) {
+    sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show Portal', $secondaryAdminEmail, 'Dental Show Admin', $email, "New Exhibitor Booking: {$companyName} ({$bookingRef})", $adminHtml, $adminText);
+}
+
 // -------------------------------------------------------------
 // Response Output
 // -------------------------------------------------------------
 if ($isAjax) {
     header('Content-Type: application/json; charset=UTF-8');
     echo json_encode([
-        'status'      => 'success',
+        'status' => 'success',
         'booking_ref' => $bookingRef,
-        'message'     => "Thank you! Your space booking application has been received successfully. Your Reference Number is {$bookingRef}. A confirmation email has been sent to {$email}."
+        'message' => "Thank you! Your space booking application has been received successfully. Your Reference Number is {$bookingRef}. A confirmation email has been sent to {$email}."
     ]);
 } else {
     // Elegant standalone HTML confirmation page

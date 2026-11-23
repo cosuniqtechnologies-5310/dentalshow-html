@@ -7,11 +7,12 @@
 header('Content-Type: application/json; charset=UTF-8');
 
 // Configuration
-$zohoApiKey     = 'PHtE6r1YF+DjjzF98EcB5/+6Q5GjZI4rqOkxKlZF4YdCWaIASU1T/doslj+w+U1+BKJKQaPJmt47s+zNtrjRIma4ZGgaWmqyqK3sx/VYSPOZsbq6x00VtFoSc0fdUIDvdd5v0CfWvtbYNA==';
+$zohoApiKey = 'PHtE6r1YF+DjjzF98EcB5/+6Q5GjZI4rqOkxKlZF4YdCWaIASU1T/doslj+w+U1+BKJKQaPJmt47s+zNtrjRIma4ZGgaWmqyqK3sx/VYSPOZsbq6x00VtFoSc0fdUIDvdd5v0CfWvtbYNA==';
 $recaptchaSecret = '6LdkQi0uAAAAAILAnqmbz4tCkgwANt7bz4uA-2_b';
-$adminEmail      = 'dentalshoworgsecy@gmail.com';
-$fromEmail       = 'orgsecy@dentalshow.in';
-$replyToEmail    = 'dentalshoworgsecy@gmail.com';
+$adminEmail = 'mailinaiworks@gmail.com';
+$secondaryAdminEmail = 'dentalshoworgsecy@gmail.com';
+$fromEmail = 'orgsecy@dentalshow.in';
+$replyToEmail = 'dentalshoworgsecy@gmail.com';
 
 // Only allow POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -21,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Sanitize inputs
-$name              = isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : '';
-$email             = isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
-$subject           = isset($_POST['subject']) && trim($_POST['subject']) !== '' ? trim(strip_tags($_POST['subject'])) : 'Website Enquiry';
-$message           = isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : '';
+$name = isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : '';
+$email = isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
+$subject = isset($_POST['subject']) && trim($_POST['subject']) !== '' ? trim(strip_tags($_POST['subject'])) : 'Website Enquiry';
+$message = isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : '';
 $recaptchaResponse = isset($_POST['g-recaptcha-response']) ? trim($_POST['g-recaptcha-response']) : '';
 
 // Validation
@@ -50,7 +51,7 @@ if (!empty($recaptchaSecret)) {
 
     $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
     $postFields = http_build_query([
-        'secret'   => $recaptchaSecret,
+        'secret' => $recaptchaSecret,
         'response' => $recaptchaResponse,
         'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
     ]);
@@ -88,7 +89,8 @@ if (!empty($recaptchaSecret)) {
 /**
  * Send email via Zoho CPaaS / ZeptoMail API
  */
-function sendZohoZeptoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody) {
+function sendZohoZeptoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody)
+{
     $endpoints = [
         'https://api.zeptomail.in/v1.1/email',
         'https://cpaas.zoho.in/v1.1/email'
@@ -97,17 +99,17 @@ function sendZohoZeptoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $r
     $payload = [
         'from' => [
             'address' => $fromEmail,
-            'name'    => $fromName
+            'name' => $fromName
         ],
         'to' => [
             [
                 'email_address' => [
                     'address' => $toEmail,
-                    'name'    => $toName
+                    'name' => $toName
                 ]
             ]
         ],
-        'subject'  => $subject,
+        'subject' => $subject,
         'htmlbody' => $htmlBody,
         'textbody' => $textBody
     ];
@@ -116,7 +118,7 @@ function sendZohoZeptoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $r
         $payload['reply_to'] = [
             [
                 'address' => $replyTo,
-                'name'    => $fromName
+                'name' => $fromName
             ]
         ];
     }
@@ -184,6 +186,20 @@ $adminSendResult = sendZohoZeptoMail(
     $adminTextBody
 );
 
+if (!empty($secondaryAdminEmail) && $secondaryAdminEmail !== $adminEmail) {
+    sendZohoZeptoMail(
+        $zohoApiKey,
+        $fromEmail,
+        'Dental Show Website',
+        $secondaryAdminEmail,
+        'Dental Show Admin',
+        $email,
+        $adminSubject,
+        $adminHtmlBody,
+        $adminTextBody
+    );
+}
+
 // -------------------------------------------------------------
 // 2. Auto-Response to the person filling contact form
 // -------------------------------------------------------------
@@ -217,14 +233,14 @@ $userSendResult = sendZohoZeptoMail(
 // Return response
 if ($adminSendResult['success'] || $userSendResult['success']) {
     echo json_encode([
-        'status'  => 'success',
+        'status' => 'success',
         'message' => 'Thank you! Your message has been sent successfully. One of our team members will connect with you shortly.'
     ]);
 } else {
     // If API returned failure, log and return informative error
     http_response_code(500);
     echo json_encode([
-        'status'  => 'error',
+        'status' => 'error',
         'message' => 'Unable to send message at this time. Please try again or reach out directly at dentalshoworgsecy@gmail.com.'
     ]);
 }
