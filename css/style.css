@@ -21684,6 +21684,7 @@ body:has(.cs-fit-wrapper) {
   overflow: hidden;
   display: block;
   line-height: 0;
+  border-bottom: 1px solid #e9ecef;
 }
 
 .stall-top-banner__img {
