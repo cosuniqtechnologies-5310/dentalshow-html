@@ -261,10 +261,9 @@ try {
 // -------------------------------------------------------------
 $zohoApiKey = 'PHtE6r1YF+DjjzF98EcB5/+6Q5GjZI4rqOkxKlZF4YdCWaIASU1T/doslj+w+U1+BKJKQaPJmt47s+zNtrjRIma4ZGgaWmqyqK3sx/VYSPOZsbq6x00VtFoSc0fdUIDvdd5v0CfWvtbYNA==';
 $fromEmail = 'orgsecy@dentalshow.in';
+$adminEmail = 'dentalshoworgsecy@gmail.com';
 $adminEmails = [
-    'mailinaiworks@gmail.com',
-    'cosuniqtechnologies@gmail.com',
-    'dentalshoworgsecy@gmail.com'
+    $adminEmail
 ];
 
 function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody)

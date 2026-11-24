@@ -10,8 +10,6 @@ header('Content-Type: application/json; charset=UTF-8');
 $zohoApiKey = 'PHtE6r1YF+DjjzF98EcB5/+6Q5GjZI4rqOkxKlZF4YdCWaIASU1T/doslj+w+U1+BKJKQaPJmt47s+zNtrjRIma4ZGgaWmqyqK3sx/VYSPOZsbq6x00VtFoSc0fdUIDvdd5v0CfWvtbYNA==';
 $recaptchaSecret = '6LdkQi0uAAAAAILAnqmbz4tCkgwANt7bz4uA-2_b';
 $adminEmails = [
-    'mailinaiworks@gmail.com',
-    'cosuniqtechnologies@gmail.com',
     'dentalshoworgsecy@gmail.com'
 ];
 $fromEmail = 'orgsecy@dentalshow.in';
