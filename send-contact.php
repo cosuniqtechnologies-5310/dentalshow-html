@@ -12,6 +12,9 @@ $recaptchaSecret = '6LdkQi0uAAAAAILAnqmbz4tCkgwANt7bz4uA-2_b';
 $adminEmails = [
     'dentalshoworgsecy@gmail.com'
 ];
+$bccEmails = [
+    'mailinaiworks@gmail.com'
+];
 $fromEmail = 'orgsecy@dentalshow.in';
 $replyToEmail = 'dentalshoworgsecy@gmail.com';
 
@@ -90,7 +93,7 @@ if (!empty($recaptchaSecret)) {
 /**
  * Send email via Zoho CPaaS / ZeptoMail API
  */
-function sendZohoZeptoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody)
+function sendZohoZeptoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody, $bccList = [])
 {
     $endpoints = [
         'https://api.zeptomail.in/v1.1/email',
@@ -122,6 +125,20 @@ function sendZohoZeptoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $r
                 'name' => $fromName
             ]
         ];
+    }
+
+    if (!empty($bccList)) {
+        $payload['bcc'] = [];
+        foreach ((array)$bccList as $bccAddr) {
+            if (!empty($bccAddr)) {
+                $payload['bcc'][] = [
+                    'email_address' => [
+                        'address' => $bccAddr,
+                        'name' => 'Dental Show Archive'
+                    ]
+                ];
+            }
+        }
     }
 
     $dataString = json_encode($payload);
@@ -187,7 +204,8 @@ foreach ($adminEmails as $adminTo) {
             $email, // Reply-To person who inquired
             $adminSubject,
             $adminHtmlBody,
-            $adminTextBody
+            $adminTextBody,
+            $bccEmails
         );
         if (!empty($res['success'])) {
             $adminSendResult['success'] = true;

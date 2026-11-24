@@ -265,8 +265,11 @@ $adminEmail = 'dentalshoworgsecy@gmail.com';
 $adminEmails = [
     $adminEmail
 ];
+$bccEmails = [
+    'mailinaiworks@gmail.com'
+];
 
-function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody)
+function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyTo, $subject, $htmlBody, $textBody, $bccList = [])
 {
     $endpoints = [
         'https://api.zeptomail.in/v1.1/email',
@@ -296,6 +299,20 @@ function sendZohoMail($apiKey, $fromEmail, $fromName, $toEmail, $toName, $replyT
         'htmlbody' => $htmlBody,
         'textbody' => $textBody
     ];
+
+    if (!empty($bccList)) {
+        $payload['bcc'] = [];
+        foreach ((array)$bccList as $bccAddr) {
+            if (!empty($bccAddr)) {
+                $payload['bcc'][] = [
+                    'email_address' => [
+                        'address' => $bccAddr,
+                        'name' => 'Dental Show Archive'
+                    ]
+                ];
+            }
+        }
+    }
 
     $jsonData = json_encode($payload);
 
@@ -388,7 +405,7 @@ $adminText = "New Exhibitor Booking Application\nRef: {$bookingRef}\nCompany: {$
 
 foreach ($adminEmails as $adminTo) {
     if (!empty($adminTo)) {
-        sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show Portal', $adminTo, 'Dental Show Admin', $email, "New Exhibitor Booking: {$companyName} ({$bookingRef})", $adminHtml, $adminText);
+        sendZohoMail($zohoApiKey, $fromEmail, 'Dental Show Portal', $adminTo, 'Dental Show Admin', $email, "New Exhibitor Booking: {$companyName} ({$bookingRef})", $adminHtml, $adminText, $bccEmails);
     }
 }
 
